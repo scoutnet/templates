@@ -5,15 +5,17 @@
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 08.07.2003
-	Version : 1.0.1
+	Version : 1.0.2
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
 								gegebenen Zeitraum leigen, sonst werden natürlich keine oder nicht alle 
 								Termine angezeigt
-	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
 	Bemerkungen : 	Diese Template ist als Modul für das ScoutNet Modulsystem gedacht und
 					stellt eine grafische Visualisierung des Kalenders dar
+	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
+	Änderungen in Version 1.0.2 - 01.08.2003:
+		- Fehler im den Datumsbezogenen Berechnungen korrigiert
  *}
 
 {*********           START DES KONFIGURATIONS-BEREICHS       *********}
@@ -65,9 +67,9 @@
 	{/if}
 
 {* Bereitstellen der benötigten Datums Variablen *}
-{assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"}
-{assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"}
-{assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"}
+{assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"|intval}
+{assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"|intval}
+{assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"|intval}
 
 {* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
 {if ($aktueller_monat-$monate_im_nachhinein) < 1}

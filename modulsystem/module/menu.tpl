@@ -6,11 +6,13 @@
 	Dateiname : menu.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 02.07.2003
-	Version : 1.0
+	Version : 1.0.1
 	notwendige Konfiguration : keine
-	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist)
 	Bemerkungen : 	Diese Template ist als Modul für das Scoutnet Modulsystem gedacht und
 					stellt ein simples Menü zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
+	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist) (gilt für Version 1.0, Version 1.0.1 nicht getestet)
+	Änderungen in Version 1.0.1 - 01.08.2003:
+		- Hinweis zur An- und Abwahl durch Strg
  *}
 
 {*********          START DES KONFIGURATIONS-BEREICHS        *********}
@@ -22,8 +24,10 @@
 {*********          ENDE DES KONFIGURATIONS-BEREICHS         *********}
 
 {if $force_w3c} <form name="form1" method="get" action=""> {/if}
-<table border="0" cellspacing="0" cellpadding="3">
+<table border="0" cellspacing="0" cellpadding="3" width="100%">
 	<tr>
+		<td valign="middle" align="center">
+			<font size="2" face="Arial, Helvetica, sans-serif">(an- und abwählen mit<br>Strg gedrückt halten)</font></td>
 		<td>
 			{if not $force_w3c} <form name="form1" method="get" action=""> {/if}
 			{foreach from=$url_parameters key=name item=value}
@@ -82,8 +86,7 @@
 		</td>
 		{/if}
 		<td>
-			<input type="submit" name="Submit" value="aktualisieren">
-			{if not $force_w3c} </form> {/if}
+			<input type="submit" name="Submit" value="aktualisieren">{if not $force_w3c} </form> {/if}
 		</td>
 	</tr>
 </table>
