@@ -2,11 +2,14 @@
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
-	Version : 1.0
+	Letzte Änderung : 05.07.2003
+	Version : 1.0.1
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
- *}
+	Änderungen in Version 1.0.1 - 05.07.2003:
+		- absoluter Pfad zu show.php in der JavaScript Funktion 
+		  infoszeigen
+*}
 
 {* Zuweisung der richtigen Gruppe *}
 	{if $groups.jahrmonat}
@@ -31,7 +34,7 @@
 <!-- Begin
   function infoszeigen(id)
     {
-    popupWin = window.open('show.php?template={/literal}{$template_path}{literal}/infos_zeigen.tpl&entryids='+id,'windy','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,copyhistory=no,scrollbars=yes,width=430,height=250,top='+((screen.height/2)-100)+',left='+((screen.width/2)-250)+'');
+    popupWin = window.open('http://kalender.scoutnet.de/2.0/show.php?template={/literal}{$template_path}{literal}/infos_zeigen.tpl&entryids='+id,'windy','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,copyhistory=no,scrollbars=yes,width=430,height=250,top='+((screen.height/2)-100)+',left='+((screen.width/2)-250)+'');
 	  if (parseFloat(navigator.appVersion) < 3) {
 	  } else {
 		popupWin.focus();
