@@ -9,6 +9,8 @@
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
+	Änderungen in Version 1.1.1 - 15.07.2003:
+		- nl2br: Zeilenumbrüche in den Infos werden in HTML Zeilenumbrüche umgewandelt
 	Änderungen in Version 1.1.0 - 13.07.2003:
 		- Pfad zu old_style.tpl auch für infos_zeigen.tpl in der JavaScript Funktion infoszeigen
 		- Korrektur des setzens von "checked" wenn kein ebenenup übergeben wurde

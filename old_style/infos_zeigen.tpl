@@ -76,7 +76,7 @@
   <tr>
     <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Infos:</b></font></td>
     <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.info}{$endtags}</font></td>
+    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.info|nl2br}{$endtags}</font></td>
   </tr>
 </table>{/strip}
 
