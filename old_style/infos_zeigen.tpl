@@ -34,7 +34,7 @@
 {/strip}<html>
 
 <head>
-<title>Termin &quot;{$eintrag.titel}&quot;, {$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."}{/if}, {$eintrag.startzeit|date_format:"%H:%M"} {if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"} {/if} für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
+<title>Termin &quot;{$eintrag.titel}&quot;, {$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}, {$eintrag.startzeit|date_format:"%H:%M"} {if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"} {/if} für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
 <base target=_blank>
 </head>
 
@@ -59,7 +59,7 @@
   <tr>
     <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Datum:</font></td>
     <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:"., %d.%m.%y"} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:"., %d.%m.%y"}{/if}{$endtags}</font></td>
+    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:"., %d.%m.%y"} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:"., %d.%m.%y"}{/if}{$endtags}</font></td>
   </tr>
 {if isset($eintrag.startzeit) && $eintrag.startzeit}
   <tr>

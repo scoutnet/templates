@@ -3,12 +3,14 @@
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 14.07.2003
-	Version : 1.1.0
+	Letzte Änderung : 16.07.2003
+	Version : 1.1.2
 	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
+	Änderungen in Version 1.1.2 - 16.07.2003:
+		- Korrektur der Datumsanzeige, vielen Dank an den freundlichen Finder: Christian Mertens
 	Änderungen in Version 1.1.1 - 15.07.2003:
 		- nl2br: Zeilenumbrüche in den Infos werden in HTML Zeilenumbrüche umgewandelt
 	Änderungen in Version 1.1.0 - 13.07.2003:
@@ -172,7 +174,7 @@
     </tr>
     {foreach from=$monat.eintraege item=eintrag} 
     <tr> 
-        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."}{/if}{$endtags}</font></td>
+        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}{$endtags}</font></td>
         {if $eintrag.info != ""} 
         	<td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}<a href=JavaScript:infoszeigen('{$eintrag.id}')>{$eintrag.titel}</a> 
