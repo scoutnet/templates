@@ -3,14 +3,16 @@
 	Name : Kalender 2.0 Template - DynDate
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 29.09.2003
-	Version : 1.1.3
+	Letzte Änderung : 22.01.2004
+	Version : 1.1.6
 	notwendige Konfiguration : keine
 	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.6 - 22.01.2004:
+		- Fehler bzgl. den End Jahres behoben (trat auf falls monate_im_voraus+aktueller_monat<=12)
 	Änderungen in Version 1.1.5 - 14.11.2003:
 		- Fehler wegen nicht angezeigten Daten im letzten angezeigten Monat behoben
 	Änderungen in Version 1.1.4 - 29.09.2003:
@@ -56,16 +58,18 @@
 	{assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"|intval}
 	{assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"|intval}
 	{assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"|intval}
+
 {if isset($monate_im_voraus)}
 	{* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
 	{if ($aktueller_monat-$monate_im_nachhinein) < 1}
 		{math equation="((a - b) % 12) + 12" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
-		{math equation="ceil((abs(a - b)+1) / 12)" a=$aktueller_monat b=$monate_im_nachhinein assign="jahre_im_nachhinein"}
-		{math equation="a - b" a=$aktuelles_jahr b=$jahre_im_nachhinein assign="start_jahr"}
+		{math equation="ceil((abs(c - d)+1) / 12)" c=$aktueller_monat d=$monate_im_nachhinein assign="jahre_im_nachhinein"}
+		{math equation="e - f" e=$aktuelles_jahr f=$jahre_im_nachhinein assign="start_jahr"}
 	{else}
-		{math equation="a - b" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
+		{math equation="g - h" g=$aktueller_monat h=$monate_im_nachhinein assign="start_monat"}
 		{assign var="start_jahr" value=$aktuelles_jahr}
 	{/if}
+
 	{assign var="start_jahr" value=$start_jahr|string_format:"%02s"}
 	{assign var="start_monat" value=$start_monat|string_format:"%02s"}
 	{assign var="startdate" value="`$start_jahr`-`$start_monat`-01"}
@@ -74,15 +78,13 @@
 {if isset($monate_im_nachhinein)}
 	{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
 	{if ($aktueller_monat + $monate_im_voraus) > 12}
-		{math equation="((a + b) % 12)" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
-		{math equation="floor((a + b - 1) / 12)" a=$aktueller_monat b=$monate_im_voraus assign="jahre_im_voraus"}
-		{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
+		{math equation="((i + j) % 12)" i=$aktueller_monat j=$monate_im_voraus assign="end_monat"}
+		{math equation="floor((k + m - 1) / 12)" k=$aktueller_monat m=$monate_im_voraus assign="jahre_im_voraus"}
+		{math equation="n + o" n=$aktuelles_jahr o=$jahre_im_voraus assign="end_jahr"}
 	{else}
-		{math equation="a + b" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
+		{math equation="p + q" p=$aktueller_monat q=$monate_im_voraus assign="end_monat"}
 		{assign var="end_jahr" value=$aktuelles_jahr}
 	{/if}
-	{assign var="end_jahr" value=$end_jahr|string_format:"%02s"}
-	{assign var="end_monat" value=$end_monat|string_format:"%02s"}
 	
 	{if $end_monat==4||$end_monat==6||$end_monat==9||$end_monat==11}
 		{assign var="end_tag" value="30"}
@@ -94,8 +96,8 @@
 		{assign var="end_tag" value="31"}
 	{/if}
 
-	{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
-
+	{assign var="end_jahr" value=$end_jahr|string_format:"%02s"}
+	{assign var="end_monat" value=$end_monat|string_format:"%02s"}
 	{assign var="enddate" value="`$end_jahr`-`$end_monat`-`$end_tag`"}
 {/if}
 
