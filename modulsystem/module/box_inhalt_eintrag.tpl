@@ -1,4 +1,15 @@
-{strip}
+{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+
+{*
+	Name : Kalender 2.0 Template - Benötigt in den Modulen "Heutige Termine" für Scoutnet Modulsystem 
+	Dateiname : heutige.tpl
+	Autor : Scoutnet Kalender-Team - Christopher Vogt
+	Letzte Änderung : 16.07.2003
+	Version : 1.0.1
+	Änderungen in Version 1.0.1 - 16.07.2003:
+		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
+ *}
+
 <ul>
 	<li>
 		<b>{$eintrag.titel}</b>
@@ -18,7 +29,7 @@
 		<b>Ort:</b>	{$eintrag.ort}
 		</i>
 		<br>
-			<b>Autor:</b>&nbsp;{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}
+			<b>Autor:</b>&nbsp;{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}
 		<br>
 		<i>
 		<b>Kategorie:</b>&nbsp;{$eintrag.kategorie}
