@@ -14,8 +14,8 @@ if($__VARS[other_template]=="other")
 $id=6;
 $url="http://kalender.scoutnet.de/2.0/show.php?id=6&template=dyndate/dyndate.tpl";
 
-if($__VARS[monate_im_nachhinein])$url.="&monate_im_nachhinein=".$__VARS[monate_im_nachhinein];
-if($__VARS[monate_im_voraus])$url.="&monate_im_voraus=".$__VARS[monate_im_voraus];
+$url.="&monate_im_nachhinein=".$__VARS[monate_im_nachhinein];
+$url.="&monate_im_voraus=".$__VARS[monate_im_voraus];
 if($__VARS[other_template])$url.="&other_template=".$__VARS[other_template];
 
 	 $entity_url=htmlentities($url);
@@ -39,20 +39,20 @@ echo'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
         </tr>
         <tr align="center" valign="middle"> 
             <td><strong><font size="2" face="Arial, Helvetica, sans-serif">Wert</font></strong></td>
-            <td> <div align="center"> 
+            <td>
                     <input name="monate_im_nachhinein" type="text" value="'.$__VARS[monate_im_nachhinein].'" size="4" maxlength="3">
-                </div></td>
-            <td> <div align="center"> 
+                </td>
+            <td>
                     <input name="monate_im_voraus" type="text" value="'.$__VARS[monate_im_voraus].'" size="4" maxlength="3">
-                </div></td>
-            <td> <div align="center"> 
+                </td>
+            <td> 
 			    <select name="other_template">
 			        <option value="modulsystem/modulsystem.tpl" selected>Modulsystem</option>
 			        <option value="old_style/old_style.tpl">OldStyle</option>
 			        <option value="other">anderes:</option>
 			    </select>
-                    <input name="custom_template" type="text" value="'.$__VARS[custom_template].'" size="20" maxlength="20">
-                </div></td>
+                    <input name="custom_template" type="text" value="'.$__VARS[custom_template].'" size="40">
+               </td>
         </tr>
         <tr align="center" valign="middle"> 
             <td colspan="4"> <div align="center"> 

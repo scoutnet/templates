@@ -11,6 +11,8 @@
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.5 - 14.11.2003:
+		- Fehler wegen nicht angezeigten Daten im letzten angezeigten Monat behoben
 	Änderungen in Version 1.1.4 - 29.09.2003:
 		- Fehler in den Datumsgrenzen behoben
 	Änderungen in Version 1.1.3 - 29.09.2003:
@@ -81,7 +83,20 @@
 	{/if}
 	{assign var="end_jahr" value=$end_jahr|string_format:"%02s"}
 	{assign var="end_monat" value=$end_monat|string_format:"%02s"}
-	{assign var="enddate" value="`$end_jahr`-`$end_monat`-01"}
+	
+	{if $end_monat==4||$end_monat==6||$end_monat==9||$end_monat==11}
+		{assign var="end_tag" value="30"}
+	{elseif $end_monat==2 && $end_jahr%4 && (!$end_jahr%100 || $end_jahr%1000)}
+		{assign var="end_tag" value="29"}
+	{elseif $end_monat==2}
+		{assign var="end_tag" value="28"}
+	{else}
+		{assign var="end_tag" value="31"}
+	{/if}
+
+	{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
+
+	{assign var="enddate" value="`$end_jahr`-`$end_monat`-`$end_tag`"}
 {/if}
 
 {* automatische Linkerstellung *}
