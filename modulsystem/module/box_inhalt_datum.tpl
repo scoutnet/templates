@@ -4,8 +4,10 @@
 	Name : Kalender 2.0 Template - Benötigt in den Modulen "Heutige Termine" und "Monas Tabellen" für Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 16.07.2003
-	Version : 1.0.1
+	Letzte Änderung : 09.06.2004
+	Version : 1.0.2
+	Änderungen in Version 1.0.2 - 20.05.2004:
+		- Modifier für Umwandlung und Entfernen der Zeilenumbrüche in den Infos, da sonst u.U. Javascriptfehler
 	Änderungen in Version 1.0.1 - 16.07.2003:
 		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
  *}
@@ -43,7 +45,7 @@
 		</i>
 	 	{if $eintrag.info != ""}
 			<br>
-			<b>Infos:</b>&nbsp;{$eintrag.info}
+			<b>Infos:</b>&nbsp;{$eintrag.info|nl2br|nolb}
 		{/if}
 	</li>
 {/foreach}

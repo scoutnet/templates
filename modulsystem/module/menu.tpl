@@ -5,7 +5,7 @@
 	Name : Kalender 2.0 Template - Modul Menu_1 für Scoutnet Modulsystem 
 	Dateiname : menu.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
+	Letzte Änderung : 01.08.2003
 	Version : 1.0.1
 	notwendige Konfiguration : keine
 	Bemerkungen : 	Diese Template ist als Modul für das Scoutnet Modulsystem gedacht und

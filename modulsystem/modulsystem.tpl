@@ -3,8 +3,8 @@
 	Name : Kalender 2.0 Template - Scoutnet Modulsystem
 	Dateiname : modulsystem.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 03.07.2003
-	Version : 1.0
+	Letzte Änderung : 27.10.2003
+	Version : 1.0.1
 	notwendige Konfiguration : keine
 	Bemerkungen : Diese Template stellt nur eine Basis zum Einbinden von beliebigen Modulen dar
  *}
@@ -35,7 +35,8 @@
 <title>Scoutnet-Kalender für {$kalender.ebene} {$kalender.name}</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 </head>
-<body>
+
+<body{if isset($urlparameters.bgcolor)} bgcolor=#{$urlparameters.bgcolor}{/if}>
 
 {strip}
 {* Einbinden der Overlib-Bibliothek wenn benötigt (siehe Module) *}
