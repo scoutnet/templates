@@ -4,13 +4,17 @@
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 29.09.2003
-	Version : 1.1.2
+	Version : 1.1.3
 	notwendige Konfiguration : keine
 	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.4 - 29.09.2003:
+		- Fehler in den Datumsgrenzen behoben
+	Änderungen in Version 1.1.3 - 29.09.2003:
+		- Wahl eines anderen Templates per link
 	Änderungen in Version 1.1.2 - 29.09.2003:
 		- Kleine Fehlerkorrektur im Link
 	Änderungen in Version 1.1.1 - 29.09.2003:
@@ -25,7 +29,7 @@
 {********************************************************************************************}
 {**}                                                                                      {**}
 {**}              {* Template über das der Kalender aufgerufen werden soll *}             {**}
-{**}    {assign var="template" value="`$template_path`/../modulsystem/modulsystem.tpl"}   {**}
+{**}    {assign var="template" value="modulsystem/modulsystem.tpl"}   {**}
 {**}                                                                                      {**}
 {**}                               {* Datums-Einstellungen *}                             {**}
 {**}            {* (Entsprechende Zeile löschen um Begrenzung abzuschalten) *}            {**}
@@ -40,6 +44,9 @@
 {/if}
 {if isset($url_parameters.monate_im_voraus)}
 	{assign var="monate_im_voraus" value=$url_parameters.monate_im_voraus}
+{/if}
+{if isset($url_parameters.other_template)}
+	{assign var="template" value=$url_parameters.other_template}
 {/if}
 
 {* automatische Datumsbestimmungen *}

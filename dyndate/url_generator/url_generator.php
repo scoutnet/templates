@@ -5,12 +5,18 @@ if(!isset($__VARS[changed]))
 	{
 	$__VARS[monate_im_voraus]=1;
 	$__VARS[monate_im_nachhinein]=10;
+	$__VARS[other_template] = "modulsystem/modulsystem.tpl";
 	}		
 
+if($__VARS[other_template]=="other")
+	$__VARS[other_template] = $__VARS[custom_template];
+
 $id=6;
-	 $url="http://kalender.scoutnet.de/2.0/show.php?id=6&template=dyndate/dyndate.tpl";
+$url="http://kalender.scoutnet.de/2.0/show.php?id=6&template=dyndate/dyndate.tpl";
+
 if($__VARS[monate_im_nachhinein])$url.="&monate_im_nachhinein=".$__VARS[monate_im_nachhinein];
 if($__VARS[monate_im_voraus])$url.="&monate_im_voraus=".$__VARS[monate_im_voraus];
+if($__VARS[other_template])$url.="&other_template=".$__VARS[other_template];
 
 	 $entity_url=htmlentities($url);
 
@@ -26,19 +32,30 @@ echo'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <form name="urlgenerator" method="GET" action="">
     <table width="95%" border="1" cellspacing="0" cellpadding="2">
         <tr align="center" valign="middle"> 
-            <td><strong></strong></td>
+            <td><strong>&nbsp;</strong></td>
             <td> <div align="center">Monate im Nachhinein</div></td>
-            <td>Monate im Voraus</td>
+            <td> <div align="center">Monate im Voraus</div></td>
+            <td> <div align="center">Template</div></td>
         </tr>
         <tr align="center" valign="middle"> 
             <td><strong><font size="2" face="Arial, Helvetica, sans-serif">Wert</font></strong></td>
             <td> <div align="center"> 
-                    <input name="monate_im_nachhinein" type="text" value="'.$__VARS[monate_im_nachhinein].'" size="6" maxlength="6">
+                    <input name="monate_im_nachhinein" type="text" value="'.$__VARS[monate_im_nachhinein].'" size="4" maxlength="3">
                 </div></td>
-            <td><input name="monate_im_voraus" type="text" size="15" value="'.$__VARS[monate_im_voraus].'"></td>
+            <td> <div align="center"> 
+                    <input name="monate_im_voraus" type="text" value="'.$__VARS[monate_im_voraus].'" size="4" maxlength="3">
+                </div></td>
+            <td> <div align="center"> 
+			    <select name="other_template">
+			        <option value="modulsystem/modulsystem.tpl" selected>Modulsystem</option>
+			        <option value="old_style/old_style.tpl">OldStyle</option>
+			        <option value="other">anderes:</option>
+			    </select>
+                    <input name="custom_template" type="text" value="'.$__VARS[custom_template].'" size="20" maxlength="20">
+                </div></td>
         </tr>
         <tr align="center" valign="middle"> 
-            <td colspan="3"> <div align="center"> 
+            <td colspan="4"> <div align="center"> 
                     <input name=changed type="submit" value="link erzeugen">
                     <font size="2" face="Arial, Helvetica, sans-serif"> (Um mit 
                     preview ein geändertes Design anzuzeigen, muss nach der Änderung 
