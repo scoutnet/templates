@@ -4,11 +4,13 @@
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 16.07.2003
-	Version : 1.1.2
+	Version : 1.1.3
 	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
+	Änderungen in Version 1.1.3 - 16.07.2003:
+		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
 	Änderungen in Version 1.1.2 - 16.07.2003:
 		- Korrektur der Datumsanzeige, vielen Dank an den freundlichen Finder: Christian Mertens
 	Änderungen in Version 1.1.1 - 15.07.2003:
@@ -183,9 +185,7 @@
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.titel}{$endtags}</font></td>
         {/if} 
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kategorie}{$endtags}</font></td>
-        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{if ( isset($eintrag.autor.vorname) 
-            && isset($eintrag.autor.nachname) )} {$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname} 
-            {else} {$eintrag.autor.nickname}{/if}{$endtags}</font></td>
+        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kalender.ebene}{$endtags}</font></td>
     </tr>
     {/foreach} 

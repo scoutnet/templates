@@ -71,7 +71,7 @@
   <tr>
     <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Autor:</b></font></td>
     <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.autor.nickname}{$endtags}</font></td>
+    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}{$endtags}</font></td>
   </tr>
   <tr>
     <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Infos:</b></font></td>
