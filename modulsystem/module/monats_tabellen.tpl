@@ -5,7 +5,7 @@
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 08.07.2003
-	Version : 1.0.2
+	Version : 1.1.0
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
@@ -14,6 +14,8 @@
 	Bemerkungen : 	Diese Template ist als Modul für das ScoutNet Modulsystem gedacht und
 					stellt eine grafische Visualisierung des Kalenders dar
 	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
+	Änderungen in Version 1.1.0 - 29.09.2003:
+		- Template reagiert automatisch auf Datumsangaben in der URL (die durch das Template DynDate dynamisch gesetzt werden können)
 	Änderungen in Version 1.0.2 - 01.08.2003:
 		- Fehler im den Datumsbezogenen Berechnungen korrigiert
  *}
@@ -23,6 +25,8 @@
 		{* selbsterklärend *}	
 		{assign var="monate_im_nachhinein" value=1}
 		{assign var="monate_im_voraus" value=4}
+		{* sollen start und enddatum aus der URL den oben angegebenen Bereichen vorgezogen werden (z.B. durch Template DynDate gesetzt), falls sie vorhanden sind? ?*}
+		{assign var="url_werte_vorziehen" value=true} {* mögliche Werte: true false *}
 
 	{* design - grobes *}
 		{* Gibt an in wieviel Monatstabellen pro Zeile angezeigt werden sollen *}	
@@ -71,24 +75,34 @@
 {assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"|intval}
 {assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"|intval}
 
-{* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
-{if ($aktueller_monat-$monate_im_nachhinein) < 1}
-	{math equation="((a - b) % 12) + 12" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
-	{math equation="ceil((abs(a - b)+1) / 12)" a=$aktueller_monat b=$monate_im_nachhinein assign="jahre_im_nachhinein"}
-	{math equation="a - b" a=$aktuelles_jahr b=$jahre_im_nachhinein assign="start_jahr"}
+{if !(isset($url_parameters.startdate) && $url_werte_vorziehen)}
+	{* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
+	{if ($aktueller_monat-$monate_im_nachhinein) < 1}
+		{math equation="((a - b) % 12) + 12" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
+		{math equation="ceil((abs(a - b)+1) / 12)" a=$aktueller_monat b=$monate_im_nachhinein assign="jahre_im_nachhinein"}
+		{math equation="a - b" a=$aktuelles_jahr b=$jahre_im_nachhinein assign="start_jahr"}
+	{else}
+		{math equation="a - b" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
+		{assign var="start_jahr" value=$aktuelles_jahr}
+	{/if}
 {else}
-	{math equation="a - b" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
-	{assign var="start_jahr" value=$aktuelles_jahr}
+	{assign var="start_monat" value=$url_parameters.startdate|date_format:"%m"|intval}
+	{assign var="start_jahr" value=$url_parameters.startdate|date_format:"%Y"|intval}
 {/if}
 
-{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
-{if ($aktueller_monat + $monate_im_voraus) > 12}
-	{math equation="((a + b) % 12)" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
-	{math equation="floor((a + b - 1) / 12)" a=$aktueller_monat b=$monate_im_voraus assign="jahre_im_voraus"}
-	{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
+{if !(isset($url_parameters.enddate) && $url_werte_vorziehen)}
+	{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
+	{if ($aktueller_monat + $monate_im_voraus) > 12}
+		{math equation="((a + b) % 12)" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
+		{math equation="floor((a + b - 1) / 12)" a=$aktueller_monat b=$monate_im_voraus assign="jahre_im_voraus"}
+		{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
+	{else}
+		{math equation="a + b" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
+		{assign var="end_jahr" value=$aktuelles_jahr}
+	{/if}
 {else}
-	{math equation="a + b" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
-	{assign var="end_jahr" value=$aktuelles_jahr}
+	{assign var="end_monat" value=$url_parameters.enddate|date_format:"%m"|intval}
+	{assign var="end_jahr" value=$url_parameters.enddate|date_format:"%Y"|intval}
 {/if}
 
 {* Bestimmung der benötigten leeren Zellen am Ende für die Anordnung der Monatstabellen in mehreren Spalten (siehe auch $monats_spalten) *}
