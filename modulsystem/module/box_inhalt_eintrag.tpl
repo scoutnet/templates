@@ -4,17 +4,19 @@
 	Name : Kalender 2.0 Template - Benötigt in den Modulen "Heutige Termine" für Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 09.06.2004
-	Version : 1.0.2
+	Letzte Änderung : 19.01.2003
+	Version : 1.0.3
+ 	Änderungen in Version 1.0.3 - 19.01.2005:
+		- Termintitel ist unterstrichen
 	Änderungen in Version 1.0.2 - 20.05.2004:
 		- Modifier für Umwandlung und Entfernen der Zeilenumbrüche in den Infos, da sonst u.U. Javascriptfehler
 	Änderungen in Version 1.0.1 - 16.07.2003:
 		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
- *}
+*}
 
 <ul>
 	<li>
-		<b>{$eintrag.titel}</b>
+		<b><u>{$eintrag.titel}</u></b>
 			<br>
 			{if $eintrag.enddatum != ""}
 				<b>Zeitraum:</b>&nbsp;{$eintrag.startdatum|date_format:"%x"}&nbsp;bis&nbsp;{$eintrag.enddatum|date_format:"%x"}, 

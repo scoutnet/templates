@@ -4,8 +4,8 @@
 	Name : Kalender 2.0 Template - Modul Monatstabellen für Scoutnet Modulsystem 
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 08.07.2003
-	Version : 1.1.0
+	Letzte Änderung : 19.01.2003
+	Version : 1.1.1
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
@@ -14,6 +14,9 @@
 	Bemerkungen : 	Diese Template ist als Modul für das ScoutNet Modulsystem gedacht und
 					stellt eine grafische Visualisierung des Kalenders dar
 	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
+ 	Änderungen in Version 1.1.1 - 19.01.2005:
+		- Verhalten der overlib-popups geändert (onclick statt mouseover und schließen (close) muss geklickt werden)
+		- Tag des Monats von span nach a geändert um Handymbol beim mouseover zu sehen
 	Änderungen in Version 1.1.0 - 29.09.2003:
 		- Template reagiert automatisch auf Datumsangaben in der URL (die durch das Template DynDate dynamisch gesetzt werden können)
 	Änderungen in Version 1.0.2 - 01.08.2003:
@@ -112,6 +115,11 @@
 
 
 {*********  START DES BEREICHS MIT DER EIGENTLICHEN AUSGABE    *********}
+<script type="text/javascript" language="JavaScript">
+	info_click='klicken für Infos';
+	first = 1;
+</script>
+
 <table cellpadding="3" ><tr valign="top">
 {* section-Schleife, die die Jahre durchläuft die angezeigt werden sollen *}
 {section name="years" loop=$end_jahr|math:"x+1" start=$start_jahr}
@@ -219,7 +227,7 @@
 								<script type="text/javascript" language="JavaScript">
 									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
 								</script>
-								<span onmouseover="return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CENTER);" onmouseout="nd();"> 
+								<a href="javascript:void(0);" onmouseover="if(first==1) return overlib(info_click,WIDTH,100);" onmouseout="if(first==1) nd();" onclick="first=0; nd(); return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CLOSETEXT, 'schließen', CLOSECLICK, CENTER);"> 
 					        	{if "$this_date" == $aktuelles_datum}
 									{$starttags_aktuelles_existierendes_datum}
 								{else}
@@ -231,7 +239,7 @@
 								{else}
 									{$endtags_existierendes_datum}
 								{/if}
-								</span>
+								</a>
 							{else}
 								{$this_day}			
 							{/if}
