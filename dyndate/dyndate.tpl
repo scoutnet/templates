@@ -4,13 +4,19 @@
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 29.09.2003
-	Version : 1.0
+	Version : 1.1.1
 	notwendige Konfiguration : keine
+	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.1 - 29.09.2003:
+		- Monatseinstellungen über die URL möglich
+	Änderungen in Version 1.1 - 29.09.2003:
+		- Direktes Einbinden statt über Frames
 *}
+
 
 {********************************************************************************************}
 {*                                       EINSTELLUNGEN                                      *}
@@ -21,11 +27,18 @@
 {**}                                                                                      {**}
 {**}                               {* Datums-Einstellungen *}                             {**}
 {**}            {* (Entsprechende Zeile löschen um Begrenzung abzuschalten) *}            {**}
-{**}	                  {assign var="monate_im_nachhinein" value=2}                     {**}
-{**}                        {assign var="monate_im_voraus" value=5}                       {**}
+{**}	                  {assign var="monate_im_nachhinein" value=1}                     {**}
+{**}                        {assign var="monate_im_voraus" value=4}                       {**}
+{**}                   {assign var="url_parameter_vorziehen" value=true}                  {**}
 {**}                                                                                      {**}
 {********************************************************************************************}
 
+{if isset($url_parameters.monate_im_nachhinein)}
+	{assign var="monate_im_nachhinein" value=$url_parameters.monate_im_nachhinein}
+{/if}
+{if isset($url_parameters.monate_im_voraus)}
+	{assign var="monate_im_voraus" value=$url_parameters.monate_im_voraus}
+{/if}
 
 {* automatische Datumsbestimmungen *}
 	{assign var="aktuelles_datum" value=$smarty.now|date_format:"%Y-%m-%d" }
@@ -62,37 +75,14 @@
 	{assign var="enddate" value="`$end_jahr`-`$end_monat`-01"}
 {/if}
 
-
 {* automatische Linkerstellung *}
 {assign var="link" value="http://kalender.scoutnet.de/2.0/show.php?id=`$url_parameters.id`&template=`$template`&groupby=startdatum.%Y-%m&ebenenup=0"}
-
 
 {if $startdate}{assign var="link" value="`$link`&startdate=`$startdate`"}{/if}
 {if $enddate}{assign var="link" value="`$link`&enddate=`$enddate`"}{/if}
 
-
+{$link}
 
 
 {* HTML CODE *}{/strip}
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-<html>
-<head>
-<title>Scoutnet-Kalender für {$kalender.ebene} {$kalender.name}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-</head>
-
-<frameset rows="*,0" frameborder="NO" border="0" framespacing="0">
-    <frame src="{$link}" name="Kalender">
-    <frame src="UntitledFrame-27" scrolling="NO" noresize >
-</frameset>
-<noframes>
-		<body>
-			<div align="center"><center>
-			Ihr Browser unterstützt keine Frames!<br><br>
-			<a href="{$link}" target="_self">Hier gehts weiter zum Scoutnet-Kalender für {$kalender.ebene} {$kalender.name}!</a>
-			</center></div>
-		</body>
-</noframes>
-</html>
-
-</html>
+{fetch file=$link}
