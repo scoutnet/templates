@@ -4,13 +4,15 @@
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 29.09.2003
-	Version : 1.1.1
+	Version : 1.1.2
 	notwendige Konfiguration : keine
 	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.2 - 29.09.2003:
+		- Kleine Fehlerkorrektur im Link
 	Änderungen in Version 1.1.1 - 29.09.2003:
 		- Monatseinstellungen über die URL möglich
 	Änderungen in Version 1.1 - 29.09.2003:
@@ -76,13 +78,10 @@
 {/if}
 
 {* automatische Linkerstellung *}
-{assign var="link" value="http://kalender.scoutnet.de/2.0/show.php?id=`$url_parameters.id`&template=`$template`&groupby=startdatum.%Y-%m&ebenenup=0"}
+{assign var="link" value="http://kalender.scoutnet.de/2.0/show.php?id=`$url_parameters.id`&template=`$template`"}
 
 {if $startdate}{assign var="link" value="`$link`&startdate=`$startdate`"}{/if}
 {if $enddate}{assign var="link" value="`$link`&enddate=`$enddate`"}{/if}
-
-{$link}
-
 
 {* HTML CODE *}{/strip}
 {fetch file=$link}
