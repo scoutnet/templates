@@ -4,8 +4,8 @@
 	Name : Kalender 2.0 Template - Modul "Heutige Termine" für Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
-	Version : 1.0
+	Letzte Änderung : 08.07.2003
+	Version : 1.0.1
 	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist)
@@ -22,7 +22,7 @@
 			{if in_array($aktuelles_datum,$used.dates)}
 				{include file="`$modulpfad`/box_inhalt_datum.tpl" assign="box_inhalt" inhalt_datum=$aktuelles_datum}
 				<script>
-					box_heutige_inhalt='{$box_inhalt}';
+					box_heutige_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
 				</script>
 				<a onmouseover="return overlib(box_heutige_inhalt, STICKY, CAPTION, 'Termine am {$aktueller_tag}.{$aktueller_monat}.{$aktuelles_jahr}', CENTER);" onmouseout="nd();">
 					<font face="verdana,arial,helvetica" size="1"  color="#000000">
@@ -35,7 +35,7 @@
 						<li>
 							{include file="`$modulpfad`/box_inhalt_eintrag.tpl" assign="box_inhalt" eintrag=$eintrag}
                         	<script>
-								box_eintrag{$eintrag.id}_inhalt='{$box_inhalt}';
+								box_eintrag{$eintrag.id}_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
 							</script>
 							<a onmouseover="return overlib(box_eintrag{$eintrag.id}_inhalt, STICKY, CAPTION, '{$eintrag.titel}', CENTER);" onmouseout="nd();">
 								<font face="verdana,arial,helvetica" size="1"  color="#008800">

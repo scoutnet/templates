@@ -4,8 +4,8 @@
 	Name : Kalender 2.0 Template - Modul Monatstabellen für Scoutnet Modulsystem 
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
-	Version : 1.0
+	Letzte Änderung : 08.07.2003
+	Version : 1.0.1
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
@@ -201,7 +201,7 @@
 								{* Ablegen des Template mit dem Inhalt der Overlibbox in "box_inhalt" *}
 								{include file="`$modulpfad`/box_inhalt_datum.tpl" assign="box_inhalt" inhalt_datum=$this_date}
 								<script type="text/javascript" language="JavaScript">
-									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|html_entity_decode}';
+									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
 								</script>
 								<span onmouseover="return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CENTER);" onmouseout="nd();"> 
 					        	{if "$this_date" == $aktuelles_datum}
