@@ -4,8 +4,10 @@
 	Name : Kalender 2.0 Template - Benötigt in den Modulen "Heutige Termine" für Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 19.01.2003
-	Version : 1.0.3
+	Letzte Änderung : 04.11.2005
+	Version : 1.0.4
+	Änderungen in Version 1.0.4 - 04.11.2005:
+		- Zeit jetzt ohne Sekunden :).
  	Änderungen in Version 1.0.3 - 19.01.2005:
 		- Termintitel ist unterstrichen
 	Änderungen in Version 1.0.2 - 20.05.2004:
@@ -24,9 +26,9 @@
 				<b>Zeit:</b>&nbsp;{$eintrag.startdatum|date_format:"%x"}
 			{/if}
 			{if $eintrag.endzeit != ""}
-				&nbsp;{$eintrag.startzeit|date_format:"%X"}&nbsp;bis&nbsp;{$eintrag.endzeit|date_format:"%X"}
+				&nbsp;{$eintrag.startzeit|date_format:"%H:%M"}&nbsp;bis&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}
 			{else}
-				&nbsp;{$eintrag.startzeit|date_format:"%X"}
+				&nbsp;{$eintrag.startzeit|date_format:"%H:%M"}
 			{/if}
 		<br>
 		<i>

@@ -3,12 +3,22 @@
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 16.07.2003
-	Version : 1.1.3
+	Letzte Änderung : 07.12.2005
+	Version : 1.1.6
 	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
+	Änderungen in Version 1.1.6 - 07.12.2005:
+		- Die Popup-Fenster &ouml;ffnen nun einen absoluten pfad aus SERVER_NAME und PHP_SELF
+	Änderungen in Version 1.1.5 - 06.12.2005:
+		- Die Popup-Fenster &ouml;ffnen nun PHP_SELF statt dem statischen http://kalender.scoutnet.de/2.0/show.php
+	Änderungen in Version 1.1.4 - 13.10.2004:
+		- Im Info-Popup-Fenster werden nun Datum und Uhrzeit in einer Zeile angezeigt, außerdem sind dort nun auch PLZ, Ort und Kalender zu sehen
+		- Aus dem Fenstertitel vom Info-Popup ist das Datum und die Uhrzeit entfernt, wegen schlechter Darstellung und zu langem Titel für dieses kleine Fenster
+		- Die Popup-Fenstergröße ist etwas erhöht, um die zusätzlichen Daten ohne Scrollbar anzeigen zu können
+		- Ab jetzt bekommt jeder Termin einen Link mit Info-Popup-Fenster, da dort immer zusätzliche Angaben zu finden sind
+		- Für den Anstoß zu den Änderungen vielen Dank an Frank Eichinger
 	Änderungen in Version 1.1.3 - 16.07.2003:
 		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
 	Änderungen in Version 1.1.2 - 16.07.2003:
@@ -93,7 +103,7 @@
 	{/literal}{strip}
     popupWin = window.open('
 	
-	http://kalender.scoutnet.de/2.0/show.php?
+	http://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?
 	
 	entryids='+id+'&
 	template={$template_path}/infos_zeigen.tpl&
@@ -105,7 +115,7 @@
 	{if $kursiv&&$kursiv!="false"}fett={$fett}&{/if}
 	{if $kursiv&&$kursiv!="false"}kursiv={$kursiv}{/if}
 	
-	','windy','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,copyhistory=no,scrollbars=yes,width=430,height=250,top='+((screen.height/2)-100)+',left='+((screen.width/2)-250)+'');
+	','windy','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,copyhistory=no,scrollbars=yes,width=500,height=350,top='+((screen.height/2)-100)+',left='+((screen.width/2)-250)+'');
 	{/strip}{literal}
 	  if (parseFloat(navigator.appVersion) < 3) {
 	  } else {
@@ -178,12 +188,7 @@
     <tr> 
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}{$endtags}</font></td>
-        {if $eintrag.info != ""} 
-        	<td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}<a href=JavaScript:infoszeigen('{$eintrag.id}')>{$eintrag.titel}</a> 
-            {$endtags}</font></td>
-        {else} 
-        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.titel}{$endtags}</font></td>
-        {/if} 
+        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}<a href=JavaScript:infoszeigen('{$eintrag.id}')>{$eintrag.titel}</a>{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kategorie}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kalender.ebene}{$endtags}</font></td>
