@@ -4,7 +4,7 @@
 	Dateiname : modulsystem.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 27.10.2003
-	Version : 1.0.1
+	Version : 1.0.2
 	notwendige Konfiguration : keine
 	Bemerkungen : Diese Template stellt nur eine Basis zum Einbinden von beliebigen Modulen dar
  *}
@@ -41,7 +41,7 @@
 {strip}
 {* Einbinden der Overlib-Bibliothek wenn benötigt (siehe Module) *}
 {if $overlib_required}
-	<script type="text/javascript" language="JavaScript" src="http://kalender.scoutnet.de/2.0/libs/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
+	<script type="text/javascript" language="JavaScript" src="http://{$smarty.server.SERVER_NAME}/2.0/libs/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 	<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 	{assign var="overlib_included" value=true}
 {/if}

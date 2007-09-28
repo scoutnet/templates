@@ -34,7 +34,7 @@
 {/strip}<html>
 
 <head>
-<title>Termin &quot;{$eintrag.titel}&quot; für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
+<title>Termin &quot;{$eintrag.titel}&quot;, {$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}, {$eintrag.startzeit|date_format:"%H:%M"} {if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"} {/if} für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
 <base target=_blank>
 </head>
 
@@ -59,35 +59,25 @@
   <tr>
     <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Datum:</font></td>
     <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:"., %d.%m.%Y"}{if $eintrag.startzeit!=""},&nbsp;{$eintrag.startzeit|date_format:"%H:%M"}&nbsp;Uhr{/if}{if $eintrag.enddatum!="" or $eintrag.endzeit!=""}&nbsp;&nbsp;-&nbsp;&nbsp;{/if}{if $eintrag.enddatum!=""}{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:"., %d.%m.%Y"}{/if}{if $eintrag.enddatum!="" and $eintrag.endzeit!=""},&nbsp;{/if}{if $eintrag.endzeit!=""}{$eintrag.endzeit|date_format:"%H:%M"}&nbsp;Uhr{/if}{$endtags}</font></td>
+    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:"., %d.%m.%y"} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:"., %d.%m.%y"}{/if}{$endtags}</font></td>
   </tr>
+{if isset($eintrag.startzeit) && $eintrag.startzeit}
   <tr>
-    <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>PLZ:</font></td>
+    <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Uhrzeit:</b></font></td>
     <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.plz}{$endtags}</b></font></td>
+    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.startzeit|date_format:"%H:%M"} {if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"} {/if} Uhr{$endtags}</font></td>
   </tr>
-  <tr>
-    <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Ort:</font></td>
-    <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.ort}{$endtags}</b></font></td>
-  </tr>
+{/if}
   <tr>
     <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Autor:</b></font></td>
     <td width=20></td>
     <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}{$endtags}</font></td>
   </tr>
   <tr>
-    <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Kalender:</font></td>
-    <td width=20></td>
-    <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.kalender.ebene}&nbsp;{$eintrag.kalender.name}{$endtags}</b></font></td>
-  </tr>
-{if trim($eintrag.info) != ""}
-  <tr>
     <td valign="top"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}"><b>Infos:</b></font></td>
     <td width=20></td>
     <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if} color="#{$fontcolor}">{$starttags}{$eintrag.info|nl2br}{$endtags}</font></td>
   </tr>
-{/if}
 </table>{/strip}
 
 </body>

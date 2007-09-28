@@ -5,7 +5,6 @@
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
 	Letzte Änderung : 07.12.2005
 	Version : 1.1.6
-	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
@@ -91,12 +90,14 @@
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
-{/strip}<html>
+{/strip}{if !isset($urlparameters.onlybody)}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <title>ScoutNet-Kalender für {$kalender.ebene} {$kalender.name}</title>
-
+{/if}
 {literal}
-<SCRIPT LANGUAGE=JavaScript>
+<SCRIPT language="javascript" type="text/javascript">
 <!-- Begin
   function infoszeigen(id)
     {
@@ -124,9 +125,9 @@
     }
 //-->
 </script>
-{/literal}
+{/literal}{if !isset($urlparameters.onlybody)}
 </head>
-<body bgcolor=#{$bgcolor} {if $background&&$background!="false"}background={$background} {/if}{if $bgproperties&&$bgproperties!="false"}bgproperties={$bgproperties} {/if}link=#{$fontcolor} vlink=#{$fontcolor} alink=#{$fontcolor}>
+<body bgcolor=#{$bgcolor} {if $background&&$background!="false"}background={$background} {/if}{if $bgproperties&&$bgproperties!="false"}bgproperties={$bgproperties} {/if}link=#{$fontcolor} vlink=#{$fontcolor} alink=#{$fontcolor}>{/if}
 
 {* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {foreach from=$url_parameters key=name item=value}
@@ -138,7 +139,7 @@
 <table width=100% border=0 cellspacing=0 cellpadding=0>
   <tr>
     <td width=30%><div align=left><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$smarty.now|date_format:"Heute ist %A, der %d.%m.%Y.<br>Es ist %H:%M Uhr."}</font></div></td>
-	<td align=center width=40%>{if (($link==true)&&($link!="false"))}<div align=middle><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}>{if $kalender.homepage}<a href="{$kalender.homepage}" target="_parent">{/if}{$kalender.ebene}&nbsp;{$kalender.name}{if $kalender.homepage}</a>{/if}</font></div>{/if}</td>
+	<td align=center width=40%>{if (($link==true)&&($link!="false"))}<div align="center"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}>{if $kalender.homepage}<a href="{$kalender.homepage}" target="_parent">{/if}{$kalender.ebene}&nbsp;{$kalender.name}{if $kalender.homepage}</a>{/if}</font></div>{/if}</td>
     <td width=30%><div align=right>
 	{if $kalender.id != 3}
 		{assign var="temp_kalender" value=$kalender}
@@ -146,7 +147,7 @@
 		<SELECT name=gotourl onChange='location.href=this.form.gotourl.options[this.form.gotourl.selectedIndex].value; return false;'>
 		{section loop=10 name="menu"}
 			{if $temp_kalender.id >= 3}
-				<option value="show.php?{$parameters}groupby=startdatum.%Y-%m&ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
+				<option value="{$smarty.server.PHP_SELF}?{$parameters|htmlentities}groupby=startdatum.%Y-%m&amp;ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
 				{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 			{/if}
 		{/section}
@@ -188,7 +189,7 @@
     <tr> 
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}{$endtags}</font></td>
-        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}<a href=JavaScript:infoszeigen('{$eintrag.id}')>{$eintrag.titel}</a>{$endtags}</font></td>
+        <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}<a href="javascript:infoszeigen('{$eintrag.id}');">{$eintrag.titel}</a>{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kategorie}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}{$endtags}</font></td>
         <td><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">{$starttags}{$eintrag.kalender.ebene}{$endtags}</font></td>
@@ -200,16 +201,16 @@
 <table border=0 cellspacing=0 cellpadding=0>
   <tr>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">[</font></td>
-            <td><p><a href="http://kalender.scoutnet.de/infos/index.htm" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
+            <td><p><a href="http://kalender.scoutnet.de/infos/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
                 </td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
             <td><a href="http://community.scoutnet.de/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Termin&nbsp;hinzufügen</b></font></a></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">]</font></td>
   </tr>
-</table></center>
-</div>{/strip}
-
+</table></div></center>
+{/strip}
+{if !isset($urlparameters.onlybody)}
 </body>
 
-</html>
+</html>{/if}

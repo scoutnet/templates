@@ -61,6 +61,13 @@
 		{if $kalender.id>3}
 		<td>
 			<select name="addids[]" size="{$existing.stufen_ids|@count}" multiple id="addids">
+				{if isset($kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id)&&$kalender.gehoertzu.gehoertzu.gehoertzu.id>3}
+					<option value="{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id}" 
+						{if in_array($kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id,$used.kalender_ids)}
+							selected
+						{/if}
+					>{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.ebene}&nbsp;{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.name}</option>
+				{/if}
 				{if isset($kalender.gehoertzu.gehoertzu.gehoertzu.id)&&$kalender.gehoertzu.gehoertzu.id>3}
 					<option value="{$kalender.gehoertzu.gehoertzu.gehoertzu.id}" 
 						{if in_array($kalender.gehoertzu.gehoertzu.gehoertzu.id,$used.kalender_ids)}

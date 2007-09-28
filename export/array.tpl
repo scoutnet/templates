@@ -1,0 +1,1 @@
+{$groups|@print_r}

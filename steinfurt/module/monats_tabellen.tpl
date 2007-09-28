@@ -4,25 +4,16 @@
 	Name : Kalender 2.0 Template - Modul Monatstabellen für Scoutnet Modulsystem 
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 19.01.2003
-	Version : 1.1.1
+	Letzte Änderung : 02.07.2003
+	Version : 1.0
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
 								gegebenen Zeitraum leigen, sonst werden natürlich keine oder nicht alle 
 								Termine angezeigt
+	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
 	Bemerkungen : 	Diese Template ist als Modul für das ScoutNet Modulsystem gedacht und
 					stellt eine grafische Visualisierung des Kalenders dar
-	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
- 	Änderungen in Version 1.1.2 - 01.01.2006:
-		- 
- 	Änderungen in Version 1.1.1 - 19.01.2005:
-		- Verhalten der overlib-popups geändert (onclick statt mouseover und schließen (close) muss geklickt werden)
-		- Tag des Monats von span nach a geändert um Handymbol beim mouseover zu sehen
-	Änderungen in Version 1.1.0 - 29.09.2003:
-		- Template reagiert automatisch auf Datumsangaben in der URL (die durch das Template DynDate dynamisch gesetzt werden können)
-	Änderungen in Version 1.0.2 - 01.08.2003:
-		- Fehler im den Datumsbezogenen Berechnungen korrigiert
  *}
 
 {*********           START DES KONFIGURATIONS-BEREICHS       *********}
@@ -30,8 +21,6 @@
 		{* selbsterklärend *}	
 		{assign var="monate_im_nachhinein" value=1}
 		{assign var="monate_im_voraus" value=4}
-		{* sollen start und enddatum aus der URL den oben angegebenen Bereichen vorgezogen werden (z.B. durch Template DynDate gesetzt), falls sie vorhanden sind? ?*}
-		{assign var="url_werte_vorziehen" value=true} {* mögliche Werte: true false *}
 
 	{* design - grobes *}
 		{* Gibt an in wieviel Monatstabellen pro Zeile angezeigt werden sollen *}	
@@ -76,38 +65,28 @@
 	{/if}
 
 {* Bereitstellen der benötigten Datums Variablen *}
-{assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"|intval}
-{assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"|intval}
-{assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"|intval}
+{assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"}
+{assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"}
+{assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"}
 
-{if !(isset($url_parameters.startdate) && $url_werte_vorziehen)}
-	{* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
-	{if ($aktueller_monat-$monate_im_nachhinein) < 1}
-		{math equation="((a - b) % 12) + 12" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
-		{math equation="ceil((abs(a - b)+1) / 12)" a=$aktueller_monat b=$monate_im_nachhinein assign="jahre_im_nachhinein"}
-		{math equation="a - b" a=$aktuelles_jahr b=$jahre_im_nachhinein assign="start_jahr"}
-	{else}
-		{math equation="a - b" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
-		{assign var="start_jahr" value=$aktuelles_jahr}
-	{/if}
+{* Bestimmung des Startmonats und Startjahres des Templates anhand der obigen Konfigurationseinstellungen *}
+{if ($aktueller_monat-$monate_im_nachhinein) < 1}
+	{math equation="((a - b) % 12) + 12" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
+	{math equation="ceil((abs(a - b)+1) / 12)" a=$aktueller_monat b=$monate_im_nachhinein assign="jahre_im_nachhinein"}
+	{math equation="a - b" a=$aktuelles_jahr b=$jahre_im_nachhinein assign="start_jahr"}
 {else}
-	{assign var="start_monat" value=$url_parameters.startdate|date_format:"%m"|intval}
-	{assign var="start_jahr" value=$url_parameters.startdate|date_format:"%Y"|intval}
+	{math equation="a - b" a=$aktueller_monat b=$monate_im_nachhinein assign="start_monat"}
+	{assign var="start_jahr" value=$aktuelles_jahr}
 {/if}
 
-{if !(isset($url_parameters.enddate) && $url_werte_vorziehen)}
-	{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
-	{if ($aktueller_monat + $monate_im_voraus) > 12}
-		{math equation="((a + b) % 12)" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
-		{math equation="floor((a + b - 1) / 12)" a=$aktueller_monat b=$monate_im_voraus assign="jahre_im_voraus"}
-		{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
-	{else}
-		{math equation="a + b" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
-		{assign var="end_jahr" value=$aktuelles_jahr}
-	{/if}
+{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
+{if ($aktueller_monat + $monate_im_voraus) > 12}
+	{math equation="((a + b) % 12)" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
+	{math equation="floor((a + b - 1) / 12)" a=$aktueller_monat b=$monate_im_voraus assign="jahre_im_voraus"}
+	{math equation="a + b" a=$aktuelles_jahr b=$jahre_im_voraus assign="end_jahr"}
 {else}
-	{assign var="end_monat" value=$url_parameters.enddate|date_format:"%m"|intval}
-	{assign var="end_jahr" value=$url_parameters.enddate|date_format:"%Y"|intval}
+	{math equation="a + b" a=$aktueller_monat b=$monate_im_voraus assign="end_monat"}
+	{assign var="end_jahr" value=$aktuelles_jahr}
 {/if}
 
 {* Bestimmung der benötigten leeren Zellen am Ende für die Anordnung der Monatstabellen in mehreren Spalten (siehe auch $monats_spalten) *}
@@ -117,11 +96,6 @@
 
 
 {*********  START DES BEREICHS MIT DER EIGENTLICHEN AUSGABE    *********}
-<script type="text/javascript" language="JavaScript">
-	info_click='klicken für Infos';
-	first = 1;
-</script>
-
 <table cellpadding="3" ><tr valign="top">
 {* section-Schleife, die die Jahre durchläuft die angezeigt werden sollen *}
 {section name="years" loop=$end_jahr|math:"x+1" start=$start_jahr}
@@ -167,7 +141,7 @@
 									</font>
 								</td>
 								<td width="20" height="20" valign="middle" align="center">
-									<img width="28" height="25" src="http://{$smarty.server.SERVER_NAME}/2.0/images/cal.gif" alt="Calendar" border=0> 
+									<img width="28" height="25" src="http://kalender.scoutnet.de/2.0/images/cal.gif" alt="Calendar" border=0> 
 								</td>
 							</tr>
 						</table>
@@ -227,9 +201,9 @@
 								{* Ablegen des Template mit dem Inhalt der Overlibbox in "box_inhalt" *}
 								{include file="`$modulpfad`/box_inhalt_datum.tpl" assign="box_inhalt" inhalt_datum=$this_date}
 								<script type="text/javascript" language="JavaScript">
-									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
+									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|html_entity_decode}';
 								</script>
-								<a href="javascript:void(0);" onmouseover="if(first==1) return overlib(info_click,WIDTH,100);" onmouseout="if(first==1) nd();" onclick="first=0; nd(); return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CLOSETEXT, 'schließen', CLOSECLICK, CENTER);"> 
+								<span onmouseover="return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CENTER);" onmouseout="nd();"> 
 					        	{if "$this_date" == $aktuelles_datum}
 									{$starttags_aktuelles_existierendes_datum}
 								{else}
@@ -241,7 +215,7 @@
 								{else}
 									{$endtags_existierendes_datum}
 								{/if}
-								</a>
+								</span>
 							{else}
 								{$this_day}			
 							{/if}
