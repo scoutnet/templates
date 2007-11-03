@@ -229,7 +229,7 @@
 								<script type="text/javascript" language="JavaScript">
 									box_{$this_jahr}{$this_monat}{$this_day}_inhalt='{$box_inhalt|nl2br|nolb|html_entity_decode|escape:"quotes"}';
 								</script>
-								<a href="javascript:void(0);" onmouseover="if(first==1) return overlib(info_click,WIDTH,100);" onmouseout="if(first==1) nd();" onclick="first=0; nd(); return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CLOSETEXT, 'schließen', CLOSECLICK, CENTER);"> 
+								<a href="javascript:void(0);" onmouseover="if(first==1) return overlib(info_click,WIDTH,100);" onmouseout="if(first==1) nd();" onclick="first=0; nd(); return overlib(box_{$this_jahr}{$this_monat}{$this_day}_inhalt, STICKY, CAPTION, 'Termine am {$this_day}.{$this_monat}.{$this_jahr}', CLOSETEXT, 'schließen', CLOSECLICK, HAUTO, VAUTO);"> 
 					        	{if "$this_date" == $aktuelles_datum}
 									{$starttags_aktuelles_existierendes_datum}
 								{else}
