@@ -41,7 +41,7 @@
       <STime>{$eintrag.startzeit|date_format:"%H,%M,0,1,1,1970"}</STime>
       <EDate>{$eintrag.enddatum|date_format:"0,0,0,%m,%d,%y"}</EDate>
       <ETime>{$eintrag.endzeit|date_format:"%H,%M,0,1,1,1970"}</ETime>
-      <Title>{$eintrag.titel}</Title>
+      <Title><![CDATA[{$eintrag.titel}]]></Title>
       <Place>{$eintrag.ort}</Place>
       <Category>{$eintrag.kategorie}</Category>
       <Section><![CDATA[{$eintrag.stufe.bildlich_scoutnet}]]></Section>
