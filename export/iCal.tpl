@@ -45,7 +45,7 @@ END:VTIMEZONE
 BEGIN:VEVENT
 DTSTART;TZID=Europe/Berlin:{$eintrag.startdatum|date_format:"%Y%m%d"}T{if $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}000000{/if}
 
-DTEND;TZID=Europe/Berlin:{if $eintrag.enddatum}{$eintrag.enddatum|date_format:"%Y%m%d"}{else}{$eintrag.startdatum|date_format:"%Y%m%d}{/if}T{if $eintrag.endzeit}{$eintrag.endzeit|date_format:"%H%M%S"}{elseif $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}000000{/if}
+DTEND;TZID=Europe/Berlin:{if $eintrag.enddatum}{$eintrag.enddatum|date_format:"%Y%m%d"}{else}{$eintrag.startdatum|date_format:"%Y%m%d"}{/if}T{if $eintrag.endzeit}{$eintrag.endzeit|date_format:"%H%M%S"}{elseif $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}000000{/if}
 
 SUMMARY:{$eintrag.titel}
 UID:{$eintrag.id}
