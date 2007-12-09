@@ -43,16 +43,24 @@ END:VTIMEZONE
 {foreach from=$groups item=monat}
 {foreach from=$monat.eintraege item=eintrag}
 BEGIN:VEVENT
-DTSTART;TZID=Europe/Berlin:{$eintrag.startdatum|date_format:"%Y%m%d"}T{if $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}000000{/if}
-
+{if $eintrag.startzeit}
+DTSTART;TZID=Europe/Berlin:{$eintrag.startdatum|date_format:"%Y%m%d"}T{$eintrag.startzeit|date_format:"%H%M%S"}
+{else}
+DTSTART;VALUE=DATE:{$eintrag.startdatum|date_format:"%Y%m%d"}
+{/if}
+{if $eintrag.startzeit || $eintrag.endzeit}
 DTEND;TZID=Europe/Berlin:{if $eintrag.enddatum}{$eintrag.enddatum|date_format:"%Y%m%d"}{else}{$eintrag.startdatum|date_format:"%Y%m%d"}{/if}T{if $eintrag.endzeit}{$eintrag.endzeit|date_format:"%H%M%S"}{elseif $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}235900{/if}
 
+{else}
+DTEND;VALUE=DATE:{if $eintrag.enddatum}{assign var="foooo" value="`$eintrag.enddatum`"|strtotime}{$foooo+86400|date_format:"%Y%m%d"}{else}{assign var="foooo" value="`$eintrag.startdatum`"|strtotime}{$foooo+86400|date_format:"%Y%m%d"}{/if}
+
+{/if}
 {if $eintrag.ort}LOCATION:{$eintrag.ort}
 {/if}
 SUMMARY:{$eintrag.titel}
 UID:{$eintrag.id}
 SEQUENCE:1
-DTSTAMP:20060107T130017Z
+DTSTAMP:{$eintrag.changed|date_format:"%Y%m%dT%H%M%SZ"}
 END:VEVENT
 {/foreach}
 {/foreach}
