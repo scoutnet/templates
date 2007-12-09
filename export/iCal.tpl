@@ -18,7 +18,7 @@
 
 {/strip}BEGIN:VCALENDAR
 VERSION:2.0
-X-WR-CALNAME:{$kalender.name}
+X-WR-CALNAME:{$kalender.ebene} {$kalender.name}
 PRODID:-//Apple Computer\, Inc//iCal 2.0//EN
 X-WR-RELCALID:44BAD25C-E159-4774-A8DA-E75D6686A88D-{$kalender.id}
 X-WR-TIMEZONE:Europe/Berlin
