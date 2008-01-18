@@ -3,8 +3,8 @@
         Name : Kalender 2.0 Template - XML
         Dateiname : xml.tpl
         Autor : Carsten Horst
-        Letzte Änderung : 02.02.2004 (Carsten Horst)
-        Version : 1.0.0
+        Letzte Änderung : 02.07.2004 (Carsten Horst)
+        Version : 1.0.1
         notwendige Konfiguration : keine
 *}
         {if $groups.jahrmonat}
@@ -41,7 +41,7 @@
       <STime>{$eintrag.startzeit|date_format:"%H,%M,0,1,1,1970"}</STime>
       <EDate>{$eintrag.enddatum|date_format:"0,0,0,%m,%d,%y"}</EDate>
       <ETime>{$eintrag.endzeit|date_format:"%H,%M,0,1,1,1970"}</ETime>
-      <Title><![CDATA[{$eintrag.titel}]]></Title>
+      <Title>{$eintrag.titel}</Title>
       <Place>{$eintrag.ort}</Place>
       <Category>{$eintrag.kategorie}</Category>
       <Section><![CDATA[{$eintrag.stufe.bildlich_scoutnet}]]></Section>
@@ -50,7 +50,7 @@
       {else}
       <Author>{$eintrag.autor.nickname}</Author>
       {/if}
-      <Association>{$eintrag.verband}</Association>
+      <Association>{$eintrag.kalender.verband}</Association>
       <Level>{$eintrag.kalender.ebene}</Level>
       <Info><![CDATA[{$eintrag.info|nl2br}]]></Info>
     </Entry>
