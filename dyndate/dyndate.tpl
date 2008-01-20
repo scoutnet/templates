@@ -1,16 +1,18 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/capture} *}{capture name=devnull}
 {*
 	Name : Kalender 2.0 Template - DynDate
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 22.01.2004
-	Version : 1.1.6
+	Letzte Änderung : 20.01.2007
+	Version : 1.1.7
 	notwendige Konfiguration : keine
 	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.1.7 - 20.01.2007:
+	    - Überflüssige Leerzeile am Anfang entfernt durch Ersetzen von strip durch capture
 	Änderungen in Version 1.1.6 - 22.01.2004:
 		- Fehler bzgl. den End Jahres behoben (trat auf falls monate_im_voraus+aktueller_monat<=12)
 	Änderungen in Version 1.1.5 - 14.11.2003:
@@ -107,5 +109,4 @@
 {if $startdate}{assign var="link" value="`$link`&startdate=`$startdate`"}{/if}
 {if $enddate}{assign var="link" value="`$link`&enddate=`$enddate`"}{/if}
 
-{* HTML CODE *}{/strip}
-{fetch file=$link}
+{* HTML CODE *}{/capture}{fetch file=$link}
