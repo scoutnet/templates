@@ -3,11 +3,13 @@
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 07.12.2005
-	Version : 1.1.6
+	Letzte Änderung : 27.01.2008
+	Version : 1.1.7
 	notwendige Konfiguration : keine
 	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
 	W3C konformität : bisher nicht getestet
+	Änderungen in Version 1.1.7 - 27.01.2008:
+	    - BUGFIX: Bundesebene fehlt 
 	Änderungen in Version 1.1.6 - 07.12.2005:
 		- Die Popup-Fenster &ouml;ffnen nun einen absoluten pfad aus SERVER_NAME und PHP_SELF
 	Änderungen in Version 1.1.5 - 06.12.2005:
@@ -143,13 +145,13 @@
     <td width=30%><div align=right>
 	{if $kalender.id != 3}
 		{assign var="temp_kalender" value=$kalender}
-   		<FORM method=get action=/redirect.asp><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
+		<FORM method=get action=/redirect.asp><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
 		<SELECT name=gotourl onChange='location.href=this.form.gotourl.options[this.form.gotourl.selectedIndex].value; return false;'>
 		{section loop=10 name="menu"}
-			{if $temp_kalender.id >= 3}
+			{if $temp_kalender.ebene_id == 9 || $temp_kalender.ebene_id == 8 || $temp_kalender.ebene_id == 7 || $temp_kalender.ebene_id == 5}
 				<option value="{$smarty.server.PHP_SELF}?{$parameters|htmlentities}groupby=startdatum.%Y-%m&amp;ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
-				{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 			{/if}
+			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 		{/section}
 	    </SELECT><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"> anzeigen...</font>
 	    </form>

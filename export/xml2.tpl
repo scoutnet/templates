@@ -3,9 +3,12 @@
         Name : Kalender 2.0 Template - XML
         Dateiname : xml2.tpl
         Autor : Carsten Horst
-        Letzte Änderung : 13.09.2006 (Stefan Motz)
-        Version : 2.0.0
+        Letzte Änderung : 01.21.2008 (chris@scoutnet.de)
+        Version : 2.0.1
         notwendige Konfiguration : keine
+	Änderungen in Version 2.0.1 - 01.21.2008:
+          - bugfix $eintrag.kalender.verband
+
 *}
         {if $groups.jahrmonat}
                 {assign var="groups" value="`$groups.jahrmonat`"}
@@ -50,7 +53,7 @@
 {else}
             <Author>{$eintrag.autor.nickname}</Author>
 {/if}
-            <Association>{$eintrag.verband}</Association>
+            <Association>{$eintrag.kalender.verband}</Association>
             <Level>{$eintrag.kalender.ebene}</Level>
             <Info><![CDATA[{$eintrag.info|nl2br}]]></Info>
         </Entry>

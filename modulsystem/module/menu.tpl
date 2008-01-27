@@ -5,12 +5,14 @@
 	Name : Kalender 2.0 Template - Modul Menu_1 für Scoutnet Modulsystem 
 	Dateiname : menu.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 01.08.2003
-	Version : 1.0.1
+	Letzte Änderung : 27.01.2008
+	Version : 1.0.2
 	notwendige Konfiguration : keine
 	Bemerkungen : 	Diese Template ist als Modul für das Scoutnet Modulsystem gedacht und
 					stellt ein simples Menü zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
 	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist) (gilt für Version 1.0, Version 1.0.1 nicht getestet)
+	Änderungen in Version 1.0.2 - 27.01.2008:
+	    - BUGFIX: Bundesebene fehlt 
 	Änderungen in Version 1.0.1 - 01.08.2003:
 		- Hinweis zur An- und Abwahl durch Strg
  *}
@@ -61,34 +63,23 @@
 		{if $kalender.id>3}
 		<td>
 			<select name="addids[]" size="{$existing.stufen_ids|@count}" multiple id="addids">
-				{if isset($kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id)&&$kalender.gehoertzu.gehoertzu.gehoertzu.id>3}
-					<option value="{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id}" 
-						{if in_array($kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.id,$used.kalender_ids)}
+			{assign var="temp_kalender" value=$kalender}
+				{section loop=10 name="menu"}
+					{if $temp_kalender.ebene_id == 8 || $temp_kalender.ebene_id == 7 || $temp_kalender.ebene_id == 5}
+					<option value="{$temp_kalender.id}" 
+						{if in_array($temp_kalender.id,$used.kalender_ids)}
 							selected
 						{/if}
-					>{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.ebene}&nbsp;{$kalender.gehoertzu.gehoertzu.gehoertzu.gehoertzu.name}</option>
-				{/if}
-				{if isset($kalender.gehoertzu.gehoertzu.gehoertzu.id)&&$kalender.gehoertzu.gehoertzu.id>3}
-					<option value="{$kalender.gehoertzu.gehoertzu.gehoertzu.id}" 
-						{if in_array($kalender.gehoertzu.gehoertzu.gehoertzu.id,$used.kalender_ids)}
-							selected
-						{/if}
-					>{$kalender.gehoertzu.gehoertzu.gehoertzu.ebene}&nbsp;{$kalender.gehoertzu.gehoertzu.gehoertzu.name}</option>
-				{/if}
-				{if isset($kalender.gehoertzu.gehoertzu.id)&&$kalender.gehoertzu.id>3}
-					<option value="{$kalender.gehoertzu.gehoertzu.id}" 
-						{if in_array($kalender.gehoertzu.gehoertzu.id,$used.kalender_ids)}
-							selected
-						{/if}
-					>{$kalender.gehoertzu.gehoertzu.ebene}&nbsp;{$kalender.gehoertzu.gehoertzu.name}</option>
-				{/if}
-				{if isset($kalender.gehoertzu.id)&&$kalender.id>3}
-					<option value="{$kalender.gehoertzu.id}" 
-						{if in_array($kalender.gehoertzu.id,$used.kalender_ids)}
-							selected
-						{/if}
-					>{$kalender.gehoertzu.ebene}&nbsp;{$kalender.gehoertzu.name}</option>
-				{/if}
+					>
+					{if $temp_kalender.ebene_id == 5}
+					{$temp_kalender.ebene}
+					{else}
+					{$temp_kalender.ebene}&nbsp;{$temp_kalender.name}
+					{/if}
+					</option>
+					{/if}
+					{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
+				{/section}
 			</select>
 		</td>
 		{/if}

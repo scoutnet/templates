@@ -115,14 +115,8 @@
 					{/if}
 					
 					{if $eintrag.Description != ""}
-						<br/>Info: {$eintrag.Description}
 						<br/>Info: {$eintrag.Description|nl2br}
 					{/if}
-					
-					<br/>ID: {$eintrag.id}
-					
-					
-					{assign var="LastID" value=$eintrag.id}
 				</p>
 			</card>
 				
@@ -130,5 +124,6 @@
 		{/foreach} 
 
 {/capture}
+
 {$smarty.capture.wmlcontent|strip}
 </wml>
