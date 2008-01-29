@@ -52,59 +52,41 @@
 
 		</card>
 		
-		
-		{* Schleife ueber die Monate*}
-		{foreach from=$groups item=monat}
+
+		{* Ersten und letzten Termin bestimmen *}
+		{foreach from=$groups item=monat name=monate}
 			{* Schleife ueber die Termineintraege eines Monats *}
-			{foreach from=$monat.eintraege item=eintrag}
-			
-			{* Karte(n) mit den Details zu einem Termin *}
-				<card id="_{$eintrag.id}" title="{$kalender.ebene} {$kalender.name}">		
-					<p>
-						{$eintrag.startdatum|date_format:"%A"|truncate:2:""} 
-						<b>{$eintrag.startdatum|date_format:"%d.%m."}</b> 
-						{if $eintrag.startzeit!= ""}
-							{$eintrag.startzeit|date_format:"%H:%M"} 
-						{/if}
-						{if $eintrag.enddatum != "" || $eintrag.endzeit != ""}
-							- 
-							{if $eintrag.enddatum != ""}
-								{$eintrag.enddatum|date_format:"%A"|truncate:2:""} 
-								<b>{$eintrag.enddatum|date_format:"%d.%m."}</b> 
-							{/if}		       		
-							{if $eintrag.endzeit != ""}
-							{$eintrag.endzeit|date_format:"%H:%M"} 
-							{/if}
-						{/if}
-						<br/>
-					
-						<b>{$eintrag.titel}</b>
-						
-						<br/>{$eintrag.kalender.ebene}    {$eintrag.kalender.name}
-						
-						{if $eintrag.stufe.bezeichnungen != ""}
-							<br/>Stufe(n): {$eintrag.stufe.bezeichnungen}
-						{/if}
-						    
-						
-						{if $eintrag.ort != ""}
-							<br/>Ort: {$eintrag.ort}
-						{/if}
-						
-						{if $eintrag.kategorie != ""}
-							<br/>Kategorie: {$eintrag.kategorie}
-						{/if}
-						
-						{if $eintrag.Description != ""}
-							<br/>Info: {$eintrag.Description|nl2br}
-						{/if}
-						
-						{* <br/>ID: {$eintrag.id} *}
-						
-						{assign var="LastID" value=$eintrag.id}
-					</p>
-				</card>
+			{foreach from=$monat.eintraege item=eintrag name=eintraege}
+				{if $smarty.foreach.monate.first && $smarty.foreach.eintraege.first}
+					{assign var="erster_eintrag" value=$eintrag}
+				{/if}
 				
+				{if $smarty.foreach.monate.last && $smarty.foreach.eintraege.last}
+					{assign var="letzter_eintrag" value=$eintrag}
+				{/if}
+			{/foreach} 
+		{/foreach} 
+		
+		{assign var=i value=0}
+		{* Schleife ueber die Monate*}
+		{foreach from=$groups item=monat name=monate}
+			{* Schleife ueber die Termineintraege eines Monats *}
+			{foreach from=$monat.eintraege item=eintrag name=eintraege}
+				{assign var=i value=$i+1}
+				{* Wir zeigen die Termine um eins verschoben an, um vorigen und nächsten schon zu kennen *}
+				{assign var="vorheriger_eintrag" value=$aktueller_eintrag}
+				{assign var="aktueller_eintrag" value=$naechster_eintrag}
+				{assign var="naechster_eintrag" value=$eintrag}
+				{if $aktueller_eintrag}
+					{include file="wml/eintrag.tpl" eintrag=$aktueller_eintrag}
+				{/if}
+				{if $smarty.foreach.monate.last && $smarty.foreach.eintraege.last}
+					{* Nach dem letzten Durchlauf noch den letzten Termin anzeigen *}
+					{assign var="vorheriger_eintrag" value=$aktueller_eintrag}
+					{assign var="aktueller_eintrag" value=$naechster_eintrag}
+					{assign var="naechster_eintrag" value=""}
+					{include file="wml/eintrag.tpl" eintrag=$aktueller_eintrag}
+				{/if}
 			{/foreach} 
 		{/foreach} 
 
