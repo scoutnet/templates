@@ -3,14 +3,16 @@
 	Name : Kalender 2.0 Template - DynDate
 	Dateiname : dyndate.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 20.01.2007
-	Version : 1.1.7
+	Letzte Änderung : 30.01.2007
+	Version : 1.2
 	notwendige Konfiguration : keine
 	W3C konformität : keine Relevanz da keine Ausgabe
 	Bemerkungen : Diese Template wird einem anderen Template vorgeschoben um das Datum dynamisch anzupassen,
 	              falls etwas nicht funktioniert bitte erst im neuen Forum (kalender.scoutnet.de) lesen, 
 				  erst dann mail an uns, Gut Pfad, Christopher, Kalender-Team ScoutNet
 	              P.S. Vielen Dank an Rocky (rocky@dpsg-lh.de) für die Idee für dieses Template.
+	Änderungen in Version 1.2 - 30.01.2007:
+	    - Durchreichen aller URL-Parameter (danke an Klaus Kleiner für die Idee)
 	Änderungen in Version 1.1.7 - 20.01.2007:
 	    - Überflüssige Leerzeile am Anfang entfernt durch Ersetzen von strip durch capture
 	Änderungen in Version 1.1.6 - 22.01.2004:
@@ -50,9 +52,6 @@
 {/if}
 {if isset($url_parameters.monate_im_voraus)}
 	{assign var="monate_im_voraus" value=$url_parameters.monate_im_voraus}
-{/if}
-{if isset($url_parameters.other_template)}
-	{assign var="template" value=$url_parameters.other_template}
 {/if}
 
 {* automatische Datumsbestimmungen *}
@@ -104,7 +103,7 @@
 {/if}
 
 {* automatische Linkerstellung *}
-{assign var="link" value="http://kalender.scoutnet.de/2.0/show.php?id=`$url_parameters.id`&template=`$template`"}
+{assign var="link" value="http://`$smarty.server.SERVER_NAME``$smarty.server.PHP_SELF`?`$smarty.server.QUERY_STRING`&template=`$smarty.request.other_template`"}
 
 {if $startdate}{assign var="link" value="`$link`&startdate=`$startdate`"}{/if}
 {if $enddate}{assign var="link" value="`$link`&enddate=`$enddate`"}{/if}
