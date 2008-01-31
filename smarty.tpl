@@ -1,10 +1,10 @@
 <style>
 h1{ldelim}
 	font-size: 1em;
-{rldelim}
+{rdelim}
 pre{ldelim}
 	padding-left: 50px;
-{rldelim}
+{rdelim}
 
 </style>
 <h1>$smarty.get</h1>
@@ -13,6 +13,11 @@ pre{ldelim}
 </pre>
 
 <h1>$smarty.post</h1>
+<pre>
+{$smarty.post|@print_r:1}
+</pre>
+
+<h1>$smarty.cookie</h1>
 <pre>
 {$smarty.cookies|@print_r:1}
 </pre>
