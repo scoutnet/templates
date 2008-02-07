@@ -2,8 +2,8 @@
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 01.02.2008
-	Version : 1
+	Letzte Änderung : 07.02.2008
+	Version : 1.1
 *}
 {* Anleitung *}
 
@@ -16,6 +16,10 @@
 	
 	&css=http://deineseite.de/dein-stylesheet.css - um ein eigenes stylesheet anzugeben
 
+	&js=http://deineseite.de/dein-javascript.js - um ein eigenes javascript anzugeben
+
+	&nostrip - verhindert das komprimieren des html codes in eine Zeile. Ergibt besser lesbaren html code, zum testen.
+
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
@@ -23,14 +27,21 @@
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
+	{assign var="SNK_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF|dirname|dirname|cat:"/"}
 	{if isset($smarty.request.css)}
 		{assign var="css" value=`$smarty.request.css`}
 	{else}
-		{assign var="php_self" value=$smarty.server.PHP_SELF|dirname}
-		{assign var="css" value="`$php_self`/templates/scoutnet/style.css"}
+		{assign var="css" value="`$SNK_URL`2.0/templates/scoutnet/style.css"}
+	{/if}
+	{if isset($smarty.request.js)}
+		{assign var="js" value=`$smarty.request.js`}
+	{else}
+		{assign var="js" value="`$SNK_URL`2.0/templates/scoutnet/behavior.js"}
 	{/if}
 {* Initialisierung ENDE *}
 {/capture}{capture name=content}
+
+{$php_self_dir|dirname}
 
 {* Kopfbereich *}
 {if !isset($smarty.request.onlybody)}
@@ -43,8 +54,19 @@
 {/if}
 <html{if isset($smarty.request.xhtml)} xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"{/if}>
 <head>
-	<title>ScoutNet-Kalender f&uuml;r {$kalender.ebene} {$kalender.name}</title>
+	<title>ScoutNet-Kalender f&uuml;r {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}</title>
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
+	<script type="text/javascript" src="{$js}"></script>
+	<script type="text/javascript" src="{$SNK_URL}js/base2-p.js"></script>
+	<script type="text/javascript" src="{$SNK_URL}js/base2-dom-p.js"></script>
+{literal}
+	<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>
+{/literal}
+	<script type="text/javascript">
+		base2.DOM.bind(document);
+		snk_init();
+		document.addEventListener('DOMContentLoaded', snk_finish, false);
+	</script>
 </head>
 <body>
 {/if}
@@ -73,7 +95,6 @@
 			<select
 				id="snk-auswahlbox"
 				name="ebenenup"
-				onchange="location.href='{$smarty.server.PHP_SELF}?{$smarty.server.QUERY_STRING|htmlentities}&amp;ebenenup='+getElementById('snk-auswahlbox').options[getElementById('snk-auswahlbox').selectedIndex].value; return false;"
 			>
 			{section loop=10 name="menu"}
 				{if $temp_kalender.ebene_id == 9
@@ -86,21 +107,21 @@
 						selected
 					{/if}
 				>
-					{$temp_kalender.ebene}
+					{$temp_kalender.ebene|htmlentities|nl2br}
 				</option>
 				{/if}
 			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 		{/section}
 	    </select>
-	    	<noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
-	    	<script type="text/javascript">document.write('anzeigen');</script>
+	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
+	    	
 	    </form>
 	{/if}
 </div>
 
 <div class="snk-termine">
 <table>
-	<caption>ScoutNet-Kalender f&uuml;r {$kalender.ebene}&nbsp;{$kalender.name}</caption>
+	<caption>ScoutNet-Kalender f&uuml;r {$kalender.ebene|htmlentities|nl2br}&nbsp;{$kalender.name|htmlentities|nl2br}</caption>
 	<tr class="snk-headings-row"> 
 		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
 		<th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
@@ -120,33 +141,34 @@
 		<td class="snk-eintrag-titel">
 			{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 			<a
-				href="#snk-termin-{$eintrag.id}"
-				{literal}onclick="x=document.getElementById('snk-termin-{/literal}{$eintrag.id}{literal}');if(!this.putstyle)this.putstyle='table-row';this.putstyle2='block'; if(x.style.display == this.putstyle || x.style.display == this.putstyle2) {x.style.display = 'none';this.style.color = 'blue'; } else {try{x.style.display =this.putstyle;}catch(e){x.style.display =this.putstyle2;}this.style.color = 'red'; } return false;"{/literal}
+				href="#snk-termin-{$eintrag.id}" class="snk-termin-link"
+				onclick="if(snk_show_termin) return snk_show_termin({$eintrag.id},this); "
 			>
-				{$eintrag.titel}
-			</a>{else}{$eintrag.titel}{/if}
+				{$eintrag.titel|htmlentities|nl2br}
+			</a>{else}{$eintrag.titel|htmlentities|nl2br}{/if}
 		</td>
 		<td class="snk-eintrag-stufe">
 			{foreach from=$eintrag.stufe.records item=stufe}
-				<img src="http://kalender.scoutnet.de/2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung}"{$xhtmlend}>
+				<img src="{$SNK_URL}2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung|htmlentities|nl2br}"{$xhtmlend}>
 			{/foreach}			
 		</td>
-		<td class="snk-eintrag-kategorien">{$eintrag.kategorie}</td>
-		<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene}</td>
+		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
+		<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br}</td>
 	</tr>
+	{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
 		<td colspan="6">
 			<dl>
 					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
-					{if $eintrag.plz && $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz} {$eintrag.ort}</dd>{/if}
-					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer}</dd>{/if}
-					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group}</dd>{/if}
-					{if $eintrag.URL}<dt class="snk-eintrag-zielgruppe">Link</dt><dd><a href="{$eintrag.URL}">{if $eintrag.URL_Text}{$eintrag.URL_Text}{else}{$eintrag.URL}{/if}</a></dd>{/if}
-					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname}&nbsp;{$eintrag.autor.nachname}{else}{$eintrag.autor.nickname}{/if}</dd>
+					{if $eintrag.plz && $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
+					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
+					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
+					{if $eintrag.URL}<dt class="snk-eintrag-zielgruppe">Link</dt><dd><a href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
+					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
 			</dl>
 		</td>
 	</tr>
-	<script type="text/javascript">document.getElementById('snk-termin-{$eintrag.id}').style.display = 'none';</script>
+	{/if}
 	{/foreach} 
 	{/foreach} 
 </table>
@@ -171,8 +193,7 @@
 {/if}
 {* Fußbereich ENDE *}
 
-{/capture}{$smarty.capture.content|strip}
-
+{/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
 
 {capture name=dummy}{literal}
 <SCRIPT language="javascript" type="text/javascript">
