@@ -2,8 +2,8 @@
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 07.02.2008
-	Version : 1.1
+	Letzte Änderung : 11.02.2008
+	Version : 1.2
 *}
 {* Anleitung *}
 
@@ -27,7 +27,10 @@
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
-	{assign var="SNK_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF|dirname|dirname|cat:"/"}
+	{assign var="SNK_PHP_SELF_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
+	{assign var="SNK_URL"          value=$SNK_PHP_SELF_URL|dirname|dirname|cat:"/"}
+	{assign var="SNK_REQUEST_URL"  value=$SNK_PHP_SELF_URL|cat:"?"|cat:$smarty.server.QUERY_STRING}
+
 	{if isset($smarty.request.css)}
 		{assign var="css" value=`$smarty.request.css`}
 	{else}
@@ -40,8 +43,6 @@
 	{/if}
 {* Initialisierung ENDE *}
 {/capture}{capture name=content}
-
-{$php_self_dir|dirname}
 
 {* Kopfbereich *}
 {if !isset($smarty.request.onlybody)}
@@ -61,12 +62,12 @@
 	<script type="text/javascript" src="{$SNK_URL}js/base2-dom-p.js"></script>
 {literal}
 	<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>
-{/literal}
 	<script type="text/javascript">
 		base2.DOM.bind(document);
 		snk_init();
-		document.addEventListener('DOMContentLoaded', snk_finish, false);
+		document.addEventListener('DOMContentLoaded', function(){ return snk_finish('{/literal}{$SNK_REQUEST_URL|addslashes}{literal}'); }, false);
 	</script>
+{/literal}
 </head>
 <body>
 {/if}
@@ -92,10 +93,7 @@
 				{/if}
 			{/foreach}
 			<label for="snk-auswahlbox">Termine bis</label>
-			<select
-				id="snk-auswahlbox"
-				name="ebenenup"
-			>
+			<select id="snk-auswahlbox" name="ebenenup">
 			{section loop=10 name="menu"}
 				{if $temp_kalender.ebene_id == 9
 				 || $temp_kalender.ebene_id == 8
@@ -114,7 +112,6 @@
 		{/section}
 	    </select>
 	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
-	    	
 	    </form>
 	{/if}
 </div>
@@ -193,35 +190,5 @@
 {/if}
 {* Fußbereich ENDE *}
 
+{* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
-
-{capture name=dummy}{literal}
-<SCRIPT language="javascript" type="text/javascript">
-<!-- Begin
-  function infoszeigen(id)
-	{
-	{/literal}{strip}
-	popupWin = window.open('
-	
-	http://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?
-	
-	entryids='+id+'&
-	template={$template_path}/infos_zeigen.tpl&
-	bgcolor={$bgcolor}&
-	{if $background&&$background!="false"}background={$background}&{/if}
-	{if $bgproperties&&$bgproperties!="false"}bgproperties={$bgproperties}&{/if}
-	fontcolor={$fontcolor}&fontsize={$fontsize}&
-	{if $fontface}fontface={$fontface}&{/if}
-	{if $kursiv&&$kursiv!="false"}fett={$fett}&{/if}
-	{if $kursiv&&$kursiv!="false"}kursiv={$kursiv}{/if}
-	
-	','windy','toolbar=no,location=no,directories=no,status=no,menubar=no,resizable=no,copyhistory=no,scrollbars=yes,width=500,height=350,top='+((screen.height/2)-100)+',left='+((screen.width/2)-250)+'');
-	{/strip}{literal}
-	  if (parseFloat(navigator.appVersion) < 3) {
-	  } else {
-		popupWin.focus();
-	  }
-	}
-//-->
-</script>
-{/literal}{/capture}

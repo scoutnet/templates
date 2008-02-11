@@ -5,10 +5,10 @@ function snk_init(){
 }
 
 /* called after DOM is complete */
-function snk_finish(){
+function snk_finish( snk_request_url ){
 	/* add drop-down behavior */
 	document.getElementById("snk-auswahlbox").onchange = function(){
-		location.href = '{/literal}{$SNK_URL|substr:0:-1}{$smarty.server.PHP_SELF}?{$smarty.server.QUERY_STRING|addslashes}{literal}&ebenenup='
+		location.href = snk_request_url+'&ebenenup='
 		                + document.getElementById('snk-auswahlbox')
 		                  .options[ document.getElementById('snk-auswahlbox').selectedIndex ]
 		                  .value;
