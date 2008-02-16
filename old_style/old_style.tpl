@@ -3,36 +3,8 @@
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 27.01.2008
-	Version : 1.1.7
-	notwendige Konfiguration : keine
-	Bemerkungen : Dieses Template bietet das Design des Kalender 1.0
-	W3C konformität : bisher nicht getestet
-	Änderungen in Version 1.1.7 - 27.01.2008:
-	    - BUGFIX: Bundesebene fehlt 
-	Änderungen in Version 1.1.6 - 07.12.2005:
-		- Die Popup-Fenster &ouml;ffnen nun einen absoluten pfad aus SERVER_NAME und PHP_SELF
-	Änderungen in Version 1.1.5 - 06.12.2005:
-		- Die Popup-Fenster &ouml;ffnen nun PHP_SELF statt dem statischen http://kalender.scoutnet.de/2.0/show.php
-	Änderungen in Version 1.1.4 - 13.10.2004:
-		- Im Info-Popup-Fenster werden nun Datum und Uhrzeit in einer Zeile angezeigt, außerdem sind dort nun auch PLZ, Ort und Kalender zu sehen
-		- Aus dem Fenstertitel vom Info-Popup ist das Datum und die Uhrzeit entfernt, wegen schlechter Darstellung und zu langem Titel für dieses kleine Fenster
-		- Die Popup-Fenstergröße ist etwas erhöht, um die zusätzlichen Daten ohne Scrollbar anzeigen zu können
-		- Ab jetzt bekommt jeder Termin einen Link mit Info-Popup-Fenster, da dort immer zusätzliche Angaben zu finden sind
-		- Für den Anstoß zu den Änderungen vielen Dank an Frank Eichinger
-	Änderungen in Version 1.1.3 - 16.07.2003:
-		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
-	Änderungen in Version 1.1.2 - 16.07.2003:
-		- Korrektur der Datumsanzeige, vielen Dank an den freundlichen Finder: Christian Mertens
-	Änderungen in Version 1.1.1 - 15.07.2003:
-		- nl2br: Zeilenumbrüche in den Infos werden in HTML Zeilenumbrüche umgewandelt
-	Änderungen in Version 1.1.0 - 13.07.2003:
-		- Pfad zu old_style.tpl auch für infos_zeigen.tpl in der JavaScript Funktion infoszeigen
-		- Korrektur des setzens von "checked" wenn kein ebenenup übergeben wurde
-		- kleinere Designanpassungen
-		- Es gibt nun viele Konfigurationsmöglichkeiten am Anfang und über die URL
-	Änderungen in Version 1.0.1 - 05.07.2003:
-		- absoluter Pfad zu show.php in der JavaScript Funktion infoszeigen
+	Letzte Änderung : 16.02.2008
+	Version : 1.2
 *}
 
 {* START - STANDARDKONFIGURATIONSBEREICH entsprechend denen im Adminbereich des Kalender 1.0*}
@@ -148,7 +120,7 @@
 		<FORM method=get action=/redirect.asp><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
 		<SELECT name=gotourl onChange='location.href=this.form.gotourl.options[this.form.gotourl.selectedIndex].value; return false;'>
 		{section loop=10 name="menu"}
-			{if $temp_kalender.ebene_id == 9 || $temp_kalender.ebene_id == 8 || $temp_kalender.ebene_id == 7 || $temp_kalender.ebene_id == 5}
+			{if $temp_kalender}
 				<option value="{$smarty.server.PHP_SELF}?{$parameters|htmlentities}groupby=startdatum.%Y-%m&amp;ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
 			{/if}
 			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}

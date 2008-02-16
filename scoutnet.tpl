@@ -2,8 +2,8 @@
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 11.02.2008
-	Version : 1.2
+	Letzte Änderung : 16.02.2008
+	Version : 1.3
 *}
 {* Anleitung *}
 
@@ -95,10 +95,7 @@
 			<label for="snk-auswahlbox">Termine bis</label>
 			<select id="snk-auswahlbox" name="ebenenup">
 			{section loop=10 name="menu"}
-				{if $temp_kalender.ebene_id == 9
-				 || $temp_kalender.ebene_id == 8
-				 || $temp_kalender.ebene_id == 7
-				 || $temp_kalender.ebene_id == 5}
+				{if $temp_kalender}
 				<option
 					value="{$smarty.section.menu.index}"
 					{if isset($smarty.request.ebenenup) && $smarty.request.ebenenup == $smarty.section.menu.index}
