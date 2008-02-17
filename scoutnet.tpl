@@ -55,7 +55,7 @@
 {/if}
 <html{if isset($smarty.request.xhtml)} xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"{/if}>
 <head>
-	<title>ScoutNet-Kalender f&uuml;r {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}</title>
+	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
 	<script type="text/javascript" src="{$SNK_URL}js/base2-p.js"></script>
@@ -102,7 +102,7 @@
 						selected
 					{/if}
 				>
-					{$temp_kalender.ebene|htmlentities|nl2br}
+					{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}
 				</option>
 				{/if}
 			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
@@ -115,14 +115,14 @@
 
 <div class="snk-termine">
 <table>
-	<caption>ScoutNet-Kalender f&uuml;r {$kalender.ebene|htmlentities|nl2br}&nbsp;{$kalender.name|htmlentities|nl2br}</caption>
+	<caption>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</caption>
 	<tr class="snk-headings-row"> 
+		{if count($used.kalender) > 1}<th class="snk-eintrag-ebene-ueberschrift">Termin von</th>{/if}
 		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
 		<th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
 		<th class="snk-eintrag-titel-ueberschrift">Titel</th>
 		<th class="snk-eintrag-stufen-ueberschrift">Stufen</th>
 		<th class="snk-eintrag-kategorien-ueberschrift">Kategorien</th>
-		<th class="snk-eintrag-ebene-ueberschrift">Ebene</th>
 	</tr>
 	{foreach from=$groups item=monat} 
 	<tr> 
@@ -130,7 +130,8 @@
 	</tr>
 	{foreach from=$monat.eintraege item=eintrag} 
 	<tr> 
-		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:", %d.%m."} {if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:", %d.%m."}{/if}</td>
+		{if count($used.kalender) > 1}<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br|replace:" ":"&nbsp;"}{if $eintrag.kalender.ebene_id >= 7}&nbsp;{$eintrag.kalender.name|htmlentities|nl2br|replace:" ":"&nbsp;"}{/if}</td>{/if}
+		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</td>
 		<td class="snk-eintrag-zeit">{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}</td>
 		<td class="snk-eintrag-titel">
 			{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
@@ -147,7 +148,6 @@
 			{/foreach}			
 		</td>
 		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
-		<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br}</td>
 	</tr>
 	{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
