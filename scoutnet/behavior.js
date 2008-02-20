@@ -31,14 +31,15 @@ function snk_show_termin( termin_id, link ){
 	}
 	this.putstyle_ie = 'block';
 	if( details.style.display == this.putstyle_w3c || details.style.display == this.putstyle_ie ){
-		 details.style.display = 'none';
-		 link.style.color = 'blue';
+		details.style.display = 'none';
+		link.style.color = link.old_color;
 	} else {
 		try{
 			details.style.display = this.putstyle_w3c;
 		}catch(e){
 			details.style.display = this.putstyle_ie;
 		}
+		link.old_color = link.style.color;
 		link.style.color = 'red';
 	}
 	return false;
