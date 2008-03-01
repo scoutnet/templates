@@ -10,9 +10,7 @@
         {if $groups.jahrmonat}
                 {assign var="groups" value="`$groups.jahrmonat`"}
         {/if}
-{/strip}
-
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+{/strip}<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!DOCTYPE ScoutNetCalendarData [
   <!ELEMENT ScoutNetCalendarData (Entry)+>
