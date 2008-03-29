@@ -1,18 +1,18 @@
-{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{capture name=dummy}{* Entfernt alle unnï¿½tigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 16.02.2008
+	Letzte ï¿½nderung : 16.02.2008
 	Version : 1.3
 *}
 {* Anleitung *}
 
 	Dieses Template stellt den Kalender als Tabelle bereit.	
-	Folgende Parameter können in der URL (per get oder post) übergeben werden, um das Verhalten des templates zu verändern:
+	Folgende Parameter kï¿½nnen in der URL (per get oder post) ï¿½bergeben werden, um das Verhalten des templates zu verï¿½ndern:
 
 	&onlybody  -  Zum Einbinden in eine existierende Webseite, werden hiermit nur der Inhalt des <body> tags ausgegeben.
 	
-	&xhtml - Passt den Doctype an und erzeugt schließende / bei tags wo das nötig ist.
+	&xhtml - Passt den Doctype an und erzeugt schlieï¿½ende / bei tags wo das nï¿½tig ist.
 	
 	&css=http://deineseite.de/dein-stylesheet.css - um ein eigenes stylesheet anzugeben
 
@@ -23,7 +23,7 @@
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
-	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nï¿½tig, wenn man den URL-Parameter groupby nicht ï¿½bergibt) *}
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
@@ -126,7 +126,7 @@
 	</tr>
 	{foreach from=$groups item=monat} 
 	<tr> 
-		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"}</th>
+		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"|htmlentities}</th>
 	</tr>
 	{foreach from=$monat.eintraege item=eintrag} 
 	<tr> 
@@ -169,7 +169,7 @@
 </div>
 
 <div class="snk-hinzufuegen">
-	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzufügen</a>
+	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
 </div>
 
 <div class="snk-powered-by">
@@ -180,12 +180,12 @@
 </div>
 {* Inhalt Ende *}
 
-{* Fußbereich *}
+{* Fuï¿½bereich *}
 {if !isset($urlparameters.onlybody)}
 </body>
 </html>
 {/if}
-{* Fußbereich ENDE *}
+{* Fuï¿½bereich ENDE *}
 
 {* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
