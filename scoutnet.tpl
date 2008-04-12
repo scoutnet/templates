@@ -1,18 +1,18 @@
-{capture name=dummy}{* Entfernt alle unn�tigen Leerzeichen und Leerzeilen bis {/strip} *}
+﻿{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte �nderung : 16.02.2008
-	Version : 1.3
+	Letzte Änderung : 12.04.2008
+	Version : 1.4
 *}
 {* Anleitung *}
 
 	Dieses Template stellt den Kalender als Tabelle bereit.	
-	Folgende Parameter k�nnen in der URL (per get oder post) �bergeben werden, um das Verhalten des templates zu ver�ndern:
+	Folgende Parameter können in der URL (per get oder post) übergeben werden, um das Verhalten des templates zu verändern:
 
 	&onlybody  -  Zum Einbinden in eine existierende Webseite, werden hiermit nur der Inhalt des <body> tags ausgegeben.
 	
-	&xhtml - Passt den Doctype an und erzeugt schlie�ende / bei tags wo das n�tig ist.
+	&xhtml - Passt den Doctype an und erzeugt schließende / bei tags wo das nötig ist.
 	
 	&css=http://deineseite.de/dein-stylesheet.css - um ein eigenes stylesheet anzugeben
 
@@ -23,7 +23,7 @@
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
-	{* Zuweisung der richtigen Gruppe (nur n�tig, wenn man den URL-Parameter groupby nicht �bergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
@@ -126,7 +126,7 @@
 	</tr>
 	{foreach from=$groups item=monat} 
 	<tr> 
-		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"|htmlentities}</th>
+		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"}</th>
 	</tr>
 	{foreach from=$monat.eintraege item=eintrag} 
 	<tr> 
@@ -153,8 +153,8 @@
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
 		<td colspan="6">
 			<dl>
-					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.plz && $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
+					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
+					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.URL}<dt class="snk-eintrag-zielgruppe">Link</dt><dd><a target=blank href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
@@ -169,7 +169,7 @@
 </div>
 
 <div class="snk-hinzufuegen">
-	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
+	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzufügen</a>
 </div>
 
 <div class="snk-powered-by">
@@ -180,12 +180,12 @@
 </div>
 {* Inhalt Ende *}
 
-{* Fu�bereich *}
+{* Fußbereich *}
 {if !isset($urlparameters.onlybody)}
 </body>
 </html>
 {/if}
-{* Fu�bereich ENDE *}
+{* Fußbereich ENDE *}
 
 {* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
