@@ -149,7 +149,7 @@
 		</td>
 		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
 	</tr>
-	{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
+	{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
 		<td colspan="6">
 			<dl>
