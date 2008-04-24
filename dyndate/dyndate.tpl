@@ -79,7 +79,7 @@
 {if isset($monate_im_nachhinein)}
 	{* Bestimmung des Endmonats und Endjahres des Templates anhand der obigen Konfigurationseinstellungen *}
 	{if ($aktueller_monat + $monate_im_voraus) > 12}
-		{math equation="((i + j) % 12)" i=$aktueller_monat j=$monate_im_voraus assign="end_monat"}
+		{math equation="((i + j - 1) % 12 + 1)" i=$aktueller_monat j=$monate_im_voraus assign="end_monat"}
 		{math equation="floor((k + m - 1) / 12)" k=$aktueller_monat m=$monate_im_voraus assign="jahre_im_voraus"}
 		{math equation="n + o" n=$aktuelles_jahr o=$jahre_im_voraus assign="end_jahr"}
 	{else}
