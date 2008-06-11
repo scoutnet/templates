@@ -1,4 +1,4 @@
-﻿{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
