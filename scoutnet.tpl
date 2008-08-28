@@ -169,7 +169,7 @@
 </div>
 
 <div class="snk-hinzufuegen">
-	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
+	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
 </div>
 
 <div class="snk-powered-by">
