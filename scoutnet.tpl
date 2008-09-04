@@ -1,18 +1,18 @@
-{capture name=dummy}{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}
+{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Ã„nderung : 12.04.2008
-	Version : 1.4
+	Letzte Änderung : 04.09.2008
+	Version : 1.4.1
 *}
 {* Anleitung *}
 
 	Dieses Template stellt den Kalender als Tabelle bereit.	
-	Folgende Parameter kÃ¶nnen in der URL (per get oder post) Ã¼bergeben werden, um das Verhalten des templates zu verÃ¤ndern:
+	Folgende Parameter können in der URL (per get oder post) übergeben werden, um das Verhalten des templates zu verändern:
 
 	&onlybody  -  Zum Einbinden in eine existierende Webseite, werden hiermit nur der Inhalt des <body> tags ausgegeben.
 	
-	&xhtml - Passt den Doctype an und erzeugt schlieÃŸende / bei tags wo das nÃ¶tig ist.
+	&xhtml - Passt den Doctype an und erzeugt schließende / bei tags wo das nötig ist.
 	
 	&css=http://deineseite.de/dein-stylesheet.css - um ein eigenes stylesheet anzugeben
 
@@ -23,7 +23,7 @@
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
-	{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
@@ -75,7 +75,7 @@
 
 {* Inhalt *}
 <div id="snk-{$kalender.id}" class="snk">
-
+<div class="snk-body">
 <div class="snk-datum">
 	{$smarty.now|date_format:"Heute ist %A, der %d.%m.%Y."}
 </div>
@@ -115,9 +115,9 @@
 
 <div class="snk-termine">
 <table>
-	<caption>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</caption>
+	<caption>ScoutNet-Kalender {$kalender.verband|htmlentities|nl2br} {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</caption>
 	<tr class="snk-headings-row"> 
-		{if count($used.kalender) > 1}<th class="snk-eintrag-ebene-ueberschrift">Termin von</th>{/if}
+		{if count($used.kalender) > 1}<th class="snk-eintrag-ebene-ueberschrift">Ebene</th>{/if}
 		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
 		<th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
 		<th class="snk-eintrag-titel-ueberschrift">Titel</th>
@@ -153,11 +153,11 @@
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
 		<td colspan="6">
 			<dl>
-					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|htmlentities|nl2br}</dd>{/if}
+					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
 					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.URL}<dt class="snk-eintrag-zielgruppe">Link</dt><dd><a target=blank href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
+					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" |{/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
 					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
 			</dl>
 		</td>
@@ -167,25 +167,26 @@
 	{/foreach} 
 </table>
 </div>
-
-<div class="snk-hinzufuegen">
-	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
+</div>
+<div class="snk-footer">
+	<div class="snk-hinzufuegen">
+		<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
+	</div>
+	<div class="snk-powered-by">
+		Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
+	</div>
+</div>
 </div>
 
-<div class="snk-powered-by">
-	Powered by <a href="http://kalender.scoutnet.de/" target="_blank">ScoutNet-Kalender</a>
-</div>
-
-
-</div>
+<!--  color:#3333FF; background-color: #FF9933; -->
 {* Inhalt Ende *}
 
-{* FuÃŸbereich *}
+{* Fußbereich *}
 {if !isset($urlparameters.onlybody)}
 </body>
 </html>
 {/if}
-{* FuÃŸbereich ENDE *}
+{* Fußbereich ENDE *}
 
 {* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
