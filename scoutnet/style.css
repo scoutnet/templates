@@ -29,7 +29,6 @@ body{
 .snk-termine{
 	clear:both;
 	width: 100%;
-	align: center;
 }
 .snk-termine table{
 	width:100%;
@@ -82,12 +81,10 @@ tr.snk-headings-row th{
 	color: #555;
 }
 .snk-powered-by{
-	width: 49.99%;
 	text-align: right;
-	float: left;
+	float: right;
 }
 .snk-hinzufuegen{
-	width: 49.99%;
 	float: left;
 	font-weight: bold;
 }
