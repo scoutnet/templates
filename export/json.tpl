@@ -1,0 +1,1 @@
+{ldelim}"kalender":{$kalender|@json_encode},"existing":{$existing|@json_encode},"eintraege":{$eintraege|@json_encode}{rdelim}

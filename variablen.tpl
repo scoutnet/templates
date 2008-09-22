@@ -17,9 +17,9 @@ pre{ldelim}
 {$groups|@print_r:1}
 </pre>
 
-<h1>$list</h1>
+<h1>$eintraege</h1>
 <pre>
-{$list|@print_r:1}
+{$eintraege|@print_r:1}
 </pre>
 
 <h1>$used</h1>
