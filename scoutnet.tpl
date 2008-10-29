@@ -157,7 +157,7 @@
 					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" |{/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
+					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" {/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
 					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
 			</dl>
 		</td>
