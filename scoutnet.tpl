@@ -2,8 +2,8 @@
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 04.09.2008
-	Version : 1.4.1
+	Letzte Änderung : 18.11.2008
+	Version : 1.4.2
 *}
 {* Anleitung *}
 
@@ -170,7 +170,7 @@
 </div>
 <div class="snk-footer">
 	<div class="snk-hinzufuegen">
-		<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
+		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
 	</div>
 	<div class="snk-powered-by">
 		Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
