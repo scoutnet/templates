@@ -1,0 +1,1 @@
+{$kalender|@serialize}%%%%SERIALIZE-TEMPLATE-DELIMITER%%%%{$groups|@serialize}
