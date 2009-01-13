@@ -5,42 +5,18 @@
 
 		<title>testfoo</title>
 		<script language="javascript">
-			// bugfix to show correct Timezone in popups
-		/*	Timeline.DefaultEventSource.Event.prototype.fillTime = function(elmt, labeller) {
-				if (this._instant) {
-					if (this.isImprecise()) {
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("start")));
-						elmt.appendChild(elmt.ownerDocument.createElement("br"));
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("end")));
-					} else {
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("start")));
-					}
-				} else {
-					if (this.isImprecise()) {
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("start") + " ~ " + this.getProperty("latestStart")));
-						elmt.appendChild(elmt.ownerDocument.createElement("br"));
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("earliestEnd") + " ~ " + this.getProperty("end")));
-					} else {
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("start")));
-						elmt.appendChild(elmt.ownerDocument.createElement("br"));
-						elmt.appendChild(elmt.ownerDocument.createTextNode(this.getProperty("end")));
-					}
-				}
-			};*/
 			var tl;
 			function onLoad() {
 				var eventSource = new Timeline.DefaultEventSource();
 
 				var theme = Timeline.ClassicTheme.create();
-				theme.event.label.width = 500; // px
-				//theme.event.label.vertical-align = "middle";
+				theme.event.label.width = 500; 
 				theme.event.bubble.width = 250;
 				theme.event.bubble.height = 200;
 				var today = new Date();
 
 				var bandInfos = [
 					Timeline.createBandInfo({
-						//timeZone:	-1,
 						eventSource:	eventSource,
 						width:		"67%", 
 						intervalUnit:	Timeline.DateTime.DAY, 
@@ -49,7 +25,6 @@
 						trackHeight:    2,
 					}),
 					Timeline.createBandInfo({
-						//timeZone:	-1,
 						showEventText:  false,
 						trackHeight:    0.6,
 						trackGap:       0.2,
@@ -60,7 +35,6 @@
 						theme:		theme
 					}),
 					Timeline.createBandInfo({
-						//timeZone:	-1,
 						showEventText:  false,
 						trackHeight:    0.3,
 						trackGap:       0.2,
@@ -94,7 +68,6 @@
 
 				var kalender_url = "http://kalender.scoutnet.de/2.0/show.php?id=3&content_type=xml&nogz&template=export/simile_timeline_xml.tpl&charset=utf8";
 				Timeline.loadXML(kalender_url, function(xml, url) { eventSource.loadXML(xml, url); });
-				//Timeline.loadXML("http://kalender.scoutnet.de/tmp/jfk.xml", function(xml, url) { eventSource.loadXML(xml, url); });
 				setupFilterHighlightControls(document.getElementById("controls"),tl,[0,1],theme);
 			}
 
@@ -119,6 +92,5 @@
 
 	<body onload="onLoad()" onresize="onResize()">
 		<div id="tl" class="timeline-default timeline-container" style="height: 200px; border: 1px solid #aaa"></div>
-		<!--div id="controls" class="controls"></div-->
 	</body>
 </html>
