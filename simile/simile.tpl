@@ -1,3 +1,4 @@
+{literal}
 <html>
 	<head>
 		<script src="http://simile.mit.edu/timeline/api/timeline-api.js" type="text/javascript"></script>
@@ -94,3 +95,5 @@
 		<div id="tl" class="timeline-default timeline-container" style="height: 200px; border: 1px solid #aaa"></div>
 	</body>
 </html>
+
+{/literal}
