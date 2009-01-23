@@ -89,13 +89,6 @@
 				}
 			}
 		</script>
-		<style type="text/css">
-		html {
-		    font-family: Trebuchet MS, Helvetica, Arial, sans serif;
-		        font-size: 8pt;
-			    border: 1px solid #aaa;
-			    }
-		</style>
 		{/literal}
 	</head>
 
