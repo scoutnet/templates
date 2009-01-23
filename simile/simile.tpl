@@ -92,7 +92,7 @@
 	</head>
 
 	<body onload="onLoad()" onresize="onResize()">
-		<div id="tl" class="timeline-default timeline-container" style="height: 200px; border: 1px solid #aaa"></div>
+		<div id="tl" class="timeline-default timeline-container" style="height: 150px; border: 1px solid #aaa"></div>
 	</body>
 </html>
 
