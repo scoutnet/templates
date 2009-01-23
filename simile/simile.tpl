@@ -67,7 +67,7 @@
 
 				tl = Timeline.create(document.getElementById("tl"), bandInfos);
 
-				var kalender_url = "http://kalender.scoutnet.de/2.0/show.php?id={$kalender.id}&content_type=xml&nogz&template=export/simile_timeline_xml.tpl&charset=utf8";
+				var kalender_url = "http://kalender.scoutnet.de/2.0/show.php?id={/literal}{$kalender.id}{literal}&content_type=xml&nogz&template=export/simile_timeline_xml.tpl&charset=utf8";
 				Timeline.loadXML(kalender_url, function(xml, url) { eventSource.loadXML(xml, url); });
 				setupFilterHighlightControls(document.getElementById("controls"),tl,[0,1],theme);
 			}
