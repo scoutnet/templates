@@ -100,7 +100,7 @@
 	</head>
 
 	<body onload="onLoad()" onresize="onResize()">
-		<div id="tl" class="timeline-default timeline-container" style="height: {$height}px; {if !isset($smarty.request.noborder)}border: 1px solid #aaa{/if}"></div>
+		<div id="tl" class="timeline-default timeline-container" style="height: {$height}px; {if isset($smarty.request.noborder)} {else}border: 1px solid #aaa{/if}"></div>
 	</body>
 </html>
 
