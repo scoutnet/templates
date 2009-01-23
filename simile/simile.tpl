@@ -1,3 +1,10 @@
+{if isset($smarty.request.height)}
+	{assign var="height" value=`$smarty.request.height`}
+{else}
+	{assign var="height" value="200"}
+{/if}
+
+
 {literal}
 <html>
 	<head>
@@ -13,7 +20,7 @@
 				var theme = Timeline.ClassicTheme.create();
 				theme.event.label.width = 500; 
 				theme.event.bubble.width = 250;
-				theme.event.bubble.height = 150;
+				theme.event.bubble.height = {/literal}{$height}{literal};
 				var today = new Date();
 
 				var bandInfos = [
@@ -92,7 +99,7 @@
 	</head>
 
 	<body onload="onLoad()" onresize="onResize()">
-		<div id="tl" class="timeline-default timeline-container" style="height: 150px; border: 1px solid #aaa"></div>
+		<div id="tl" class="timeline-default timeline-container" style="height: {/literal}{$height}{literal}px; border: 1px solid #aaa"></div>
 	</body>
 </html>
 
