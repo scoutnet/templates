@@ -13,7 +13,7 @@
 				var theme = Timeline.ClassicTheme.create();
 				theme.event.label.width = 500; 
 				theme.event.bubble.width = 250;
-				theme.event.bubble.height = 200;
+				theme.event.bubble.height = 150;
 				var today = new Date();
 
 				var bandInfos = [
