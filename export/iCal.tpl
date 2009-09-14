@@ -61,6 +61,7 @@ SUMMARY:{$eintrag.titel}
 UID:{$eintrag.id}
 SEQUENCE:1
 {if $entrag.changed}DTSTAMP:{$eintrag.changed|date_format:"%Y%m%dT%H%M%SZ"}{else}DTSTAMP:{$eintrag.created|date_format:"%Y%m%dT%H%M%SZ"}{/if}
+
 END:VEVENT
 {/foreach}
 {/foreach}
