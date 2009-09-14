@@ -60,7 +60,9 @@ DTEND;VALUE=DATE:{if $eintrag.enddatum}{assign var="foooo" value="`$eintrag.endd
 SUMMARY:{$eintrag.titel}
 UID:{$eintrag.id}
 SEQUENCE:1
-{if $entrag.changed}DTSTAMP:{$eintrag.changed|date_format:"%Y%m%dT%H%M%SZ"}{else}DTSTAMP:{$eintrag.created|date_format:"%Y%m%dT%H%M%SZ"}{/if}
+{if $eintrag.Description}DESCRIPTION:{$eintrag.Description|replace:"\n":"\\n"}
+{/if}
+{if $eintrag.changed}DTSTAMP:{$eintrag.changed|date_format:"%Y%m%dT%H%M%SZ"}{else}DTSTAMP:{$eintrag.created|date_format:"%Y%m%dT%H%M%SZ"}{/if}
 
 END:VEVENT
 {/foreach}
