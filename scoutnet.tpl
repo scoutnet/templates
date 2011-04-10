@@ -99,7 +99,7 @@
 				<option
 					value="{$smarty.section.menu.index}"
 					{if isset($smarty.request.ebenenup) && $smarty.request.ebenenup == $smarty.section.menu.index}
-						selected
+						selected="selected"
 					{/if}
 				>
 					{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}

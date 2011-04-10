@@ -5,7 +5,7 @@ if(!isset($__VARS[changed]))
 	{
 	$__VARS[monate_im_voraus]=1;
 	$__VARS[monate_im_nachhinein]=10;
-	$__VARS[other_template] = "modulsystem/modulsystem.tpl";
+	$__VARS[other_template] = "scoutnet.tpl";
 	}		
 
 if($__VARS[other_template]=="other")
@@ -47,7 +47,8 @@ echo'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
                 </td>
             <td> 
 			    <select name="other_template">
-			        <option value="modulsystem/modulsystem.tpl" selected>Modulsystem</option>
+			        <option value="scoutnet.tpl" selected>ScoutNet Standard</option>
+			        <option value="modulsystem/modulsystem.tpl">Modulsystem</option>
 			        <option value="old_style/old_style.tpl">OldStyle</option>
 			        <option value="other">anderes:</option>
 			    </select>
@@ -56,7 +57,7 @@ echo'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
         </tr>
         <tr align="center" valign="middle"> 
             <td colspan="4"> <div align="center"> 
-                    <input name=changed type="submit" value="link erzeugen">
+                    <strong style="color: white; background-color: red;padding: 2px;">1.</strong><input name=changed type="submit" value="link erzeugen">
                     <font size="2" face="Arial, Helvetica, sans-serif"> (Um mit 
                     preview ein geändertes Design anzuzeigen, muss nach der Änderung 
                     erst der link erzeugt werden.) </font> </div></td>
@@ -71,7 +72,7 @@ echo'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 	<font size="2" face="Arial, Helvetica, sans-serif">(Um den Link verwenden zu können, müsst ihr nur noch die ID durch eure ersetzen. Dieses Feld hat jedoch keinen Einfluss auf den preview-link weiter unten.)</font>
     <br>
 	<br>
-    <font size="2" face="Arial, Helvetica, sans-serif"><a href="'.$url.'" target="kalenderFrame">preview</a> mit dem Beispielkalender</font><div>
+	<strong style="color: white; background-color: red;padding: 2px;">2.</strong> <font size="2" face="Arial, Helvetica, sans-serif"><a href="'.$url.'" target="kalenderFrame">preview</a> mit dem Beispielkalender</font><div>
 </body>
 </html>';
 ?>
