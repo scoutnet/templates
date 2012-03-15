@@ -8,7 +8,9 @@ function snk_init(){
 function snk_finish( snk_request_url ){
 	/* add drop-down behavior */
 	document.getElementById("snk-auswahlbox").onchange = function(){
-		location.href = snk_request_url+'&ebenenup='
+		location.href = (snk_request_url
+				//.replace(/&upto=[^&]*/g, "")
+				+'&ebenenup=')
 		                + document.getElementById('snk-auswahlbox')
 		                  .options[ document.getElementById('snk-auswahlbox').selectedIndex ]
 		                  .value;
