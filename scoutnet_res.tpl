@@ -25,7 +25,7 @@
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
-	{assign var="SNK_PHP_SELF_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
+	{assign var="SNK_PHP_SELF_URL" value="https://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
 	{assign var="SNK_URL"          value=$SNK_PHP_SELF_URL|dirname|dirname|cat:"/"}
 	{assign var="SNK_REQUEST_URL"  value=$SNK_PHP_SELF_URL|cat:"?"|cat:$smarty.server.QUERY_STRING}
 
@@ -49,10 +49,10 @@
 <head>
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 
-	<!-- Latest compiled and minified CSS -->
-    	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- Bootstrap minified CSS -->
+    	<link rel="stylesheet" href="http://v.rtopel.de/dev/templates/scoutnet_res/bootstrap.min.css">
     	<!-- jQuery library -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    	<script src="http://v.rtopel.de/dev/templates/scoutnet_res/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
@@ -112,26 +112,18 @@
 </div>
 
 <div class="snk-termine">
-<table>
-	<caption>ScoutNet-Kalender {$kalender.verband|htmlentities|nl2br} {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</caption>
-	<tr class="snk-headings-row"> 
-		{if count($used.kalender) > 1}<th class="snk-eintrag-ebene-ueberschrift">Ebene</th>{/if}
-		<th class="snk-eintrag-datum-ueberschrift">Datum</th>
-		<th class="snk-eintrag-zeit-ueberschrift">Zeit</th>
-		<th class="snk-eintrag-titel-ueberschrift">Titel</th>
-		<th class="snk-eintrag-stufen-ueberschrift">Stufen</th>
-		<th class="snk-eintrag-kategorien-ueberschrift">Kategorien</th>
-	</tr>
+<div class="container-fluid">
+	<p class="snk-termine-heading">ScoutNet-Kalender {$kalender.verband|htmlentities|nl2br} {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</p>
 	{foreach from=$groups item=monat} 
-	<tr> 
-		<th colspan="6" class="snk-monat-heading">{$monat.startdatum|date_format:"%B '%y"}</th>
-	</tr>
+	<div class="row"> 
+		<div class="snk-monat-heading col-sm-12 col-md-12">{$monat.startdatum|date_format:"%B '%y"}</div>
+	</div>
 	{foreach from=$monat.eintraege item=eintrag} 
-	<tr> 
-		{if count($used.kalender) > 1}<td class="snk-eintrag-ebene">{$eintrag.kalender.ebene|htmlentities|nl2br|replace:" ":"&nbsp;"}{if $eintrag.kalender.ebene_id >= 7}&nbsp;{$eintrag.kalender.name|htmlentities|nl2br|replace:" ":"&nbsp;"}{/if}</td>{/if}
-		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</td>
-		<td class="snk-eintrag-zeit">{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}</td>
-		<td class="snk-eintrag-titel">
+	<div class="row grid-hover"> 
+		{if count($used.kalender) > 1}<div class="snk-eintrag-ebene col-sm-1 col-md-1">{$eintrag.kalender.ebene|htmlentities|nl2br|replace:" ":"&nbsp;"}{if $eintrag.kalender.ebene_id >= 7}&nbsp;{$eintrag.kalender.name|htmlentities|nl2br|replace:" ":"&nbsp;"}{/if}</div>{/if}
+		<div class="snk-eintrag-datum col-sm-3 col-md-2">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</div>
+		<div class="snk-eintrag-zeit col-sm-2 col-md-1">{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}</div>
+		<div class="snk-eintrag-titel col-sm-4 col-md-5">
 			{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 			<a
 				href="#snk-termin-{$eintrag.id}" class="snk-termin-link"
@@ -139,17 +131,17 @@
 			>
 				{$eintrag.titel|htmlentities|nl2br}
 			</a>{else}{$eintrag.titel|htmlentities|nl2br}{/if}
-		</td>
-		<td class="snk-eintrag-stufe">
+		</div>
+		<div class="snk-eintrag-stufe col-sm-1 col-md-1">
 			{foreach from=$eintrag.stufe.records item=stufe}
 				<img src="{$SNK_URL}2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung|htmlentities|nl2br}"{$xhtmlend}>
 			{/foreach}			
-		</td>
-		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
-	</tr>
+		</div>
+		<div class="snk-eintrag-kategorien col-sm-2 col-md-3">{$eintrag.kategorie|htmlentities|nl2br}</div>
+	</div>
 	{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
-	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
-		<td colspan="6">
+	<div id="snk-termin-{$eintrag.id}" class="snk-termin-infos row">
+		<div class="col-sm-12 col-md-2">
 			<dl>
 					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
 					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
@@ -158,12 +150,12 @@
 					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" {/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
 					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
 			</dl>
-		</td>
-	</tr>
+		</div>
+	</div>
 	{/if}
 	{/foreach} 
 	{/foreach} 
-</table>
+</div>
 </div>
 </div>
 <div class="snk-footer">

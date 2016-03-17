@@ -4,7 +4,7 @@ body{
 	color: #333;
 }
 .snk{
-	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/background.gif) 0 -85px repeat-x;
+/*	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/background.gif) 0 -85px repeat-x;*/
 	font-family: 'Trebuchet MS', Arial, Sans-Serif;
 }
 .snk-body{
@@ -28,36 +28,29 @@ body{
 }
 .snk-termine{
 	clear:both;
-	width: 100%;
+	width: 92%;
+	margin: 0 auto;
 }
 .snk-termine table{
 	width:100%;
 }
 
-.snk-termine caption{
+.snk-termine-heading{
 	padding-top: 0px;
 	padding-bottom: 10px;
 	font-size: 1.4em;
 	color: white;
 	font-weight: bold;
-	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/icon.gif) no-repeat 10px 2px;
-	color: #F09404;
-	padding-left: 95px;
+/*	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/icon.gif) no-repeat 10px 2px;*/
+	color: #003055;
 }
-tr.snk-headings-row th{
+.snk-headings-row {
 	background-color: transparent;
 	line-height: 120%;
 	padding: 0px;
 	color: #333;
 }
-.snk-termine th{
-	color: #222;
-	text-align: left;
-	background-color: #F59705;
-	line-height: 90%;
-	padding: 5px;
-}
-.snk-termine td{
+.snk-termine {
 	padding-right: 5px;
 	vertical-align: top;
 }
@@ -102,3 +95,27 @@ tr.snk-headings-row th{
 	text-align:left;
 }
 
+.snk-monat-heading {
+background-color: #003055 !important;
+    color: white !important;
+    font-weight: bold;
+    line-height: 1.42857;
+    padding: 8px;
+    text-align: left;
+}
+
+.snk-hinzufuegen, .snk-ebenene-menu, .snk-uhrzeit, .snk-datum
+{
+display: none !important;
+}
+.row {
+margin: 10px -15px;
+}
+
+/*.snk-eintrag-datum.col-sm-3 {
+    max-width: 200px;
+}
+
+.snk-eintrag-zeit.col-sm-2 {
+max-width: 150px;
+}*/
