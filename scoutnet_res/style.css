@@ -2,6 +2,7 @@ body{
 	margin:0;
 	padding:0;
 	color: #333;
+	background: none !important;
 }
 .snk{
 /*	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/background.gif) 0 -85px repeat-x;*/
@@ -109,13 +110,21 @@ background-color: #003055 !important;
 display: none !important;
 }
 .row {
-margin: 10px -15px;
+/*margin: 10px -15px;*/
+line-height: 2;
 }
 
-/*.snk-eintrag-datum.col-sm-3 {
-    max-width: 200px;
+.grid-hover:hover {
+    background-color: #abcde5;
+
 }
 
-.snk-eintrag-zeit.col-sm-2 {
-max-width: 150px;
-}*/
+@media (max-width: 768px)
+{
+.row.grid-hover {
+    border-bottom: 1px solid lightgray;
+}
+.grid-hover:last-child {
+    border: none;
+}
+}

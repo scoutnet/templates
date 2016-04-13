@@ -49,10 +49,10 @@
 <head>
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 
-	<!-- Bootstrap minified CSS -->
-    	<link rel="stylesheet" href="http://v.rtopel.de/dev/templates/scoutnet_res/bootstrap.min.css">
+	<!-- Bootstrap minified CSS TEST-->
+    	<link rel="stylesheet" href="https://v.rtopel.de/dev/templates/scoutnet_res/bootstrap.min.css">
     	<!-- jQuery library -->
-    	<script src="http://v.rtopel.de/dev/templates/scoutnet_res/jquery.min.js"></script>
+    	<script src="https://v.rtopel.de/dev/templates/scoutnet_res/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
@@ -138,20 +138,21 @@
 			{/foreach}			
 		</div>
 		<div class="snk-eintrag-kategorien col-sm-2 col-md-3">{$eintrag.kategorie|htmlentities|nl2br}</div>
+	
 	</div>
 	{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
-	<div id="snk-termin-{$eintrag.id}" class="snk-termin-infos row">
-		<div class="col-sm-12 col-md-2">
-			<dl>
-					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
-					{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" {/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
-					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
-			</dl>
+		<div id="snk-termin-{$eintrag.id}" class="snk-termin-infos row">
+			<div class="col-sm-12 col-md-12">
+				<dl>
+						{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|nl2br}</dd>{/if}
+						{if $eintrag.plz || $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
+						{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
+						{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
+						{if $eintrag.URL}<dt class="snk-eintrag-url">Link</dt><dd><a {if $smarty.get.link_target}target="{$smarty.get.link_target}" {/if}href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
+						<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
+				</dl>
+			</div>
 		</div>
-	</div>
 	{/if}
 	{/foreach} 
 	{/foreach} 
