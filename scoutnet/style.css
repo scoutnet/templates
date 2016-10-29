@@ -4,7 +4,7 @@ body{
 	color: #333;
 }
 .snk{
-	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/background.gif) 0 -85px repeat-x;
+	background: url(//kalender.scoutnet.de/2.0/templates/scoutnet/background.gif) 0 -85px repeat-x;
 	font-family: 'Trebuchet MS', Arial, Sans-Serif;
 }
 .snk-body{
@@ -40,7 +40,7 @@ body{
 	font-size: 1.4em;
 	color: white;
 	font-weight: bold;
-	background: url(http://kalender.scoutnet.de/2.0/templates/scoutnet/icon.gif) no-repeat 10px 2px;
+	background: url(//kalender.scoutnet.de/2.0/templates/scoutnet/icon.gif) no-repeat 10px 2px;
 	color: #F09404;
 	padding-left: 95px;
 }

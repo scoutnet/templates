@@ -27,7 +27,7 @@
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
-	{assign var="SNK_PHP_SELF_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
+	{assign var="SNK_PHP_SELF_URL" value="//"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
 	{assign var="SNK_URL"          value=$SNK_PHP_SELF_URL|dirname|dirname|cat:"/"}
 	{assign var="SNK_REQUEST_URL"  value=$SNK_PHP_SELF_URL|cat:"?"|cat:$smarty.server.QUERY_STRING}
 
@@ -173,7 +173,7 @@
 		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
 	</div>
 	<div class="snk-powered-by">
-		Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
+		Powered by <span><a href="https://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
 	</div>
 </div>
 </div>
