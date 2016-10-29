@@ -2,8 +2,8 @@
 {*
 	Name : ScoutNet Responsive Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt) + Raphael Topel
-	Letzte Änderung : 17.03.2016
-	Version : 0.0.1
+	Letzte Änderung : 26.10.2016
+	Version : 0.1.0
 *}
 {* Anleitung *}
 
@@ -50,19 +50,17 @@
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 
 	<!-- Bootstrap minified CSS TEST-->
-    	<link rel="stylesheet" href="https://v.rtopel.de/dev/templates/scoutnet_res/bootstrap.min.css">
+    	<link rel="stylesheet" href="`$SNK_URL`2.0/templates/scoutnet_res/bootstrap.min.css">
     	<!-- jQuery library -->
-    	<script src="https://v.rtopel.de/dev/templates/scoutnet_res/jquery.min.js"></script>
+    	<script src="`$SNK_URL`2.0/templates/scoutnet_res/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
 	<script type="text/javascript" src="{$SNK_URL}js/base2-p.js"></script>
 	<script type="text/javascript" src="{$SNK_URL}js/base2-dom-p.js"></script>
 {literal}
-	<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>
 	<script type="text/javascript">
 		base2.DOM.bind(document);
-		snk_init();
 		document.addEventListener('DOMContentLoaded', function(){ return snk_finish('{/literal}{$SNK_REQUEST_URL|addslashes}{literal}'); }, false);
 	</script>
 {/literal}

@@ -1,9 +1,3 @@
-/* called before body is loaded */
-function snk_init(){
-	/* enable stylesheet that hides all termin details, doesn't work in safari */
-	document.getElementsByTagName('style')[0].media = 'screen';
-}
-
 /* called after DOM is complete */
 function snk_finish( snk_request_url ){
 	/* add drop-down behavior */
