@@ -50,9 +50,9 @@
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 
 	<!-- Bootstrap minified CSS TEST-->
-    	<link rel="stylesheet" href="`$SNK_URL`2.0/templates/scoutnet_res/bootstrap.min.css">
+    	<link rel="stylesheet" href="{$SNK_URL}2.0/templates/scoutnet_res/bootstrap.min.css">
     	<!-- jQuery library -->
-    	<script src="`$SNK_URL`2.0/templates/scoutnet_res/jquery.min.js"></script>
+    	<script src="{$SNK_URL}2.0/templates/scoutnet_res/jquery.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
