@@ -1,18 +1,18 @@
-{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{capture name=dummy}{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 18.11.2008
+	Letzte Ã„nderung : 18.11.2008
 	Version : 1.4.2
 *}
 {* Anleitung *}
 
 	Dieses Template stellt den Kalender als Tabelle bereit.	
-	Folgende Parameter können in der URL (per get oder post) übergeben werden, um das Verhalten des templates zu verändern:
+	Folgende Parameter kÃ¶nnen in der URL (per get oder post) Ã¼bergeben werden, um das Verhalten des templates zu verÃ¤ndern:
 
 	&onlybody  -  Zum Einbinden in eine existierende Webseite, werden hiermit nur der Inhalt des <body> tags ausgegeben.
 	
-	&xhtml - Passt den Doctype an und erzeugt schließende / bei tags wo das nötig ist.
+	&xhtml - Passt den Doctype an und erzeugt schlieÃŸende / bei tags wo das nÃ¶tig ist.
 	
 	&css=http://deineseite.de/dein-stylesheet.css - um ein eigenes stylesheet anzugeben
 
@@ -23,7 +23,7 @@
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
-	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
 	{if $groups.jahrmonat}
 		{assign var="groups" value="`$groups.jahrmonat`"}
 	{/if}
@@ -170,7 +170,7 @@
 </div>
 <div class="snk-footer">
 	<div class="snk-hinzufuegen">
-		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
+		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>
 	</div>
 	<div class="snk-powered-by">
 		Powered by <span><a href="https://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
@@ -181,12 +181,12 @@
 <!--  color:#3333FF; background-color: #FF9933; -->
 {* Inhalt Ende *}
 
-{* Fußbereich *}
+{* FuÃŸbereich *}
 {if !isset($urlparameters.onlybody)}
 </body>
 </html>
 {/if}
-{* Fußbereich ENDE *}
+{* FuÃŸbereich ENDE *}
 
 {* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}
