@@ -1,1 +1,0 @@
-{debug output="html"}
