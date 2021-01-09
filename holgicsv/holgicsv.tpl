@@ -1,5 +1,5 @@
 {strip}
-{assign var="groups" value="`$groups.jahrmonat`"}
+{assign var="groups" value=$groups.jahrmonat}
 {/strip}
 {foreach from=$groups item=monat}
 {foreach from=$monat.eintraege item=eintrag}

@@ -1,27 +1,27 @@
 {strip}
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}
 
 {*
-	Name : Kalender 2.0 Template - Modul Menu_1 für Scoutnet Modulsystem 
+	Name : Kalender 2.0 Template - Modul Menu_1 fÃ¼r Scoutnet Modulsystem 
 	Dateiname : menu.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 27.01.2008
+	Letzte Ã„nderung : 27.01.2008
 	Version : 1.0.2
 	notwendige Konfiguration : keine
-	Bemerkungen : 	Diese Template ist als Modul für das Scoutnet Modulsystem gedacht und
-					stellt ein simples Menü zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
-	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist) (gilt für Version 1.0, Version 1.0.1 nicht getestet)
-	Änderungen in Version 1.0.2 - 27.01.2008:
+	Bemerkungen : 	Diese Template ist als Modul fÃ¼r das Scoutnet Modulsystem gedacht und
+					stellt ein simples MenÃ¼ zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
+	W3C konformitÃ¤t : Transitional (nur wenn im Modulsystem $force_w3c true ist) (gilt fÃ¼r Version 1.0, Version 1.0.1 nicht getestet)
+	Ã„nderungen in Version 1.0.2 - 27.01.2008:
 	    - BUGFIX: Bundesebene fehlt 
-	Änderungen in Version 1.0.1 - 01.08.2003:
+	Ã„nderungen in Version 1.0.1 - 01.08.2003:
 		- Hinweis zur An- und Abwahl durch Strg
  *}
 
 {*********          START DES KONFIGURATIONS-BEREICHS        *********}
 	{* Anzahl der Ebenen die nach oben angeboten werden sollen
-		für einen Stamm der DPSG beispielsweise 3 um auch Bezirk, Diözese und Verband anzubieten *}
+		fÃ¼r einen Stamm der DPSG beispielsweise 3 um auch Bezirk, DiÃ¶zese und Verband anzubieten *}
 	{assign var="ebenen" value=3}
-	{* Anzahl der Zeilen der Auswahlmenüs, Standard ist die Anzahl der Stufen ($existing.stufen_ids|@count) *}
+	{* Anzahl der Zeilen der AuswahlmenÃ¼s, Standard ist die Anzahl der Stufen ($existing.stufen_ids|@count) *}
 	{assign var="zeilen" value=$existing.stufen_ids|@count}
 {*********          ENDE DES KONFIGURATIONS-BEREICHS         *********}
 
@@ -29,7 +29,7 @@
 <table border="0" cellspacing="0" cellpadding="3" width="100%">
 	<tr>
 		<td valign="middle" align="center">
-			<font size="2" face="Arial, Helvetica, sans-serif">(an- und abwählen mit<br>Strg gedrückt halten)</font></td>
+			<font size="2" face="Arial, Helvetica, sans-serif">(an- und abwÃ¤hlen mit<br>Strg gedrÃ¼ckt halten)</font></td>
 		<td>
 			{if not $force_w3c} <form name="form1" method="get" action=""> {/if}
 			{foreach from=$url_parameters key=name item=value}
@@ -65,6 +65,7 @@
 			<select name="addids[]" size="{$existing.stufen_ids|@count}" multiple id="addids">
 			{assign var="temp_kalender" value=$kalender}
 				{section loop=10 name="menu"}
+					{if $temp_kalender}
 					{if $temp_kalender.ebene_id == 8 || $temp_kalender.ebene_id == 7 || $temp_kalender.ebene_id == 5}
 					<option value="{$temp_kalender.id}" 
 						{if in_array($temp_kalender.id,$used.kalender_ids)}
@@ -79,6 +80,7 @@
 					</option>
 					{/if}
 					{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
+					{/if}
 				{/section}
 			</select>
 		</td>

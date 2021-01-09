@@ -2,7 +2,7 @@
 {*
 	Name : ScoutNet Standard Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt)
-	Letzte Änderung : 16.02.2008
+	Letzte Änderung : 03.01.2020
 	Version : 1.3
 *}
 {* Anleitung *}
@@ -25,21 +25,21 @@
 {* Initialisierung *}
 	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
 	{if $groups.jahrmonat}
-		{assign var="groups" value="`$groups.jahrmonat`"}
+		{assign var="groups" value=$groups.jahrmonat}
 	{/if}
-	{assign var="SNK_PHP_SELF_URL" value="http://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
+	{assign var="SNK_PHP_SELF_URL" value="//"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
 	{assign var="SNK_URL"          value=$SNK_PHP_SELF_URL|dirname|dirname|cat:"/"}
 	{assign var="SNK_REQUEST_URL"  value=$SNK_PHP_SELF_URL|cat:"?"|cat:$smarty.server.QUERY_STRING}
 
 	{if isset($smarty.request.css)}
-		{assign var="css" value=`$smarty.request.css`}
+		{assign var="css" value=$smarty.request.css}
 	{else}
-		{assign var="css" value="`$SNK_URL`2.0/templates/scoutnet/style.css"}
+		{assign var="css" value="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/Css/Smarty/scoutnet/style.css"}
 	{/if}
 	{if isset($smarty.request.js)}
-		{assign var="js" value=`$smarty.request.js`}
+		{assign var="js" value=$smarty.request.js}
 	{else}
-		{assign var="js" value="`$SNK_URL`2.0/templates/scoutnet/behavior.js"}
+		{assign var="js" value="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/Smarty/scoutnet/behavior.js"}
 	{/if}
 {* Initialisierung ENDE *}
 {/capture}{capture name=content}
@@ -53,13 +53,13 @@
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
  	{assign var="xhtmlend" value=""}
 {/if}
-<html{if isset($smarty.request.xhtml)} xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"{/if}>
+<html{if isset($smarty.request.xhtml)} xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de"{/if}>
 <head>
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
 	<script type="text/javascript" src="{$js}"></script>
-	<script type="text/javascript" src="{$SNK_URL}js/base2-p.js"></script>
-	<script type="text/javascript" src="{$SNK_URL}js/base2-dom-p.js"></script>
+	<script type="text/javascript" src="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/base2-p.js"></script>
+	<script type="text/javascript" src="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/base2-dom-p.js"></script>
 {literal}
 	<style type="text/css" media="none">.snk-termin-infos{display:none;}</style>
 	<script type="text/javascript">
@@ -81,33 +81,31 @@
 </div>
 
 <div class="snk-ebenene-menu">
-	{if $temp_kalender.ebene_id != 5}
-		{assign var="temp_kalender" value=$kalender}
-		<form method="get" action="{$smarty.server.PHP_SELF}">
-			{foreach from=$smarty.request key=var item=value}
-				{if $var != "ebenenup"}
-					<input type="hidden" name="{$var}" value="{$value}"{$xhtmlend}>
-				{/if}
-			{/foreach}
-			<label for="snk-auswahlbox">Termine bis</label>
-			<select id="snk-auswahlbox" name="ebenenup">
+	{assign var="temp_kalender" value=$kalender}
+	<form method="get" action="{$smarty.server.PHP_SELF}">
+		{foreach from=$smarty.request key=var item=value}
+			{if $var != "ebenenup"}
+				<input type="hidden" name="{$var}" value="{$value}"{$xhtmlend}>
+			{/if}
+		{/foreach}
+		<label for="snk-auswahlbox">Termine bis</label>
+		<select id="snk-auswahlbox" name="ebenenup">
 			{section loop=10 name="menu"}
 				{if $temp_kalender}
-				<option
-					value="{$smarty.section.menu.index}"
-					{if isset($smarty.request.ebenenup) && $smarty.request.ebenenup == $smarty.section.menu.index}
-						selected
-					{/if}
-				>
-					{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}
-				</option>
+					<option
+							value="{$smarty.section.menu.index}"
+							{if isset($smarty.request.ebenenup) && $smarty.request.ebenenup == $smarty.section.menu.index}
+								selected="selected"
+							{/if}
+					>
+						{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}
+					</option>
+					{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 				{/if}
-			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
-		{/section}
-	    </select>
-	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
-	    </form>
-	{/if}
+			{/section}
+		</select>
+		<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
+	</form>
 </div>
 
 <div class="snk-termine">
@@ -130,7 +128,7 @@
 		<td class="snk-eintrag-datum">{$eintrag.startdatum|date_format:"%A"|truncate:2:""}{$eintrag.startdatum|date_format:",&nbsp;%d.%m."}&nbsp;{if $eintrag.enddatum!= ""}&nbsp;-&nbsp;{$eintrag.enddatum|date_format:"%A"|truncate:2:""}{$eintrag.enddatum|date_format:",&nbsp;%d.%m."}{/if}</td>
 		<td class="snk-eintrag-zeit">{$eintrag.startzeit|date_format:"%H:%M"}{if $eintrag.endzeit!= ""}&nbsp;-&nbsp;{$eintrag.endzeit|date_format:"%H:%M"}{/if}</td>
 		<td class="snk-eintrag-titel">
-			{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
+			{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 			<a
 				href="#snk-termin-{$eintrag.id}" class="snk-termin-link"
 				onclick="if(snk_show_termin) return snk_show_termin({$eintrag.id},this); "
@@ -139,19 +137,17 @@
 			</a>{else}{$eintrag.titel|htmlentities|nl2br}{/if}
 		</td>
 		<td class="snk-eintrag-stufe">
-			{foreach from=$eintrag.stufe.records item=stufe}
-				<img src="{$SNK_URL}2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung|htmlentities|nl2br}"{$xhtmlend}>
-			{/foreach}			
+			{$eintrag.stufe.bildlich_scoutnet}
 		</td>
 		<td class="snk-eintrag-kategorien">{$eintrag.kategorie|htmlentities|nl2br}</td>
 	</tr>
-	{if $eintrag.Description || $eintrag.Location || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
+	{if $eintrag.Description || $eintrag.plz || $eintrag.ort || $eintrag.Organizer || $eintrag.Target_Group || $eintrag.URL}
 	<tr id="snk-termin-{$eintrag.id}" class="snk-termin-infos">
 		<td colspan="6">
 			<dl>
 					{if $eintrag.Description}<dt class="snk-eintrag-beschreibung">Beschreibung</dt><dd>{$eintrag.Description|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.plz && $eintrag.ort}<dt class="snk-eintrag-ort">Ort</dt><dd>{$eintrag.plz|htmlentities|nl2br} {$eintrag.ort|htmlentities|nl2br}</dd>{/if}
-					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dt>{/if}
+					{if $eintrag.Organizer}<dt class="snk-eintrag-veranstalter">Veranstalter</dt><dd>{$eintrag.Organizer|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.Target_Group}<dt class="snk-eintrag-zielgruppe">Zielgruppe</dt><dd>{$eintrag.Target_Group|htmlentities|nl2br}</dd>{/if}
 					{if $eintrag.URL}<dt class="snk-eintrag-link">Link</dt><dd><a target=blank href="{$eintrag.URL}">{if $eintrag.URL_Text|htmlentities|nl2br}{$eintrag.URL_Text}{else}{$eintrag.URL|htmlentities|nl2br}{/if}</a></dd>{/if}
 					<dt class="snk-eintrag-autor">Eingetragen von</dt><dd>{if $eintrag.autor.vorname || $eintrag.autor.nachname}{$eintrag.autor.vorname|htmlentities|nl2br}&nbsp;{$eintrag.autor.nachname|htmlentities|nl2br}{else}{$eintrag.autor.nickname|htmlentities|nl2br}{/if}</dd>
@@ -165,11 +161,11 @@
 </div>
 
 <div class="snk-hinzufuegen">
-	<a href="http://www.scoutnet.de/community/kalender/events.html?task=create&nbsp;SSID={$kalender.id}">Termin&nbsp;hinzuf&uuml;gen</a>
+	<a href="https://www.scoutnet.de/community/kalender/termine-bearbeiten/structure/{$kalender.id}/new">Termin&nbsp;hinzuf&uuml;gen</a>
 </div>
 
 <div class="snk-powered-by">
-	Powered by <a href="http://kalender.scoutnet.de/" target="_blank">ScoutNet-Kalender</a>
+	Powered by <a href="https://www.scoutnet.de/technik/kalender/" target="_blank">ScoutNet-Kalender</a>
 </div>
 
 

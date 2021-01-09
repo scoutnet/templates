@@ -1,91 +1,88 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
         Name : Kalender 2.0 Template - Old Style Infoinline
         Dateiname : old_style.tpl
         Autor : Scoutnet Kalender-Team - Christopher Vogt
-        Letzte Änderung : 30.09.2003 (Peter Dübbert)
+        Letzte Ã„nderung : 30.09.2003 (Peter DÃ¼bbert)
         Version : 1.1.4
-        benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
+        benÃ¶tigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
         notwendige Konfiguration : keine
         Bemerkungen : Dieses Template bietet das Design des Kalender 1.0 unter Hinzunahme der Infos auf einer Seite
-        W3C konformität : bisher nicht getestet
-        Änderungen in Version 1.1.4 - 30.09.2003:
-                - Die Infos zu den jeweiligen Terminen werden direkt in der Tabelle angezeigt. Für die Stufen werden die kleine Symbole mit angezeigt. Der Link heisst jetzt Termine verwalten anstatt Termin eintragen.
-        Änderungen in Version 1.1.3 - 16.07.2003:
+        W3C konformitÃ¤t : bisher nicht getestet
+        Ã„nderungen in Version 1.1.4 - 30.09.2003:
+                - Die Infos zu den jeweiligen Terminen werden direkt in der Tabelle angezeigt. FÃ¼r die Stufen werden die kleine Symbole mit angezeigt. Der Link heisst jetzt Termine verwalten anstatt Termin eintragen.
+        Ã„nderungen in Version 1.1.3 - 16.07.2003:
                 - Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
-        Änderungen in Version 1.1.2 - 16.07.2003:
+        Ã„nderungen in Version 1.1.2 - 16.07.2003:
                 - Korrektur der Datumsanzeige, vielen Dank an den freundlichen Finder: Christian Mertens
-        Änderungen in Version 1.1.1 - 15.07.2003:
-                - nl2br: Zeilenumbrüche in den Infos werden in HTML Zeilenumbrüche umgewandelt
-        Änderungen in Version 1.1.0 - 13.07.2003:
-                - Pfad zu old_style.tpl auch für infos_zeigen.tpl in der JavaScript Funktion infoszeigen
-                - Korrektur des setzens von "checked" wenn kein ebenenup übergeben wurde
+        Ã„nderungen in Version 1.1.1 - 15.07.2003:
+                - nl2br: ZeilenumbrÃ¼che in den Infos werden in HTML ZeilenumbrÃ¼che umgewandelt
+        Ã„nderungen in Version 1.1.0 - 13.07.2003:
+                - Pfad zu old_style.tpl auch fÃ¼r infos_zeigen.tpl in der JavaScript Funktion infoszeigen
+                - Korrektur des setzens von "checked" wenn kein ebenenup Ã¼bergeben wurde
                 - kleinere Designanpassungen
-                - Es gibt nun viele Konfigurationsmöglichkeiten am Anfang und über die URL
-        Änderungen in Version 1.0.1 - 05.07.2003:
+                - Es gibt nun viele KonfigurationsmÃ¶glichkeiten am Anfang und Ã¼ber die URL
+        Ã„nderungen in Version 1.0.1 - 05.07.2003:
                 - absoluter Pfad zu show.php in der JavaScript Funktion infoszeigen
 *}
 
 {* START - STANDARDKONFIGURATIONSBEREICH entsprechend denen im Adminbereich des Kalender 1.0*}
-        {* Hintergrundfarbe *}
-        {assign var="bgcolor" value="ffffff"}
-        {* Hintergrundbild *} {* für ein Hintergrundbild z.B. value="http://gandalf.wtal.de/grafik/haupthintergrund.gif" *}
-        {assign var="background" value=""}
-        {* Hintergrundbild Eigenschaften *}        {* für ein fixiertes Hintergrundbild (Wasserzeichen) value="fixed" *}
-        {assign var="bgproperties" value="false"}
-        {* Schriftfarbe *}
-        {assign var="fontcolor" value="000000"}
-        {* Schriftgröße *}
-        {assign var="fontsize" value="2"}
-        {* Schriftart *}
-        {assign var="fontface" value="Arial"}
-        {* Schrift Fett? *}
-        {assign var="fett" value="false"}
-        {* Schrift Kursiv? *}
-        {assign var="kursiv" value="false"}
-        {* Link und Überschrift verwenden? *}
-        {assign var="link" value="false"}
-{*  ENDE - STANDARDKONFIGURATIONSBEREICH *}
+    {* Hintergrundfarbe *}
+    {assign var="bgcolor" value="ffffff"}
+    {* Hintergrundbild *} {* fÃ¼r ein Hintergrundbild z.B. value="http://gandalf.wtal.de/grafik/haupthintergrund.gif" *}
+    {assign var="background" value=""}
+    {* Hintergrundbild Eigenschaften *}        {* fÃ¼r ein fixiertes Hintergrundbild (Wasserzeichen) value="fixed" *}
+    {assign var="bgproperties" value="false"}
+    {* Schriftfarbe *}
+    {assign var="fontcolor" value="000000"}
+    {* SchriftgrÃ¶ÃŸe *}
+    {assign var="fontsize" value="2"}
+    {* Schriftart *}
+    {assign var="fontface" value="Arial"}
+    {* Schrift Fett? *}
+    {assign var="fett" value="false"}
+    {* Schrift Kursiv? *}
+    {assign var="kursiv" value="false"}
+    {* Link und Ãœberschrift verwenden? *}
+    {assign var="link" value="false"}
+    {*  ENDE - STANDARDKONFIGURATIONSBEREICH *}
 
-{* START - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
-        {assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;link;fett;kursiv" delimiter=";"}
-        {foreach item=configvar from=$configvars}
-                {if isset($urlparameters.$configvar)}
-                        {assign var=$configvar value=$urlparameters.$configvar}
-                {/if}
-        {/foreach}
-
-{*  ENDE - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
-
-
-        {* Sonstiges *}
-        {assign var="ueberschriftsize" value=$fontsize|math:"x+1"}
-        {assign var="ueberschriftface" value="Arial"}
-        {assign var="monatsface" value="Arial Black"}
-        {if $fett&&$fett!="false"}
-                {assign var="starttags" value="<b>"}
-                {assign var="endtags" value="</b>"}
-        {else}
-                {assign var="starttags" value=""}
-                {assign var="endtags" value=""}
+    {* START - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
+    {assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;link;fett;kursiv" delimiter=";"}
+    {foreach item=configvar from=$configvars}
+        {if isset($urlparameters.$configvar)}
+            {assign var=$configvar value=$urlparameters.$configvar}
         {/if}
-        {if $kursiv&&$kursiv!="false"}
-                {assign var="starttags" value="$starttags<i>"}
-                {assign var="endtags" value="</i>$endtags"}
-        {else}
-                {assign var="starttags" value="$starttags"}
-                {assign var="endtags" value="$endtags"}
-        {/if}
+    {/foreach}
+
+{*  ENDE - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
 
 
+    {* Sonstiges *}
+    {assign var="ueberschriftsize" value=$fontsize|math:"x+1"}
+    {assign var="ueberschriftface" value="Arial"}
+    {assign var="monatsface" value="Arial Black"}
 
-{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
-        {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
-        {/if}
+    {assign var="starttags" value=""}
+    {assign var="endtags" value=""}
+
+    {if $fett && $fett != "false"}
+        {assign var="starttags" value="<b>"}
+        {assign var="endtags" value="</b>"}
+    {/if}
+    {if $kursiv && $kursiv != "false"}
+        {assign var="starttags" value="$starttags<i>"}
+        {assign var="endtags" value="</i>$endtags"}
+    {/if}
+
+
+{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
+    {if $groups.jahrmonat}
+        {assign var="groups" value=$groups.jahrmonat}
+    {/if}
 {/strip}<html>
 <head>
-<title>ScoutNet-Kalender für {$kalender.ebene} {$kalender.name}</title>
+<title>ScoutNet-Kalender fÃ¼r {$kalender.ebene} {$kalender.name}</title>
 
 {literal}
 <SCRIPT LANGUAGE=JavaScript>
@@ -95,7 +92,7 @@
         {/literal}{strip}
     popupWin = window.open('
 
-        http://kalender.scoutnet.de/2.0/show.php?
+        https://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?
 
         entryids='+id+'&
         template={$template_path}/infos_zeigen.tpl&
@@ -120,10 +117,12 @@
 </head>
 <body bgcolor=#{$bgcolor} {if $background&&$background!="false"}background={$background} {/if}{if $bgproperties&&$bgproperties!="false"}bgproperties={$bgproperties} {/if}link=#{$fontcolor} vlink=#{$fontcolor} alink=#{$fontcolor}>
 
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{assign var="parameters" value=$parameters|default:''}
+
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {foreach from=$url_parameters key=name item=value}
         {if $name != "ebenenup" && $name != "groupby"}
-                {assign var="parameters" value="$parameters$name=$value&"}
+            {assign var="parameters" value="$parameters$name=$value&"}
         {/if}
 {/foreach}
 
@@ -134,10 +133,10 @@
     <td width=30%><div align=right>
         {if $kalender.id != 3}
                 {assign var="temp_kalender" value=$kalender}
-                   <FORM method=get action=/redirect.asp><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
+                   <FORM method=get action=/><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
                 <SELECT name=gotourl onChange='location.href=this.form.gotourl.options[this.form.gotourl.selectedIndex].value; return false;'>
                 {section loop=10 name="menu"}
-                        {if $temp_kalender.id >= 3}
+                        {if $temp_kalender && $temp_kalender.id >= 3}
                                 <option value="show.php?{$parameters}groupby=startdatum.%Y-%m&ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
                                 {assign var="temp_kalender" value=$temp_kalender.gehoertzu}
                         {/if}
@@ -185,11 +184,11 @@
 <table border=0 cellspacing=0 cellpadding=0>
   <tr>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">[</font></td>
-            <td><p><a href="http://kalender.scoutnet.de/infos/index.htm" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
+            <td><p><a href="https://www.scoutnet.de/technik/kalender/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
                 </td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
-            <td><a href="http://community.scoutnet.de/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Termine&nbsp;verwalten</b></font></a></td>
+            <td><a href="https://www.scoutnet.de/community/kalender/termine-bearbeiten/structure/{$kalender.id}/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Termine&nbsp;verwalten</b></font></a></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">]</font></td>
   </tr>
 </table></center>

@@ -1,44 +1,29 @@
 {* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 
 {* START - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
-	{assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;fett;kursiv" delimiter=";"} 
-	{foreach item=configvar from=$configvars}
-		{if isset($urlparameters.$configvar)}
-			{assign var=$configvar value=$urlparameters.$configvar} 
-			{assign var="configvars.$configvar" value=$urlparameters.$configvar} 
-		{/if}
-	{/foreach}
+  {assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;fett;kursiv" delimiter=";"}
+  {foreach item=configvar from=$configvars}
+      {assign var=$configvar value=$urlparameters.$configvar|default:''}
+  {/foreach}
 		
 {*  ENDE - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
 
+  {* Sonstiges *}
+  {assign var="starttags" value=""}
+  {assign var="endtags" value=""}
 
-	{* Sonstiges *}
-	{if $fett&&$fett!="false"}
-		{assign var="starttags" value="<b>"}
-		{assign var="endtags" value="</b>"}
-	{else}
-		{assign var="starttags" value=""}
-		{assign var="endtags" value=""}
-	{/if}
-	{if $kursiv&&$kursiv!="false"}
-		{assign var="starttags" value="$starttags<i>"}
-		{assign var="endtags" value="</i>$endtags"}
-	{else}
-		{assign var="starttags" value="$starttags"}
-		{assign var="endtags" value="$endtags"}
-	{/if}
-
-
-
-
+  {if $fett && $fett != "false"}
+    {assign var="starttags" value="<b>"}
+    {assign var="endtags" value="</b>"}
+  {/if}
+  {if $kursiv && $kursiv != "false"}
+    {assign var="starttags" value="$starttags<i>"}
+    {assign var="endtags" value="</i>$endtags"}
+  {/if}
 {/strip}<html>
 
 <head>
 <title>Termin &quot;{$eintrag.titel}&quot; für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
-<link href="/css/layout_2col_left_vlines.css" rel="stylesheet" type="text/css"/>
-<!--[if lte IE 6]>
-<link href="/css/explorer/iehacks_vlines.css" rel="stylesheet" type="text/css" />
-<![endif]-->
 <base target=_blank>
 </head>
 

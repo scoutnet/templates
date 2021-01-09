@@ -1,14 +1,14 @@
-{capture name=dummy}{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{capture name=dummy}{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}
 {*
 	Name : ScoutNet Responsive Template
 	Autor : Scoutnet Kalender-Team (Christopher Vogt) + Raphael Topel
-	Letzte Änderung : 26.10.2016
+	Letzte Ã„nderung : 26.10.2016
 	Version : 0.1.0
 *}
 {* Anleitung *}
 
 	Dieses Template stellt den Kalender als Tabelle bereit.	
-	Folgende Parameter können in der URL (per get oder post) übergeben werden, um das Verhalten des templates zu verändern:
+	Folgende Parameter kÃ¶nnen in der URL (per get oder post) Ã¼bergeben werden, um das Verhalten des templates zu verÃ¤ndern:
 
 	&onlybody  -  Zum Einbinden in eine existierende Webseite, werden hiermit nur der Inhalt des <body> tags ausgegeben.
 	
@@ -21,23 +21,23 @@
 {* Anleitung ENDE *}
 
 {* Initialisierung *}
-	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
 	{if $groups.jahrmonat}
-		{assign var="groups" value="`$groups.jahrmonat`"}
+		{assign var="groups" value=$groups.jahrmonat}
 	{/if}
-	{assign var="SNK_PHP_SELF_URL" value="https://"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
+	{assign var="SNK_PHP_SELF_URL" value="//"|cat:$smarty.server.SERVER_NAME|cat:$smarty.server.PHP_SELF}
 	{assign var="SNK_URL"          value=$SNK_PHP_SELF_URL|dirname|dirname|cat:"/"}
 	{assign var="SNK_REQUEST_URL"  value=$SNK_PHP_SELF_URL|cat:"?"|cat:$smarty.server.QUERY_STRING}
 
 	{if isset($smarty.request.css)}
-		{assign var="css" value=`$smarty.request.css`}
+		{assign var="css" value=$smarty.request.css}
 	{else}
-		{assign var="css" value="`$SNK_URL`2.0/templates/scoutnet_res/style.css"}
+		{assign var="css" value="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/Css/Smarty/scoutnet_res/style.css"}
 	{/if}
 	{if isset($smarty.request.js)}
-		{assign var="js" value=`$smarty.request.js`}
+		{assign var="js" value=$smarty.request.js}
 	{else}
-		{assign var="js" value="`$SNK_URL`2.0/templates/scoutnet_res/behavior.js"}
+		{assign var="js" value="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/Smarty/scoutnet_res/behavior.js"}
 	{/if}
 {* Initialisierung ENDE *}
 {/capture}{capture name=content}
@@ -50,14 +50,14 @@
 	<title>ScoutNet-Kalender {$kalender.ebene|htmlentities|nl2br} {$kalender.name|htmlentities|nl2br}{if $kalender.District OR $kalender.City}, {$kalender.City|htmlentities|nl2br}{if $kalender.District AND $kalender.City}-{/if}{$kalender.District|htmlentities|nl2br}{/if}</title>
 
 	<!-- Bootstrap minified CSS TEST-->
-    	<link rel="stylesheet" href="{$SNK_URL}2.0/templates/scoutnet_res/bootstrap.min.css">
+    	<link rel="stylesheet" href="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/Css/Smarty/scoutnet_res/bootstrap.min.css">
     	<!-- jQuery library -->
-    	<script src="{$SNK_URL}2.0/templates/scoutnet_res/jquery.min.js"></script>
+    	<script src="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/Smarty/scoutnet_res/jquery.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="{$css}" media="screen"{$xhtmlend}>
+	<link rel="stylesheet" type="text/css" href="{$css}" media="screen">
 	<script type="text/javascript" src="{$js}"></script>
-	<script type="text/javascript" src="{$SNK_URL}js/base2-p.js"></script>
-	<script type="text/javascript" src="{$SNK_URL}js/base2-dom-p.js"></script>
+	<script type="text/javascript" src="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/base2-p.js"></script>
+	<script type="text/javascript" src="{$SNK_URL}typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/base2-dom-p.js"></script>
 {literal}
 	<script type="text/javascript">
 		base2.DOM.bind(document);
@@ -80,12 +80,12 @@
 </div>
 
 <div class="snk-ebenene-menu">
-	{if $temp_kalender.ebene_id != 5}
+	{if $kalender.ebene_id != 5}
 		{assign var="temp_kalender" value=$kalender}
 		<form method="get" action="{$smarty.server.PHP_SELF}">
 			{foreach from=$smarty.request key=var item=value}
 				{if $var != "ebenenup"}
-					<input type="hidden" name="{$var}" value="{$value}"{$xhtmlend}>
+					<input type="hidden" name="{$var}" value="{$value}">
 				{/if}
 			{/foreach}
 			<label for="snk-auswahlbox">Termine bis</label>
@@ -100,11 +100,11 @@
 				>
 					{$temp_kalender.ebene|htmlentities|nl2br} {if $temp_kalender.ebene_id >= 6} {$temp_kalender.name|htmlentities|nl2br}{/if}
 				</option>
+					{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 				{/if}
-			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
-		{/section}
+			{/section}
 	    </select>
-	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"{$xhtmlend}></noscript>
+	    	<span id="snk-anzeigen"></span><noscript><input type="submit" value="anzeigen"></noscript>
 	    </form>
 	{/if}
 </div>
@@ -131,9 +131,7 @@
 			</a>{else}{$eintrag.titel|htmlentities|nl2br}{/if}
 		</div>
 		<div class="snk-eintrag-stufe col-sm-1 col-md-1">
-			{foreach from=$eintrag.stufe.records item=stufe}
-				<img src="{$SNK_URL}2.0/images/{$stufe.id}.gif" alt="{$stufe.bezeichnung|htmlentities|nl2br}"{$xhtmlend}>
-			{/foreach}			
+			{$eintrag.stufe.bildlich_scoutnet}
 		</div>
 		<div class="snk-eintrag-kategorien col-sm-2 col-md-3">{$eintrag.kategorie|htmlentities|nl2br}</div>
 	
@@ -159,10 +157,10 @@
 </div>
 <div class="snk-footer">
 	<div class="snk-hinzufuegen">
-		<a href="https://www.scoutnet.de/community/kalender/events.html?task=create&amp;SSID={$kalender.id}" target="_top">Termin&nbsp;hinzufügen</a>
+		<a href="https://www.scoutnet.de/community/kalender/termine-bearbeiten/structure/{$kalender.id}/new" target="_top">Termin&nbsp;hinzuf&uuml;gen</a>
 	</div>
 	<div class="snk-powered-by">
-		Powered by <span><a href="http://kalender.scoutnet.de/" target="_top">ScoutNet.DE</a></span>
+		Powered by <span><a href="https://www.scoutnet.de/technik/kalender/" target="_top">ScoutNet.DE</a></span>
 	</div>
 </div>
 </div>
@@ -170,12 +168,12 @@
 <!--  color:#3333FF; background-color: #FF9933; -->
 {* Inhalt Ende *}
 
-{* Fußbereich *}
+{* FuÃŸbereich *}
 {if !isset($urlparameters.onlybody)}
 </body>
 </html>
 {/if}
-{* Fußbereich ENDE *}
+{* FuÃŸbereich ENDE *}
 
 {* Captured Daten ausgeben *}
 {/capture}{if !isset($smarty.request.nostrip)}{$smarty.capture.content|strip}{else}{$smarty.capture.content}{/if}

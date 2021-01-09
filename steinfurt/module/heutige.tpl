@@ -1,20 +1,20 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 
 {*
-	Name : Kalender 2.0 Template - Modul "Heutige Termine" für Scoutnet Modulsystem 
+	Name : Kalender 2.0 Template - Modul "Heutige Termine" fÃ¼r Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
+	Letzte Ã„nderung : 02.07.2003
 	Version : 1.0
-	benötigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
+	benÃ¶tigte andere Dateien : box_inhalt_datum.tpl ; box_inhalt_eintrag.tpl
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
-	W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist)
-	Bemerkungen : 	Diese Template ist als Modul für das Scoutnetn Modulsystem gedacht und
+	W3C konformitÃ¤t : Transitional (nur wenn im Modulsystem $force_w3c true ist)
+	Bemerkungen : 	Diese Template ist als Modul fÃ¼r das Scoutnetn Modulsystem gedacht und
 					zeigt eine Liste der Termine des aktuellen Tages an
  *}
 {* Zuweisung der richtigen Gruppe*} 
 	{if $groups.jahrmonattag}
-		{assign var="groups" value="`$groups.jahrmonattag`"}
+		{assign var="groups" value=$groups.jahrmonattag}
 	{/if}
 <table border="0" cellspacing="0" cellpadding="3">
 	<tr>

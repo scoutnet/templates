@@ -1,24 +1,24 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 
 {*
-	Name : Kalender 2.0 Template - Modul Monatstabellen für Scoutnet Modulsystem 
+	Name : Kalender 2.0 Template - Modul Monatstabellen fÃ¼r Scoutnet Modulsystem 
 	Dateiname : monats_tabellen.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 02.07.2003
+	Letzte Ã„nderung : 02.07.2003
 	Version : 1.0
 	notwendige Konfiguration : overlib_required muss im modulsystem auf true gesetzt werden
 	anforderungen an die URL : 	der durch monate_im_voraus und monate_im_nachhinein (siehe unten) 
 								abgedeckte bereich muss im durch die URL-Parameter startdate und enddate 
-								gegebenen Zeitraum leigen, sonst werden natürlich keine oder nicht alle 
+								gegebenen Zeitraum leigen, sonst werden natÃ¼rlich keine oder nicht alle 
 								Termine angezeigt
-	W3C konformität : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
-	Bemerkungen : 	Diese Template ist als Modul für das ScoutNet Modulsystem gedacht und
+	W3C konformitÃ¤t : nicht konform, aufgrund der Zeilen 203-205 "<script[...]box_[...]/script>"
+	Bemerkungen : 	Diese Template ist als Modul fÃ¼r das ScoutNet Modulsystem gedacht und
 					stellt eine grafische Visualisierung des Kalenders dar
  *}
 
 {*********           START DES KONFIGURATIONS-BEREICHS       *********}
 	{* zeitbereich *}
-		{* selbsterklärend *}	
+		{* selbsterklÃ¤rend *}	
 		{assign var="monate_im_nachhinein" value=1}
 		{assign var="monate_im_voraus" value=4}
 
@@ -26,25 +26,25 @@
 		{* Gibt an in wieviel Monatstabellen pro Zeile angezeigt werden sollen *}	
 		{assign var="monats_spalten" value=3}
 	
-		{* 6 Zeilen pro Monatstabelle erzwingen Höhe der Monatstabellen, damit alle Monatstabellen die selbe Höhe haben *}
-		{assign var="monatstabellen_hoehe_anpassen" value=true} {* mögliche Werte: true false *}
+		{* 6 Zeilen pro Monatstabelle erzwingen HÃ¶he der Monatstabellen, damit alle Monatstabellen die selbe HÃ¶he haben *}
+		{assign var="monatstabellen_hoehe_anpassen" value=true} {* mÃ¶gliche Werte: true false *}
 
-		{* Die Einträge in der Zeile mit den Wochentagsbeschriftungen (getrennt durch ;) *}
+		{* Die EintrÃ¤ge in der Zeile mit den Wochentagsbeschriftungen (getrennt durch ;) *}
 		{assign_array var="wochentags_beschriftungen" values="M;D;M;D;F;S;S" delimiter=";"}
 
 	{* design - feines *}
-		{* Zellenart und zusätzliche Tags für Wochentagsbeschriftungen *}
+		{* Zellenart und zusÃ¤tzliche Tags fÃ¼r Wochentagsbeschriftungen *}
 		{assign var="starttags_wochentagsbeschriftungen" value="<td align=\"center\"><b><font face=\"verdana,arial,helvetica\" size=\"1\" color=\"#000000\">"}
 		{assign var="endtags_wochentagsbeschriftungen" value="</font></b></td>"}
 
-		{* leere Zellen zum Füllen der Monats-Tabelle vor dem ersten und nach dem letzten Tag des Monats *}
+		{* leere Zellen zum FÃ¼llen der Monats-Tabelle vor dem ersten und nach dem letzten Tag des Monats *}
 		{assign var="emptycell" value="<td bgcolor=\"#319AFF\">&nbsp;</td>"}
 
 		{* Zellenart aller Daten, ausser dem aktuellen Datum *}
 		{assign var="zellenstart_irgendein_datum" value="<TD bgcolor=\"#DFDFDF\"><font face=\"verdana,arial,helvetica\" size=\"3\">"}
 		{assign var="zellenende_irgendein_datum" value="</font></TD>"}
 
-		{* Zusätzliche Tags für Daten an denen Termine sind, ausser dem aktuellen Datum *}
+		{* ZusÃ¤tzliche Tags fÃ¼r Daten an denen Termine sind, ausser dem aktuellen Datum *}
 		{assign var="starttags_existierendes_datum" value="<font color=\"#0000FF\"><u>"}
 		{assign var="endtags_existierendes_datum" value="</u></font>"}
 				
@@ -52,7 +52,7 @@
 		{assign var="zellenstart_aktuelles_datum" value="<TD bgcolor=\"#FF0033\"><font face=\"Verdana\" size=\"3\">"}
 		{assign var="zellenende_aktuelles_datum" value="</font></TD>"}
 				
-		{* Zusätzliche Tags wenn am aktuellen Datum Termine sind *}
+		{* ZusÃ¤tzliche Tags wenn am aktuellen Datum Termine sind *}
 		{assign var="starttags_aktuelles_existierendes_datum" value="<font color=\"#0000FF\"><u>"}
 		{assign var="endtags_aktuelles_existierendes_datum" value="</u></font>"}
 {*********          ENDE DES KONFIGURATIONS-BEREICHS         *********}
@@ -61,10 +61,10 @@
 {********* START DES BEREICHS MIT DEN AUTOMATISCHEN VORBEREITUNGEN    *********}
 {* Zuweisung der richtigen Gruppe*} 
 	{if $groups.jahrmonattag}
-		{assign var="groups" value="`$groups.jahrmonattag`"}
+		{assign var="groups" value=$groups.jahrmonattag}
 	{/if}
 
-{* Bereitstellen der benötigten Datums Variablen *}
+{* Bereitstellen der benÃ¶tigten Datums Variablen *}
 {assign var="aktueller_tag" value=$aktuelles_datum|date_format:"%d"}
 {assign var="aktueller_monat" value=$aktuelles_datum|date_format:"%m"}
 {assign var="aktuelles_jahr" value=$aktuelles_datum|date_format:"%Y"}
@@ -89,7 +89,7 @@
 	{assign var="end_jahr" value=$aktuelles_jahr}
 {/if}
 
-{* Bestimmung der benötigten leeren Zellen am Ende für die Anordnung der Monatstabellen in mehreren Spalten (siehe auch $monats_spalten) *}
+{* Bestimmung der benÃ¶tigten leeren Zellen am Ende fÃ¼r die Anordnung der Monatstabellen in mehreren Spalten (siehe auch $monats_spalten) *}
 {math assign="emptycells" equation="(monats_spalten-(((12-start_monat+1)+((end_jahr-start_jahr-1)*12)+end_monat)%monats_spalten))" monats_spalten=$monats_spalten end_jahr=$end_jahr start_jahr=$start_jahr start_monat=$start_monat end_monat=$end_monat}
 
 {*********  ENDE DES BEREICHS MIT DEN AUTOMATISCHEN VORBEREITUNGEN    *********}
@@ -97,9 +97,9 @@
 
 {*********  START DES BEREICHS MIT DER EIGENTLICHEN AUSGABE    *********}
 <table cellpadding="3" ><tr valign="top">
-{* section-Schleife, die die Jahre durchläuft die angezeigt werden sollen *}
+{* section-Schleife, die die Jahre durchlÃ¤uft die angezeigt werden sollen *}
 {section name="years" loop=$end_jahr|math:"x+1" start=$start_jahr}
-	{* $this_jahr gibt das Jahr für diesen Durchlauf der "years"-section ahand des Durchlaufindex an *}
+	{* $this_jahr gibt das Jahr fÃ¼r diesen Durchlauf der "years"-section ahand des Durchlaufindex an *}
 	{assign var="this_jahr" value=$smarty.section.years.index}
 
 	{* Bestimmung des ersten Monats der im aktuellen Durchlauf der "years"-section angezeigt werden soll *}
@@ -116,23 +116,23 @@
 		{assign var="end_monat_loop" value=12}
 	{/if}
 
-	{* section-Schleife, die die Monate des aktuellen Durchlaufs der "years"-section durchläuft, die angezeigt werden sollen *}
+	{* section-Schleife, die die Monate des aktuellen Durchlaufs der "years"-section durchlÃ¤uft, die angezeigt werden sollen *}
 	{section name="months" loop=$end_monat_loop|math:"x+1" start=$start_monat_loop}
 
-		{* $this_monat gibt den Jahr für diesen Durchlauf der "months"-section anhand des Durchlaufindex an *}
+		{* $this_monat gibt den Jahr fÃ¼r diesen Durchlauf der "months"-section anhand des Durchlaufindex an *}
 		{assign var="this_monat" value=$smarty.section.months.index|string_format:"%02d"}
 
-		{* table_date gibt das Datum des ersten Tages des aktuellen Monats an für die spätere Bestimmung der Überschirft der Tabelle mittels date_format *}
+		{* table_date gibt das Datum des ersten Tages des aktuellen Monats an fÃ¼r die spÃ¤tere Bestimmung der Ãœberschirft der Tabelle mittels date_format *}
 		{assign var="table_date" value="$this_jahr-$this_monat-01"}
 
 		<td> 
 
-			{* Start Rahmen für Monatstabelle *}<table border="0" cellspacing="0" cellpadding="0" width="150"><tr><td bgcolor="#000000" ><table width="100%" border="0" cellspacing="1" cellpadding="3" ><tr><td bgcolor="#CECFCE" valign="top">
+			{* Start Rahmen fÃ¼r Monatstabelle *}<table border="0" cellspacing="0" cellpadding="0" width="150"><tr><td bgcolor="#000000" ><table width="100%" border="0" cellspacing="1" cellpadding="3" ><tr><td bgcolor="#CECFCE" valign="top">
 
-				{*********         START DER Monatstabellenüberschrift         *********}
+				{*********         START DER MonatstabellenÃ¼berschrift         *********}
 				<div align="center"><center>
-					{* Einbinden des Templates mit der Überschrift der Monatstabelle *}
-					{* Start Rahmen für Monatsüberschrift *}<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td bgcolor="#000000" ><table width="100%" border="0" cellspacing="1" cellpadding="3" ><tr><td bgcolor="#FFFFFF">
+					{* Einbinden des Templates mit der Ãœberschrift der Monatstabelle *}
+					{* Start Rahmen fÃ¼r MonatsÃ¼berschrift *}<table border="0" cellspacing="0" cellpadding="0" width="100%"><tr><td bgcolor="#000000" ><table width="100%" border="0" cellspacing="1" cellpadding="3" ><tr><td bgcolor="#FFFFFF">
 						<table border="0" cellspacing="0" cellpadding="1" width="100%" bgcolor="#FFFFFF" >
 							<tr> 
 								<td align="left" valign="middle">
@@ -141,17 +141,17 @@
 									</font>
 								</td>
 								<td width="20" height="20" valign="middle" align="center">
-									<img width="28" height="25" src="http://kalender.scoutnet.de/2.0/images/cal.gif" alt="Calendar" border=0> 
+									<img width="28" height="25" src="https://{$smarty.server.SERVER_NAME}/typo3conf/ext/scoutnet_calendarserver/Resources/Public/Images/cal.gif" alt="Calendar" border=0>
 								</td>
 							</tr>
 						</table>
 
-					{* Ende Rahmen für Monatsüberschrift *}</td></tr></table></td></tr></table>
+					{* Ende Rahmen fÃ¼r MonatsÃ¼berschrift *}</td></tr></table></td></tr></table>
 				</center></div>
-				{*********          ENDE DER Monatstabellenüberschrift         *********}
+				{*********          ENDE DER MonatstabellenÃ¼berschrift         *********}
 
 
-			{* Rahmen  für Monatstabelle- Neue Zeile *} </td></tr><tr><td bgcolor="#FFFFFF">
+			{* Rahmen  fÃ¼r Monatstabelle- Neue Zeile *} </td></tr><tr><td bgcolor="#FFFFFF">
 
 				<table bgcolor="#000000" border="0" cellpadding="4" cellspacing="1" align="center">
 
@@ -169,7 +169,7 @@
 				{*********          START DER Monatstabellenzellen             *********}
 					<tr bgcolor="#DFDFDF">
 
-						{* Bestimmung der Anzahl und Einfügen der benötigten leeren Zellen am Anfang der Monats-Tabelle *}
+						{* Bestimmung der Anzahl und EinfÃ¼gen der benÃ¶tigten leeren Zellen am Anfang der Monats-Tabelle *}
 						{assign var="start_wochentag" value="$this_jahr-$this_monat-01"|date_format:"%w"|math:"x"}
 						{if $start_wochentag == 0}
 							{assign var="start_wochentag" value="7"}
@@ -181,13 +181,13 @@
 						{* Bestimmung der Anzahl der Tage des Monats *}
 						{monthlength assign="monthlength" month=$this_monat}
 
-						{* section-Schleife, die die Tage des aktuellen Durchlaufs der "month"-section durchläuft, die angezeigt werden sollen *}
+						{* section-Schleife, die die Tage des aktuellen Durchlaufs der "month"-section durchlÃ¤uft, die angezeigt werden sollen *}
 						{section name=days loop=$monthlength}
 
-							{* $this_day gibt den Tag für diesen Durchlauf der "days"-section anhand des Durchlaufindex an *}
+							{* $this_day gibt den Tag fÃ¼r diesen Durchlauf der "days"-section anhand des Durchlaufindex an *}
 							{assign var="this_day" value=$smarty.section.days.iteration|string_format:"%02d"}
 
-							{* $this_day gibt das Datum für diesen Durchlauf der "days"-section an *}
+							{* $this_day gibt das Datum fÃ¼r diesen Durchlauf der "days"-section an *}
 							{assign var="this_date" value="$this_jahr-$this_monat-$this_day"}
 							{* Falls das Datum dieses Durchlaufs dem aktuellen Datum entspricht wird eine andere Zellenart verwendet *}
 					        {if "$this_date" == $aktuelles_datum}
@@ -196,7 +196,7 @@
 								{$zellenstart_irgendein_datum}
 							{/if}
 
-							{* Falls es Termine an diesem Datum gibt ausgeben eines div mit mouseover event für overlib, sonst nur den Tag *}
+							{* Falls es Termine an diesem Datum gibt ausgeben eines div mit mouseover event fÃ¼r overlib, sonst nur den Tag *}
 							{if ( in_array($this_date, $used.dates) )}
 								{* Ablegen des Template mit dem Inhalt der Overlibbox in "box_inhalt" *}
 								{include file="`$modulpfad`/box_inhalt_datum.tpl" assign="box_inhalt" inhalt_datum=$this_date}
@@ -235,7 +235,7 @@
 				
     					{/section}
 
-						{* Bestimmung der Anzahl und Einfügen der benötigten leeren Zellen am Ende der Monats-Tabelle *}
+						{* Bestimmung der Anzahl und EinfÃ¼gen der benÃ¶tigten leeren Zellen am Ende der Monats-Tabelle *}
 						{assign var="end_wochentag" value="$this_jahr-$this_monat-$monthlength"|date_format:"%w"}
 						{if $end_wochentag == 0}
 							{assign var="end_wochentag" value="7"}
@@ -244,7 +244,7 @@
 							{$emptycell}
 						{/section}
 
-						{* Bei einem Monat der weniger als 6 Zeilen hat eine weitere anfügen *}
+						{* Bei einem Monat der weniger als 6 Zeilen hat eine weitere anfÃ¼gen *}
 						{if $monatstabellen_hoehe_anpassen && (($start_wochentag-1+$monthlength)<=35)}
     	                    </TR><TR>
 							{section name=emptyrow1 loop=7}
@@ -252,7 +252,7 @@
 							{/section}
 						{/if}
 			
-						{* Bei einem Monat der weniger als 5 Zeilen hat eine weitere anfügen, dies ist nur beim einem Februar mit Montag als Wochentag des 01. der Fall *}
+						{* Bei einem Monat der weniger als 5 Zeilen hat eine weitere anfÃ¼gen, dies ist nur beim einem Februar mit Montag als Wochentag des 01. der Fall *}
 						{if $monatstabellen_hoehe_anpassen && (($start_wochentag-1+$monthlength)==28)}
         	                </TR><TR>
 							{section name=emptyrow1 loop=7}
@@ -262,7 +262,7 @@
 					</tr>
 					{*********           ENDE DER Monatstabellenzellen             *********}
 				</TABLE>
-			{* Ende Rahmen  für Monatstabelle*}</td></tr></table></td></tr></table>
+			{* Ende Rahmen  fÃ¼r Monatstabelle*}</td></tr></table></td></tr></table>
 		</td>
 
 		{* Neue Tabellen-Zeile wenn die Anzahl der Monatstabellen in der aktuellen gleich $monats_spalten ist *}

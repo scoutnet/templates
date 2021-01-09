@@ -4,14 +4,14 @@
 
 	{assign var="last_displayed_year" value="1900"}
 	
-	{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
+	{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
 	{if $groups.jahrmonat}
-		{assign var="groups" value="`$groups.jahrmonat`"}
+		{assign var="groups" value=$groups.jahrmonat}
 	{/if}
 	
 
 <wml>
-	{* Karte mit der Liste der Termineinträge *}
+	{* Karte mit der Liste der TermineintrÃ¤ge *}
 	<card id="start" title="{$kalender.ebene} {$kalender.name}">
 		
 			{* Schleife ueber die Monate*}
@@ -73,9 +73,9 @@
 			{* Schleife ueber die Termineintraege eines Monats *}
 			{foreach from=$monat.eintraege item=eintrag name=eintraege}
 				{assign var=i value=$i+1}
-				{* Wir zeigen die Termine um eins verschoben an, um vorigen und nächsten schon zu kennen *}
-				{assign var="vorheriger_eintrag" value=$aktueller_eintrag}
-				{assign var="aktueller_eintrag" value=$naechster_eintrag}
+				{* Wir zeigen die Termine um eins verschoben an, um vorigen und nÃ¤chsten schon zu kennen *}
+				{assign var="vorheriger_eintrag" value=$aktueller_eintrag|default:null}
+				{assign var="aktueller_eintrag" value=$naechster_eintrag|default:null}
 				{assign var="naechster_eintrag" value=$eintrag}
 				{if $aktueller_eintrag}
 					{include file="wml/eintrag.tpl" eintrag=$aktueller_eintrag}

@@ -42,10 +42,10 @@ pre{ldelim}
 {$eintrag_count|@print_r:1}
 </pre>
 
-<h1>$eintrag</h1>
+{if $eintrag}<h1>$eintrag</h1>
 <pre>
 {$eintrag|@print_r:1}
-</pre>
+</pre>{/if}
 
 <h1>$template_path</h1>
 <pre>

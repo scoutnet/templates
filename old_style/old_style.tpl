@@ -1,22 +1,22 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
 	Name : Kalender 2.0 Template - Old Style
 	Dateiname : old_style.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 16.02.2008
+	Letzte Ã„nderung : 16.02.2008
 	Version : 1.2
 *}
 
 {* START - STANDARDKONFIGURATIONSBEREICH entsprechend denen im Adminbereich des Kalender 1.0*}
 	{* Hintergrundfarbe *}
 	{assign var="bgcolor" value="ffffff"}
-	{* Hintergrundbild *} {* für ein Hintergrundbild z.B. value="http://gandalf.wtal.de/grafik/haupthintergrund.gif" *}
+	{* Hintergrundbild *} {* fÃ¼r ein Hintergrundbild z.B. value="http://gandalf.wtal.de/grafik/haupthintergrund.gif" *}
 	{assign var="background" value="false"}
-	{* Hintergrundbild Eigenschaften *}	{* für ein fixiertes Hintergrundbild (Wasserzeichen) value="fixed" *}
+	{* Hintergrundbild Eigenschaften *}	{* fÃ¼r ein fixiertes Hintergrundbild (Wasserzeichen) value="fixed" *}
 	{assign var="bgproperties" value="false"} 
 	{* Schriftfarbe *}
 	{assign var="fontcolor" value="000000"}
-	{* Schriftgröße *}
+	{* SchriftgrÃ¶ÃŸe *}
 	{assign var="fontsize" value="2"}
 	{* Schriftart *}
 	{assign var="fontface" value="false"}
@@ -24,51 +24,48 @@
 	{assign var="fett" value="false"} 
 	{* Schrift Kursiv? *}
 	{assign var="kursiv" value="false"} 
-	{* Link und Überschrift verwenden? *}
+	{* Link und Ãœberschrift verwenden? *}
 	{assign var="link" value="true"} 
 {*  ENDE - STANDARDKONFIGURATIONSBEREICH *}
 
-{* START - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
+{* START - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
 	{assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;link;fett;kursiv" delimiter=";"} 
 	{foreach item=configvar from=$configvars}
 		{if isset($urlparameters.$configvar)}
-			{assign var=$configvar value=$urlparameters.$configvar} 
+			{assign var=$configvar value=$urlparameters.$configvar}
 		{/if}
 	{/foreach}
 		
-{*  ENDE - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
+{*  ENDE - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
 
 
-	{* Sonstiges *}
-	{assign var="ueberschriftsize" value=$fontsize|math:"x+1"}
-	{assign var="ueberschriftface" value="Arial"}
-	{assign var="monatsface" value="Arial Black"}
-	{if $fett&&$fett!="false"}
-		{assign var="starttags" value="<b>"}
-		{assign var="endtags" value="</b>"}
-	{else}
-		{assign var="starttags" value=""}
-		{assign var="endtags" value=""}
-	{/if}
-	{if $kursiv&&$kursiv!="false"}
-		{assign var="starttags" value="$starttags<i>"}
-		{assign var="endtags" value="</i>$endtags"}
-	{else}
-		{assign var="starttags" value="$starttags"}
-		{assign var="endtags" value="$endtags"}
-	{/if}
+{* Sonstiges *}
+{assign var="ueberschriftsize" value=$fontsize|math:"x+1"}
+{assign var="ueberschriftface" value="Arial"}
+{assign var="monatsface" value="Arial Black"}
+
+{assign var="starttags" value=""}
+{assign var="endtags" value=""}
+{if $fett && $fett != "false"}
+    {assign var="starttags" value="<b>"}
+    {assign var="endtags" value="</b>"}
+{/if}
+{if $kursiv && $kursiv != "false"}
+    {assign var="starttags" value="$starttags<i>"}
+    {assign var="endtags" value="</i>$endtags"}
+{/if}
 	
 
 
-{* Zuweisung der richtigen Gruppe (nur nötig, wenn man den URL-Parameter groupby nicht übergibt) *}
+{* Zuweisung der richtigen Gruppe (nur nÃ¶tig, wenn man den URL-Parameter groupby nicht Ã¼bergibt) *}
 	{if $groups.jahrmonat}
-		{assign var="groups" value="`$groups.jahrmonat`"}
+		{assign var="groups" value=$groups.jahrmonat}
 	{/if}
 {/strip}{if !isset($urlparameters.onlybody)}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>ScoutNet-Kalender für {$kalender.ebene} {$kalender.name}</title>
+<title>ScoutNet-Kalender fÃ¼r {$kalender.ebene} {$kalender.name}</title>
 {/if}
 {literal}
 <SCRIPT language="javascript" type="text/javascript">
@@ -78,7 +75,7 @@
 	{/literal}{strip}
     popupWin = window.open('
 	
-	http://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?
+	https://{$smarty.server.SERVER_NAME}{$smarty.server.PHP_SELF}?
 	
 	entryids='+id+'&
 	template={$template_path}/infos_zeigen.tpl&
@@ -103,7 +100,8 @@
 </head>
 <body bgcolor=#{$bgcolor} {if $background&&$background!="false"}background={$background} {/if}{if $bgproperties&&$bgproperties!="false"}bgproperties={$bgproperties} {/if}link=#{$fontcolor} vlink=#{$fontcolor} alink=#{$fontcolor}>{/if}
 
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{assign var="parameters" value=$parameters|default:""}
 {foreach from=$url_parameters key=name item=value}
 	{if $name != "ebenenup" && $name != "groupby"}
 		{assign var="parameters" value="$parameters$name=$value&"}
@@ -117,13 +115,13 @@
     <td width=30%><div align=right>
 	{if $kalender.id != 3}
 		{assign var="temp_kalender" value=$kalender}
-		<FORM method=get action=/redirect.asp><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
+		<FORM method=get action=/><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">Termine bis </font>
 		<SELECT name=gotourl onChange='location.href=this.form.gotourl.options[this.form.gotourl.selectedIndex].value; return false;'>
 		{section loop=10 name="menu"}
 			{if $temp_kalender}
 				<option value="{$smarty.server.PHP_SELF}?{$parameters|htmlentities}groupby=startdatum.%Y-%m&amp;ebenenup={$smarty.section.menu.index}"{if isset($url_parameters.ebenenup) && $url_parameters.ebenenup == $smarty.section.menu.index} selected{/if}> {$temp_kalender.ebene}</option>
+                {assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 			{/if}
-			{assign var="temp_kalender" value=$temp_kalender.gehoertzu}
 		{/section}
 	    </SELECT><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"> anzeigen...</font>
 	    </form>
@@ -175,11 +173,11 @@
 <table border=0 cellspacing=0 cellpadding=0>
   <tr>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">[</font></td>
-            <td><p><a href="http://kalender.scoutnet.de/infos/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
+            <td><p><a href="https://www.scoutnet.de/technik/kalender/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Infos&nbsp;zum&nbsp;ScoutNet-Kalender</b></font></a></p>
                 </td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">|</font></td>
-            <td><a href="http://community.scoutnet.de/" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Termin&nbsp;hinzufügen</b></font></a></td>
+            <td><a href="https://www.scoutnet.de/community/kalender/termine-bearbeiten/structure/{$kalender.id}/new" target="_blank"><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}"><b>Termin&nbsp;hinzufÃ¼gen</b></font></a></td>
     <td width=10><p align=center><font size="{$fontsize}" {if $fontface}face="{$fontface}" {/if}color="#{$fontcolor}">]</font></td>
   </tr>
 </table></div></center>

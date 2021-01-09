@@ -16,14 +16,10 @@
 	  <post href="http://www.asdf.com/" description="asdf" extended="asdf" hash="3f73499f1ccc233e7f2141c35cf28e4b" tag="suchen copyright" time="2006-04-22T13:13:42Z" />
 *}
 	{if $groups.jahrmonat}
-		{assign var="groups" value="`$groups.jahrmonat`"}
+		{assign var="groups" value=$groups.jahrmonat}
 	{/if}
-	{if isset($url_parameters.startdate)}
-		{assign var="startdate" value=$url_parameters.startdate}
-	{/if}
-	{if isset($url_parameters.enddate)}
-		{assign var="enddate" value=$url_parameters.enddate}
-	{/if}
+	{assign var="startdate" value=$url_parameters.startdate|default:''}
+	{assign var="enddate" value=$url_parameters.enddate|default:''}
 
 {/strip}<?xml version='1.0' encoding="ISO-8859-1" standalone='yes'?>
 <calendar>

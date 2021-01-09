@@ -1,17 +1,17 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
         Name : Kalender 2.0 Template - XML
         Dateiname : xml2.tpl
         Autor : Carsten Horst
-        Letzte Änderung : 01.21.2008 (chris@scoutnet.de)
+        Letzte Ã„nderung : 01.21.2008 (chris@scoutnet.de)
         Version : 2.0.1
         notwendige Konfiguration : keine
-	Änderungen in Version 2.0.1 - 01.21.2008:
+	Ã„nderungen in Version 2.0.1 - 01.21.2008:
           - bugfix $eintrag.kalender.verband
 
 *}
         {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
+                {assign var="groups" value=$groups.jahrmonat}
         {/if}
 {/strip}<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
 

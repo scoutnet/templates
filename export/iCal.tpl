@@ -1,6 +1,6 @@
 {strip}
 {if $groups.jahrmonat}
-	{assign var="groups" value="`$groups.jahrmonat`"}
+	{assign var="groups" value=$groups.jahrmonat}
 {/if}
 {assign var="lastmodified" value="1970-01-01 00:00:00"}
 {foreach from=$groups item=monat}
@@ -52,7 +52,7 @@ DTSTART;VALUE=DATE:{$eintrag.startdatum|date_format:"%Y%m%d"}
 DTEND;TZID=Europe/Berlin:{if $eintrag.enddatum}{$eintrag.enddatum|date_format:"%Y%m%d"}{else}{$eintrag.startdatum|date_format:"%Y%m%d"}{/if}T{if $eintrag.endzeit}{$eintrag.endzeit|date_format:"%H%M%S"}{elseif $eintrag.startzeit}{$eintrag.startzeit|date_format:"%H%M%S"}{else}235900{/if}
 
 {else}
-DTEND;VALUE=DATE:{if $eintrag.enddatum}{assign var="foooo" value="`$eintrag.enddatum`"|strtotime}{$foooo+86400|date_format:"%Y%m%d"}{else}{assign var="foooo" value="`$eintrag.startdatum`"|strtotime}{$foooo+86400|date_format:"%Y%m%d"}{/if}
+DTEND;VALUE=DATE:{if $eintrag.enddatum}{assign var="foooo" value=$eintrag.enddatum|strtotime}{{$foooo+86400}|date_format:"%Y%m%d"}{else}{assign var="foooo" value=$eintrag.startdatum|strtotime}{{$foooo+86400}|date_format:"%Y%m%d"}{/if}
 
 {/if}
 {if $eintrag.ort}LOCATION:{$eintrag.ort}

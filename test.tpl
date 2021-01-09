@@ -1,4 +1,4 @@
-<HTML
+<HTML>
 <HEAD>
 <TITLE></TITLE>
 <META name="description" content="">
@@ -7,21 +7,18 @@
 </HEAD>
 <BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#0000FF" VLINK="#800080">
 
-{debug}
+<pre>
+Existing: {$existing|@print_r}
+Used: {$used|@print_r}
+Kalender: {$kalender|@print_r}
+Eintraege: {$eintraege|@print_r}
+Groups: {$groups|@print_r}
 
-{*$smarty.get|@print_r}
-{$url_parameters|@print_r}
-{$urlparameters|@print_r}
-
-{$smarty.get|@print_r}
-{$url_parameters|@print_r}
-{$urlparameters|@print_r}
-
-
-{$existing|@print_r}
-{$used|@print_r}
-{$kalender|@print_r}
-{$eintraege|@print_r}
-{$groups|@print_r*}
+"url"            {$url}
+"url_parameters" {$url_parameters|@print_r}
+"urlparameters"  {$urlparameters|@print_r}
+"eintrag_count"  {$eintrag_count}
+"template_path"  {$template_path}
+</pre>
 </BODY>
 </HTML>

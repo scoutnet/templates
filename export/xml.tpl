@@ -1,14 +1,14 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
         Name : Kalender 2.0 Template - XML
         Dateiname : xml.tpl
         Autor : Carsten Horst
-        Letzte Änderung : 02.07.2004 (Carsten Horst)
+        Letzte Ã„nderung : 02.07.2004 (Carsten Horst)
         Version : 1.0.1
         notwendige Konfiguration : keine
 *}
         {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
+                {assign var="groups" value=$groups.jahrmonat}
         {/if}
 {/strip}<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 

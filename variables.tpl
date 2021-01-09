@@ -1,1 +1,1 @@
-{* convenience alias *}{include file=variablen.tpl}
+{* convenience alias *}{include file="variablen.tpl"}

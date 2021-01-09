@@ -1,23 +1,23 @@
 {strip}
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}
 
 {*
-   Name : Kalender 2.0 Template - Modul Menu_1 für Scoutnet Modulsystem
+   Name : Kalender 2.0 Template - Modul Menu_1 fÃ¼r Scoutnet Modulsystem
    Dateiname : menu.tpl
    Autor : Scoutnet Kalender-Team - Christopher Vogt
-   Letzte Änderung : 02.07.2003
+   Letzte Ã„nderung : 02.07.2003
    Version : 1.0
    notwendige Konfiguration : keine
-   W3C konformität : Transitional (nur wenn im Modulsystem $force_w3c true ist)
-   Bemerkungen :    Diese Template ist als Modul für das Scoutnet Modulsystem gedacht und
-               stellt ein simples Menü zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
+   W3C konformitÃ¤t : Transitional (nur wenn im Modulsystem $force_w3c true ist)
+   Bemerkungen :    Diese Template ist als Modul fÃ¼r das Scoutnet Modulsystem gedacht und
+               stellt ein simples MenÃ¼ zur Auswahl der angezeigten Kategorien Stufen und Ebenen (Stamm, Bezirk,etc.) dar
  *}
 
 {*********          START DES KONFIGURATIONS-BEREICHS        *********}
    {* Anzahl der Ebenen die nach oben angeboten werden sollen
-      für einen Stamm der DPSG beispielsweise 3 um auch Bezirk, Diözese und Verband anzubieten *}
+      fÃ¼r einen Stamm der DPSG beispielsweise 3 um auch Bezirk, DiÃ¶zese und Verband anzubieten *}
    {assign var="ebenen" value=3}
-   {* Anzahl der Zeilen der Auswahlmenüs, Standard ist die Anzahl der Stufen ($existing.stufen_ids|@count) *}
+   {* Anzahl der Zeilen der AuswahlmenÃ¼s, Standard ist die Anzahl der Stufen ($existing.stufen_ids|@count) *}
    {assign var="zeilen" value=$existing.stufen_ids|@count}
 {*********          ENDE DES KONFIGURATIONS-BEREICHS         *********}
 
@@ -82,7 +82,7 @@
       </td>
       {/if}
       <td>
-         <input name="ID" type="hidden" value="{$url_parameters.SeitenID}">
+         <input name="ID" type="hidden" value="{$url_parameters.SeitenID|default:''}">
          <input type="submit" name="Submit" value="aktualisieren">
          {if not $force_w3c} </form> {/if}
       </td>

@@ -1,31 +1,25 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 
-{* START - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
+{* START - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
 	{assign_array var="configvars" values="bgcolor;background;bgproperties;fontcolor;fontsize;fontface;fett;kursiv" delimiter=";"} 
 	{foreach item=configvar from=$configvars}
-		{if isset($urlparameters.$configvar)}
-			{assign var=$configvar value=$urlparameters.$configvar} 
-			{assign var="configvars.$configvar" value=$urlparameters.$configvar} 
-		{/if}
+          {assign var=$configvar value=$urlparameters.$configvar|default:''}
 	{/foreach}
-		
-{*  ENDE - Überschreiben der STANDARDKONFIGURATION durch Parameter *}
+{*  ENDE - Ãœberschreiben der STANDARDKONFIGURATION durch Parameter *}
 
 
 	{* Sonstiges *}
-	{if $fett&&$fett!="false"}
+    {assign var="starttags" value=""}
+    {assign var="endtags" value=""}
+
+	{if $fett && $fett != "false"}
 		{assign var="starttags" value="<b>"}
 		{assign var="endtags" value="</b>"}
-	{else}
-		{assign var="starttags" value=""}
-		{assign var="endtags" value=""}
 	{/if}
-	{if $kursiv&&$kursiv!="false"}
+
+	{if $kursiv && $kursiv!="false"}
 		{assign var="starttags" value="$starttags<i>"}
 		{assign var="endtags" value="</i>$endtags"}
-	{else}
-		{assign var="starttags" value="$starttags"}
-		{assign var="endtags" value="$endtags"}
 	{/if}
 
 
@@ -34,7 +28,7 @@
 {/strip}<html>
 
 <head>
-<title>Termin &quot;{$eintrag.titel}&quot; für {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
+<title>Termin &quot;{$eintrag.titel}&quot; fÃ¼r {$eintrag.kalender.ebene} {$eintrag.kalender.name}</title>
 <base target=_blank>
 </head>
 

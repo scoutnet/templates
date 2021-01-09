@@ -1,9 +1,9 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
 	Name : Kalender 2.0 Template - Scoutnet Modulsystem
 	Dateiname : modulsystem.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 27.01.2008
+	Letzte Ã„nderung : 27.01.2008
 	Version : 1.0.3
 	notwendige Konfiguration : keine
 	Bemerkungen : Diese Template stellt nur eine Basis zum Einbinden von beliebigen Modulen dar
@@ -16,14 +16,14 @@
 		{* Dateinamen der Module *}
 		{assign_array var="module" values="kalender_banner.tpl;menu.tpl;heutige.tpl;monats_tabellen.tpl;link_footer.tpl" delimiter=";"}
 	{*  	{assign_array var="module" values="monats_tabellen.tpl" delimiter=";"}*}
-		{* overlib_required muss auf true gesetzt werden wenn eins der Module die JavaScript Bibliothek Overlib benötigt,
+		{* overlib_required muss auf true gesetzt werden wenn eins der Module die JavaScript Bibliothek Overlib benÃ¶tigt,
 			kann anderenfalls auf false gesetzt werden *}
 		{assign var="overlib_required" value=true}
 	{* sonstiges *}
-		{* Einstellen des (für das Modulsystem) aktuellen Datums (für Testzwecke),
+		{* Einstellen des (fÃ¼r das Modulsystem) aktuellen Datums (fÃ¼r Testzwecke),
 			Standardwert ist das wirkliche Datum: $smarty.now|date_format:"%Y-%m-%d" *}
 		{assign var="aktuelles_datum" value=$smarty.now|date_format:"%Y-%m-%d" }
-		{* Erzwingen der w3c konformität (soweit die Module das unterstützen) unter Umständen mit leichten Design-Einbußen *}
+		{* Erzwingen der w3c konformitÃ¤t (soweit die Module das unterstÃ¼tzen) unter UmstÃ¤nden mit leichten Design-EinbuÃŸen *}
 		{assign var="force_w3c" value=false}
 {*********          ENDE DES KONFIGURATIONS-BEREICHS         *********}
 
@@ -32,15 +32,15 @@
 {/strip}{if $force_w3c} <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">{/if}
 <html>
 <head>
-<title>Scoutnet-Kalender für {$kalender.ebene} {$kalender.name}</title>
+<title>Scoutnet-Kalender fÃ¼r {$kalender.ebene} {$kalender.name}</title>
 </head>
 
 <body{if isset($urlparameters.bgcolor)} bgcolor=#{$urlparameters.bgcolor}{/if}>
 
 {strip}
-{* Einbinden der Overlib-Bibliothek wenn benötigt (siehe Module) *}
+{* Einbinden der Overlib-Bibliothek wenn benÃ¶tigt (siehe Module) *}
 {if $overlib_required}
-	<script type="text/javascript" language="JavaScript" src="http://kalender.scoutnet.de/2.0/libs/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
+	<script type="text/javascript" language="JavaScript" src="https://{$smarty.server.SERVER_NAME}/typo3conf/ext/scoutnet_calendarserver/Resources/Public/JavaScript/libs/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 	<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
 	{assign var="overlib_included" value=true}
 {/if}

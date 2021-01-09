@@ -1,7 +1,7 @@
-{include file=variablen.tpl}
+{include file="variablen.tpl"}
 
 
 <h1>Umlaute-Test</h1>
 <p>
-ä ö ü Ä Ö Ü ß
+Ã¤ Ã¶ Ã¼ Ã„ Ã– Ãœ ÃŸ
 </p>

@@ -1,6 +1,6 @@
 {strip}
         {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
+                {assign var="groups" value=$groups.jahrmonat}
         {/if}
 {/strip}<data date-time-format="iso8601">
 {*debug output="html"*}

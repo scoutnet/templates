@@ -1,4 +1,4 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
         Name : Kalender 2.0 Template - JSON
         Dateiname : json.tpl
@@ -7,15 +7,11 @@
         notwendige Konfiguration : keine
 *}
         {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
+                {assign var="groups" value=$groups.jahrmonat}
         {/if}
 {/strip}
 {strip}
-{if $smarty.get.varname}
-{$smarty.get.varname}
-{else}
-calendar
-{/if}
+{$smarty.get.varname|default:'calendar'}
 {/strip} = [
 {foreach from=$groups item=monat name=groups}
 {foreach from=$monat.eintraege item=eintrag name=entries}
@@ -35,7 +31,7 @@ calendar
 {else}
     Author : "{$eintrag.autor.nickname|escape:"javascript"}",
 {/if}
-    Association : "{$eintrag.verband|escape:"javascript"}",
+    Association : "{$eintrag.kalender.verband|escape:"javascript"}",
     Level : "{$eintrag.kalender.ebene|escape:"javascript"}",
     Info : "{$eintrag.info|nl2br|escape:"javascript"}"
 {if $smarty.foreach.groups.last && $smarty.foreach.entries.last}

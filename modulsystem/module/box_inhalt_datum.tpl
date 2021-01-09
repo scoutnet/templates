@@ -1,18 +1,18 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
+{* Entfernt alle unnÃ¶tigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 
 {*
-	Name : Kalender 2.0 Template - Benötigt in den Modulen "Heutige Termine" und "Monas Tabellen" für Scoutnet Modulsystem 
+	Name : Kalender 2.0 Template - BenÃ¶tigt in den Modulen "Heutige Termine" und "Monas Tabellen" fÃ¼r Scoutnet Modulsystem 
 	Dateiname : heutige.tpl
 	Autor : Scoutnet Kalender-Team - Christopher Vogt
-	Letzte Änderung : 04.11.2005
+	Letzte Ã„nderung : 04.11.2005
 	Version : 1.0.4
-	Änderungen in Version 1.0.4 - 04.11.2005:
+	Ã„nderungen in Version 1.0.4 - 04.11.2005:
 		- Zeit jetzt ohne Sekunden :).
-	Änderungen in Version 1.0.3 - 19.01.2005:
+	Ã„nderungen in Version 1.0.3 - 19.01.2005:
 		- Termintitel ist unterstrichen
-	Änderungen in Version 1.0.2 - 20.05.2004:
-		- Modifier für Umwandlung und Entfernen der Zeilenumbrüche in den Infos, da sonst u.U. Javascriptfehler
-	Änderungen in Version 1.0.1 - 16.07.2003:
+	Ã„nderungen in Version 1.0.2 - 20.05.2004:
+		- Modifier fÃ¼r Umwandlung und Entfernen der ZeilenumbrÃ¼che in den Infos, da sonst u.U. Javascriptfehler
+	Ã„nderungen in Version 1.0.1 - 16.07.2003:
 		- Als Autor wird jetzt entweder Vor- und/oder Nachname angezeigt (wenn in der Community eingegeben) und sonst der Nickname des Autors
  *}
 

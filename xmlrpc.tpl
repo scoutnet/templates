@@ -1,14 +1,13 @@
-{* Entfernt alle unnötigen Leerzeichen und Leerzeilen bis {/strip} *}{strip}
 {*
         Name : Kalender 2.0 Template - XML
         Dateiname : xmlrpc.tpl
         Autor : Jan Brohl
-        Letzte Änderung : 04.02.2010 (Jan Brohl)
+        Letzte Ã„nderung : 04.02.2010 (Jan Brohl)
         Version : 1.1.0
         notwendige Konfiguration : keine
 *}
         {if $groups.jahrmonat}
-                {assign var="groups" value="`$groups.jahrmonat`"}
+                {assign var="groups" value=$groups.jahrmonat}
         {/if}
 {/strip}<?xml version="1.0" encoding="ISO-8859-1"?>
 {strip}
@@ -41,7 +40,7 @@
 {else}
             <member><name>autor</name><value><string>{$eintrag.autor.nickname}</string></value></member>
 {/if}
-            <member><name>verband</name><value><string>{$eintrag.autor.verband}</string></value></member>
+            <member><name>verband</name><value><string>{$eintrag.kalender.verband}</string></value></member>
 <member><name>ebene</name><value><string>{$eintrag.kalender.ebene} </string></value></member>
             <member><name>info</name><value><string>{$eintrag.info|nl2br|escape}</string></value></member>
 </struct>

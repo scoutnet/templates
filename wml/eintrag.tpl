@@ -8,7 +8,7 @@
 						{if $letzter_eintrag.id != $aktueller_eintrag.id}<a href='#_{$letzter_eintrag.id}'>&gt;|</a>{else}&gt;|{/if}
 					</b></p>
 					<p>
-					{$eintrag.x}
+{*					{$eintrag.x}*}
 						{$eintrag.startdatum|date_format:"%A"|truncate:2:""} 
 						<b>{$eintrag.startdatum|date_format:"%d.%m."}</b> 
 						{if $eintrag.startzeit!= ""}
